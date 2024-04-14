@@ -17,9 +17,9 @@ export default class Video extends Component {
         <ReactPlayer
           url={PlayGrond}
           id="MainPlay"
-          playing
-          loop
-          controls={true}
+          playing={true}
+          loop={true}
+          controls={false}
           width="100%"
           height="100vh"
           config={{
@@ -28,10 +28,10 @@ export default class Video extends Component {
                 style: {
                   width: "100%",
                   height: "100vh",
-                  objectFit: "cover"
-                }
-              }
-            }
+                  objectFit: "cover",
+                },
+              },
+            },
           }}
         />
       </div>

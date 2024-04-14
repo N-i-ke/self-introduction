@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/self-introduction/static/css/main.27ecfc90.css",
+    "main.js": "/self-introduction/static/js/main.5ea88a33.js",
+    "static/media/TopQBeijing.mp4": "/self-introduction/static/media/TopQBeijing.be1e46189e305135dab7.mp4",
+    "static/media/kadan.png": "/self-introduction/static/media/kadan.6c657bc4daebc32af72d.png",
+    "static/media/kunaipu.png": "/self-introduction/static/media/kunaipu.1f48d696b2ed056842ef.png",
+    "static/media/ohana.png": "/self-introduction/static/media/ohana.3b4e9200964e40eaab6c.png",
+    "static/media/Engress.png": "/self-introduction/static/media/Engress.1213956a032b3abf8704.png",
+    "static/media/sneaker.png": "/self-introduction/static/media/sneaker.51d2d024ff0a5c893c9c.png",
+    "static/media/kensetu.png": "/self-introduction/static/media/kensetu.ab49ae8b6c30b6f2b0c0.png",
+    "static/media/works.png": "/self-introduction/static/media/works.7fe9499595574010094f.png",
+    "static/media/sousaku.png": "/self-introduction/static/media/sousaku.cf444cf2036fe0670dd1.png",
+    "static/media/your.png": "/self-introduction/static/media/your.7090b864f08ea4e1acf1.png",
+    "index.html": "/self-introduction/index.html",
+    "main.27ecfc90.css.map": "/self-introduction/static/css/main.27ecfc90.css.map",
+    "main.5ea88a33.js.map": "/self-introduction/static/js/main.5ea88a33.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.27ecfc90.css",
+    "static/js/main.5ea88a33.js"
+  ]
+}

@@ -1,2 +1,6 @@
 node_modules/
 DS_Store/
+src/App.css.map
+src/App.min.css
+src/App.min.css.map
+src/WorkItem.min.css

@@ -25,7 +25,7 @@ const HomePage = () => {
             <li className="work-item animated-li">
               <figure>
                 <a href="../Works/sneaker.html">
-                  <img src={Sneaker} />
+                  <img src={Sneaker} alt="sneaker"/>
                   <figcaption>
                     <div className="fig-inner">
                       <h3>動画付きカルーセル</h3>
@@ -39,7 +39,7 @@ const HomePage = () => {
             <li className="work-item animated-li">
               <figure>
                 <a href="/">
-                  <img src={Flower} />
+                  <img src={Flower} alt="flower"/>
                   <figcaption>
                     <div className="fig-inner">
                       <h3>スクロールイベントのWebサイト</h3>
@@ -53,7 +53,7 @@ const HomePage = () => {
             <li className="work-item animated-li">
               <figure>
                 <a href="/">
-                  <img src={Work} />
+                  <img src={Work} alt="work"/>
                   <figcaption>
                     <div className="fig-inner">
                       <h3>シンプルなサイトのWordPress構築</h3>
@@ -67,7 +67,7 @@ const HomePage = () => {
             <li className="work-item animated-li">
               <figure>
                 <a href="/">
-                  <img src={Building} alt="/" />
+                  <img src={Building} alt="building" />
                   <figcaption>
                     <div className="fig-inner">
                       <h3>建設会社のWebサイト</h3>
@@ -81,7 +81,7 @@ const HomePage = () => {
             <li className="work-item animated-li">
               <figure>
                 <a href="/">
-                  <img src={BathSalt} alt="/" />
+                  <img src={BathSalt} alt="bathsalt" />
                   <figcaption>
                     <div className="fig-inner">
                       <h3>一般的なLPサイト</h3>
@@ -95,7 +95,7 @@ const HomePage = () => {
             <li className="work-item animated-li">
               <figure>
                 <a href="/">
-                  <img src={Engress} alt="/" />
+                  <img src={Engress} alt="Engress" />
                   <figcaption>
                     <div className="fig-inner">
                       <h3>TOEFL英語学習コーポレートサイト</h3>
@@ -109,7 +109,7 @@ const HomePage = () => {
             <li className="work-item animated-li">
               <figure>
                 <a href="/">
-                  <img src={Kadan} alt="/" />
+                  <img src={Kadan} alt="Kadan" />
                   <figcaption>
                     <div className="fig-inner">
                       <h3>旅館型Webサイト</h3>
@@ -123,7 +123,7 @@ const HomePage = () => {
             <li className="work-item animated-li">
               <figure>
                 <a href="/">
-                  <img src={Sousaku} alt="/" />
+                  <img src={Sousaku} alt="Sousaku" />
                   <figcaption>
                     <div className="fig-inner">
                       <h3>和風なWebサイト模写</h3>
@@ -137,7 +137,7 @@ const HomePage = () => {
             <li className="work-item animated-li">
               <figure>
                 <a href="/">
-                  <img src={Your} alt="/" />
+                  <img src={Your} alt="YourCoding" />
                   <figcaption>
                     <div className="fig-inner">
                       <h3>モダンなデザインのWebサイトの模写</h3>

@@ -15,8 +15,8 @@ export const WorkItemSneaker = () => {
           <ul>
             <li className="work-item animated-li">
               <figure>
-                <a href="">
-                  <img src={Sneaker} alt="" />
+                <a href="./">
+                  <img src={Sneaker} alt="Sneaker" />
                   <figcaption>
                     <div className="fig-inner">
                       <h3>動画付きカルーセル</h3>

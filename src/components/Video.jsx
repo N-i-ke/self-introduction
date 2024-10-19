@@ -19,6 +19,7 @@ export default class Video extends Component {
           id="MainPlay"
           playing={true}
           loop={true}
+          muted={true}
           controls={false}
           width="100%"
           height="100vh"

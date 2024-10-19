@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "es6",                          // 出力するJavaScriptのバージョン
+    "module": "commonjs",                     // モジュールシステム
+    "jsx": "react",                           // ReactのJSXサポート
+    "strict": true,                           // 厳格な型チェック
+    "esModuleInterop": true,                  // ESモジュールとの互換性
+    "skipLibCheck": true,                     // 外部ライブラリの型チェックをスキップ
+    "forceConsistentCasingInFileNames": true, // 大文字小文字のファイル名を強制
+    "moduleResolution": "node",               // Node.jsのモジュール解決
+    "allowSyntheticDefaultImports": true      // デフォルトインポートのサポート
+  },
+  "include": ["src"],                         // プロジェクト内のソースコードを含む
+  "exclude": ["node_modules"]                 // 除外するフォルダ
+}

@@ -1,14 +1,14 @@
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import React from 'react';
-import './App.css';
-import './WorkItem.css'
-import Header from './components/Header';
+import React from "react";
+import { BrowserRouter } from "react-router-dom";
+import "./App.css";
+import "./WorkItem.css";
+import Header from "./components/Header";
 import Video from "./components/Video";
 import HomePage from "./components/HomePage";
-import Footer from './components/Footer';
+import Footer from "./components/Footer";
 import Contact from "./components/Contact";
 
-function App() {
+const App: React.FC = () => {
   return (
     <BrowserRouter>
       <div className="App">
@@ -20,6 +20,6 @@ function App() {
       </div>
     </BrowserRouter>
   );
-}
+};
 
 export default App;

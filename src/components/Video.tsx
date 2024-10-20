@@ -1,14 +1,25 @@
 import React, { Component } from "react";
 import ReactPlayer from "react-player";
 import TopVideo from "../Video/TopBeijing.mp4";
+import styled from "styled-components";
 
-// プロパティの型を定義（今回はプロパティなしなので、空のオブジェクト）
 interface VideoProps {}
 
-// ステートの型を定義
 interface VideoState {
   PlayGrond: string;
 }
+
+const VideoContainer = styled.div`
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+`;
+
+const MainPlay = styled(ReactPlayer)`
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+`;
 
 export default class Video extends Component<VideoProps, VideoState> {
   constructor(props: VideoProps) {
@@ -21,10 +32,9 @@ export default class Video extends Component<VideoProps, VideoState> {
   render() {
     const { PlayGrond } = this.state;
     return (
-      <div className="bg-video">
-        <ReactPlayer
+      <VideoContainer className="bg-video">
+        <MainPlay
           url={PlayGrond}
-          id="MainPlay"
           playing={true}
           loop={true}
           muted={true} // 自動再生が許可されるようにミュート
@@ -43,7 +53,7 @@ export default class Video extends Component<VideoProps, VideoState> {
             },
           }}
         />
-      </div>
+      </VideoContainer>
     );
   }
 }

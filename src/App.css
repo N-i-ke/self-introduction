@@ -1,49 +1,8 @@
 @charset "UTF-8";
-.site-title {
-  width: 100%;
-  text-align: center;
-  position: absolute;
-  margin: 0;
-  color: #fff;
-  filter: drop-shadow(1px 1px 10px #c0c0c0);
-  font-size: 3.5rem;
-  font-family: "Alegreya Sans SC", sans-serif;
-  top: 35%;
-}
-
-.sub-site-title {
-  width: 100%;
-  text-align: center;
-  position: absolute;
-  margin: 0;
-  color: #fff;
-  font-family: "Alegreya Sans SC", sans-serif;
-  top: 50%;
-  filter: drop-shadow(1px 1px 10px #c0c0c0);
-}
-
 .wrapper {
   box-sizing: border-box;
   background-color: #fff;
   box-shadow: 0 0 8px 4px #999;
-}
-
-/*----------------------------------------------------
-アニメーション
-------------------------------------------------------*/
-/*スタートアニメーション*/
-.start {
-  background: #1b1b1b;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  z-index: 9000;
-}
-
-.start span {
-  display: none;
 }
 
 /*----------------------------------------------------
@@ -61,14 +20,6 @@ header
   display: inline-block;
   font-size: 1.15rem;
   padding-right: 5px;
-}
-
-/*Video*/
-.bg-video {
-  width: 100%;
-  height: 100vh;
-  -o-object-fit: cover;
-     object-fit: cover;
 }
 
 /*menu-btn*/
@@ -206,6 +157,13 @@ nav
 mainコンテンツ部分は
 ------------------------------------------------------*/
 #MainPlay {
+  width: 100%;
+  height: 100vh;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.bg-video {
   width: 100%;
   height: 100vh;
   -o-object-fit: cover;
@@ -666,16 +624,6 @@ SP
   }
 }
 @media screen and (max-width: 480px) {
-  body {
-    font-size: 0.8rem;
-    line-height: 1.6;
-  }
-  .site-title {
-    font-size: 2rem;
-  }
-  .sub-site-title {
-    font-size: 0.3rem;
-  }
   .sec-title {
     font-size: 4rem;
   }

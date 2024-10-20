@@ -23,10 +23,6 @@
     text-align:center;
     font-size:7rem;
     color:#83FFE630;
-    // margin-top:0;
-    // margin-bottom:0;
-
-
     position:relative;
     letter-spacing:5px;
     font-weight:900;
@@ -59,57 +55,6 @@
 }
 .start span{
     display:none;
-}
-
-/*fadeInUpのクラス名*/
-.animated{
-    // opacity:0;
-}
-/*fadeIn 0.3s*/
-.animated-li {
-    /*デフォルトで透明度0に指定*/
-    // opacity: 0;
-    // transition: 1s;
-}
-/*fadeIn 0.2s*/
-.animated-div {
-    /*デフォルトで透明度0に指定*/
-    // opacity: 0;
-    // transition: 1s;
-}
-/*スクロールした時に追加されるクラス*/
-.fadein{
-    // opacity: 1;
-}
-/*テキストアニメーション*/
-.text-container{
-    // overflow: hidden;
-    // position: relative;
-}
-.text-container__title{
-    // display: block;
-    // opacity: 0;
-    // position: relative;
-    // transition:all .5s .3s ease; 
-    // z-index: 0;
-}
-.text-container:before{
-    // background: #333;
-    // content: '';
-    // display: block;
-    // height: 100%;
-    // position: absolute;
-    // transform: translateX(-100%);
-    // transition:all .8s 0s ease; 
-    // width: 100%;
-    // z-index: 1;     
-}
-/*アニメーションするプロパティを設定します*/
-.text-container.active .text-container__title{
-    // opacity: 1;
-}
-.text-container.active:before{
-    // transform: translateX(100%);        
 }
 /*----------------------------------------------------
 header
@@ -345,8 +290,6 @@ about
    
     -webkit-text-orientation: mixed;
     text-orientation: mixed;
-    /*display:-webkit-flex;*/
-    /*display:flex;*/
     letter-spacing: 5px
 }
 #about .icon-wrapper .name .name-main{
@@ -459,13 +402,6 @@ contact
     background-color:#808080;
     text-align: center;
 }
-#contact .sec-title{
-    /*font-size:6rem;*/
-}
-#contact .sub-sec-title{
-    /*font-size:2rem;*/
-}
-
 #contact .contact-wrapper{
     padding-top:0px;
     margin-bottom:0;
@@ -589,9 +525,6 @@ SP
       box-sizing: border-box;
       padding:5%;
       margin:0;
-    }
-    .slides img{
-        
     }
     #work .work-item{
         width:50%;

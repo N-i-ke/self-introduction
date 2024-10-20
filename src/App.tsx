@@ -24,6 +24,11 @@ const GlobalStyle = createGlobalStyle`
     color: #f6f6e9;
     background-color: rgba(28, 28, 28, 1);
   }
+  .wrapper {
+    box-sizing:border-box;
+    background-color:#fff;
+    box-shadow:0 0 8px 4px #999;
+  }
   a {
     text-decoration: none;
   }

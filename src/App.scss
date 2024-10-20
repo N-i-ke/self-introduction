@@ -1,9 +1,3 @@
-.wrapper{
-    box-sizing:border-box;
-    background-color:#fff;
-    box-shadow:0 0 8px 4px #999;
-}
-
 /*----------------------------------------------------
 index.html work contents
 ------------------------------------------------------*/
@@ -196,79 +190,6 @@ service
     font-size: 1rem;
 }
 
-/*----------------------------------------------------
-contact
-------------------------------------------------------*/
-#contact{
-    padding-top:20px;
-    background-color:#808080;
-    text-align: center;
-}
-#contact .contact-wrapper{
-    padding-top:0px;
-    margin-bottom:0;
-    font-family: 'Montserrat Subrayada', sans-serif;
-}
-#contact .contact-wrapper form{
-    margin:0 auto;
-    max-width:600px;
-    display:flex;
-    flex-direction:column;
-    padding-bottom: 50px;
-}
-#contact .contact-wrapper dt{
-    padding:10px;
-    text-align: left;
-}
-#contact .contact-wrapper dd{
-    margin-left:0;
-}
-#contact .contact-wrapper p{
-    margin-top:40px;
-    padding-bottom:20px;
-    text-align: center;
-    font-family: 'Quicksand', sans-serif;
-}
-#contact .contact-wrapper #name,#name{
-    padding-top:10px;
-    padding-bottom:10px;
-    border:none;
-    border-radius:4px;
-    width:98%;
-}
-#contact .contact-wrapper #name,#mail{
-    padding-top:10px;
-    padding-bottom:10px;
-    border:none;
-    border-radius:4px;
-    width:98%;
-}
-#contact #message{
-    padding-top:20px;
-    padding-bottom:20px;
-    border:none;
-    border-radius:4px;
-    width:98%;
-    margin-bottom:20px;
-}
-#contact #button{
-    padding:10px;
-    border:2px solid #dc143c;
-    background-color:#dc143c;
-    color:#fff;
-    border-radius:7px;
-    width:200px;
-    margin:0 auto;
-    font-family: 'Montserrat Subrayada', sans-serif;
-    transition:all 0.5s;
-}
-#contact #button:hover{
-    color:#dc143c;
-    border:2px solid #fff;
-    background-color:#fff;
-    transition:all 0.5s;
-}
-
 /*-------------------------------------------
 SP
 -------------------------------------------*/
@@ -299,27 +220,11 @@ SP
     #skill .fab{
         font-size:4rem;
     }
-    #contact .sub-sec-title{
-        left:40%;
-    }
-
-}
-@media screen and (max-width: 666px) {
-    #work .work-item{
-        width:100%;
-    }
 }
 @media screen and (max-width: 600px) {
     section{
         padding-top:50px;
     }
-    .sec-title{
-        font-size:4rem;
-    }
-    .sub-sec-title{
-        font-size:1.4rem;
-    }
-    
     #about .profile{
         display:inline-block;
     }
@@ -397,19 +302,10 @@ SP
     #service .sub-sec-title{
         left:35%;
     }
-    #contact .sub-sec-title{
-        left:30%;
-    }
 }
 @media screen and (max-width: 480px) {
-    .sec-title{
-        font-size:4rem;
-    }
     section{
         padding-top:50px;
-    }
-    .sub-sec-title{
-        font-size:1.4rem;
     }
     .slides li img{
         width:280px;
@@ -515,12 +411,6 @@ SP
 
     #service .sub-sec-title{
         left:35%;
-    }
-    #contact .contact-wrapper form{
-        max-width:300px;
-    }
-    #contact .sub-sec-title{
-        left:25%;
     }
 }
 

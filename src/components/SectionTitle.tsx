@@ -13,6 +13,14 @@ const SecTitle = styled.h2`
   position: relative;
   letter-spacing: 5px;
   font-weight: 900;
+
+  @media screen and (max-width: 600px) {
+    font-size: 4rem;
+  }
+
+  @media screen and (max-width: 480px) {
+    font-size: 4rem;
+  }
 `;
 
 const SubSecTitle = styled.span`
@@ -23,6 +31,14 @@ const SubSecTitle = styled.span`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+
+  @media screen and (max-width: 600px) {
+    font-size: 1.4rem;
+  }
+
+  @media screen and (max-width: 480px) {
+    font-size: 1.4rem;
+  }
 `;
 
 const SectionTitle: React.FC<TitleProps> = ({ mainTitle, subTitle }) => {

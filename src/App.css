@@ -64,20 +64,6 @@
   display: none;
 }
 
-/*fadeInUpのクラス名*/
-/*fadeIn 0.3s*/
-.animated-li {
-  /*デフォルトで透明度0に指定*/
-}
-
-/*fadeIn 0.2s*/
-.animated-div {
-  /*デフォルトで透明度0に指定*/
-}
-
-/*スクロールした時に追加されるクラス*/
-/*テキストアニメーション*/
-/*アニメーションするプロパティを設定します*/
 /*----------------------------------------------------
 header
 ------------------------------------------------------*/
@@ -330,8 +316,6 @@ about
 
 #about .icon-wrapper .name {
   text-orientation: mixed;
-  /*display:-webkit-flex;*/
-  /*display:flex;*/
   letter-spacing: 5px;
 }
 
@@ -454,14 +438,6 @@ contact
   padding-top: 20px;
   background-color: #808080;
   text-align: center;
-}
-
-#contact .sec-title {
-  /*font-size:6rem;*/
-}
-
-#contact .sub-sec-title {
-  /*font-size:2rem;*/
 }
 
 #contact .contact-wrapper {

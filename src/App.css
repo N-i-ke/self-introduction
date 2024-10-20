@@ -71,11 +71,11 @@ index.html work contents
 }
 
 #work figcaption h3 {
-  font-size: 0.7rem;
+  font-size: 1.2rem;
 }
 
 #work figcaption p {
-  font-size: 0.2rem;
+  font-size: 0.8rem;
 }
 
 #work figcaption .fig-inner {
@@ -131,13 +131,13 @@ about
 }
 
 #about .about-wrapper p {
-  font-size: 0.8rem;
+  font-size: 1rem;
 }
 
 #about .about-wrapper h4 {
   color: #ff2e63;
   filter: drop-shadow(1px 1px 5px #c0c0c0);
-  font-size: 1.2rem;
+  font-size: 1.4rem;
 }
 
 /*----------------------------------------------------
@@ -208,8 +208,13 @@ service
   margin-bottom: 130px;
 }
 
+#service .service-wrap-right h3 {
+  font-size: 1.2rem;
+}
+
 #service .service-wrap-right p {
   text-align: left;
+  font-size: 1rem;
 }
 
 #service .service-wrap-left {
@@ -219,8 +224,13 @@ service
   margin-bottom: 130px;
 }
 
+#service .service-wrap-left h3 {
+  font-size: 1.2rem;
+}
+
 #service .service-wrap-left p {
   text-align: left;
+  font-size: 1rem;
 }
 
 /*----------------------------------------------------

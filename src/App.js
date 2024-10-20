@@ -7,7 +7,6 @@ import Video from "./components/Video";
 import HomePage from "./components/HomePage";
 import Footer from './components/Footer';
 import Contact from "./components/Contact";
-import { WorkItemSneaker } from './components/WorkItemSneaker';
 
 function App() {
   return (
@@ -15,9 +14,6 @@ function App() {
       <div className="App">
         <Header />
         <Video />
-        <Routes>
-          <Route path="/Sneaker" element={<WorkItemSneaker />} />
-        </Routes>
         <HomePage />
         <Contact />
         <Footer />

@@ -149,11 +149,11 @@ const Header: React.FC = () => {
   };
 
   return (
-    <HeaderContainer className={isOpen ? "open" : ""}>
+    <HeaderContainer id="top" className={isOpen ? "open" : ""}>
       <Nav isOpen={isOpen}>
         <ul className="nav-menu">
           <li>
-            <a href="#main" className="top">
+            <a href="#top" className="top">
               TOP
             </a>
           </li>

@@ -2,7 +2,7 @@ import React from "react";
 
 const Header: React.FC = () => {
   return (
-    <div>
+    <>
       <header id="header">
         <nav id="nav">
           <ul className="nav-menu">
@@ -49,7 +49,7 @@ const Header: React.FC = () => {
         </h4>
         <div id="mask"></div>
       </header>
-    </div>
+    </>
   );
 };
 

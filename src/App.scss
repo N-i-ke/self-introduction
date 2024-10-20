@@ -276,44 +276,6 @@ contact
     transition:all 0.5s;
 }
 
-/*----------------------------------------------------
-footer
-------------------------------------------------------*/
-
-#footer{
-    text-align:center;
-    background-color:rgba(28,28,28,1.0);
-    color:#fff;
-    height:70px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-#footer .btn-sns {
-    font-size: 5rem;
-    letter-spacing: 0;
-    color: #fff;
-    margin:0;
-}
-#footer  p{
-    text-align: center;
-}
-#footer i:hover {
-    color:#1da1f2;
-    transform: rotate(25deg);
-    transition:all 0.5s;
-}
-
-#footer i {
-    transition:all 0.5s;
-}
-#footer .footer{
-    /*margin-top:0;*/
-    display:inline-block;
-    vertical-align: middle;
-    font-family: 'Quicksand', sans-serif;
-}
-
 /*-------------------------------------------
 SP
 -------------------------------------------*/

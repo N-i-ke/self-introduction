@@ -5,16 +5,16 @@ const Service: React.FC = () => {
     <div className="service-wrapper">
       <div className="service-wrap-left wrapper animated">
         <i className="fas fa-edit animated"></i>
-        <h3 className="animated">コーポレートサイト制作</h3>
+        <h3 className="animated">Webアプリケーション開発</h3>
         <p className="animated">
-          会社のイメージを重視しながら会社概要やお知らせの掲載、所在地地図の設置などに対応いたします。
+          現職がWebアプリケーション開発のフロントエンドエンジニアという経歴から、React•TypeScriptを使ったWebアプリケーション開発を得意としています。アプリケーション開発のフロント側の開発はお任せください。
         </p>
       </div>
       <div className="service-wrap-right wrapper animated">
         <i className="fas fa-laptop-code animated"></i>
-        <h3 className="animated">コーディング•WP構築</h3>
+        <h3 className="animated">LP•WEB•ECサイト制作 (WordPress/Shopify)</h3>
         <p className="animated">
-          スマートフォンサイト、ワードプレスを使用した更新性の高いサイト、Javascriptを使用した動きのあるサイトなど、様々なサイトのコーディングを行っております。
+          スマートフォンサイト、ワードプレスを使用した更新性の高いサイト、Shopifyを使用したECサイトなど、静的なサイトから動的なサイトまで様々なサイトのコーディングを行っております。
         </p>
       </div>
     </div>

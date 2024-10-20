@@ -11,7 +11,7 @@ const SiteTitle = styled.h1`
   margin: 0;
   color: #fff;
   filter: drop-shadow(1px 1px 10px #c0c0c0);
-  font-size: 3.5rem;
+  font-size: 4.5rem;
   font-family: "Alegreya Sans SC", sans-serif;
   top: 35%;
 
@@ -25,6 +25,7 @@ const SubSiteTitle = styled.h4`
   position: absolute;
   margin: 0;
   color: #fff;
+  font-size: 1.5rem;
   font-family: "Alegreya Sans SC", sans-serif;
   top: 50%;
   filter: drop-shadow(1px 1px 10px #c0c0c0);

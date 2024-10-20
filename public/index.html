@@ -45,18 +45,6 @@
 
     <!-- jQueryアニメーション-->
     <script>
-      $(function () {
-      $(".menu-btn").on("click", function () {
-      if (!$("#header").hasClass("open")) {
-        $("#header").addClass("open");
-      } else {
-        $("#header").removeClass("open");
-      }
-      });
-     $("#mask").on("click", function () {
-      $("#header").removeClass("open");
-      });
-      });
   $(".animated").waypoint({
     handler(direction) {
       if (direction === "down") {

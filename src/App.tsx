@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import "./App.css";
-import "./WorkItem.css";
 import Header from "./components/Header";
 import Video from "./components/Video";
 import HomePage from "./components/HomePage";

@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import { createGlobalStyle } from "styled-components"; // styledとcreateGlobalStyleを正しくインポート
 import "./App.css";
-import "./Animate.css";
 import Header from "./components/Header";
 import Video from "./components/Video";
 import HomePage from "./components/HomePage";

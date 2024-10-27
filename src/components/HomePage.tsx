@@ -28,7 +28,7 @@ const HomePage = () => {
               title="動画付きカルーセル"
               description="カルーセルグリッドレイアウト"
               duration="2日"
-              link="../Works/sneaker.html"
+              link="/Works/index.html"
             />
             <WorkItem
               imgSrc={Flower}
@@ -36,7 +36,7 @@ const HomePage = () => {
               title="スクロールイベントのWebサイト"
               description="ギャラリーサイト/スクロールイベント"
               duration="3日"
-              link="/"
+              link="/index.html"
             />
             <WorkItem
               imgSrc={Work}

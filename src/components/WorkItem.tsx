@@ -19,7 +19,7 @@ const WorkItem: React.FC<WorkItemProps> = ({
 }) => (
   <li className="work-item animated-li">
     <figure>
-      <a href={link}>
+      <a href={link} target="_blank" rel="noopener noreferrer">
         <img src={imgSrc} alt={imgAlt} />
         <figcaption>
           <div className="fig-inner">

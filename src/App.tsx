@@ -1,5 +1,4 @@
 import React from "react";
-import { BrowserRouter } from "react-router-dom";
 import { createGlobalStyle } from "styled-components"; // styledとcreateGlobalStyleを正しくインポート
 import "./App.css";
 import Header from "./components/Header";
@@ -42,16 +41,16 @@ const GlobalStyle = createGlobalStyle`
 
 const App: React.FC = () => {
   return (
-    <BrowserRouter>
-      <GlobalStyle />
-      <div className="App">
-        <Header />
-        <Video />
-        <HomePage />
-        <Contact />
-        <Footer />
-      </div>
-    </BrowserRouter>
+  <>
+    <GlobalStyle />
+    <div className="App">
+      <Header />
+      <Video />
+      <HomePage />
+      <Contact />
+      <Footer />
+    </div>
+  </>
   );
 };
 

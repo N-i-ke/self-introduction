@@ -28,7 +28,7 @@ const HomePage = () => {
               title="動画付きカルーセル"
               description="カルーセルグリッドレイアウト"
               duration="2日"
-              link="/self-introduction/Works/index.html"
+              link="/self-introduction/Sneaker/index.html"
             />
             <WorkItem
               imgSrc={Flower}
@@ -44,7 +44,7 @@ const HomePage = () => {
               title="シンプルなサイトのWordPress構築"
               description="カスタム投稿タイプ、問い合わせフォームなど"
               duration="3日"
-              link="/"
+              link="/self-introduction/SimpleSite/index.html"
             />
             <WorkItem
               imgSrc={Building}
@@ -52,7 +52,7 @@ const HomePage = () => {
               title="建設会社のWebサイト"
               description="シンプルな配置を意識しました"
               duration="2日"
-              link="/"
+              link="/self-introduction/Building/index.html"
             />
             <WorkItem
               imgSrc={BathSalt}
@@ -60,7 +60,7 @@ const HomePage = () => {
               title="一般的なLPサイト"
               description="黄色がベースの爽やかなサイト"
               duration="2日"
-              link="/"
+              link="/self-introduction/BathSolt/index.html"
             />
             <WorkItem
               imgSrc={Engress}
@@ -68,7 +68,7 @@ const HomePage = () => {
               title="TOEFL英語学習コーポレートサイト"
               description="WordPressで構築しました"
               duration="16日"
-              link="/"
+              link="/self-introduction/Engress/index.html"
             />
             <WorkItem
               imgSrc={Kadan}

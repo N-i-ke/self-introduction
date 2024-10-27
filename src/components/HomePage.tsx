@@ -76,7 +76,7 @@ const HomePage = () => {
               title="旅館型Webサイト"
               description="モーダル/マップ埋め込みetc"
               duration="16日"
-              link="/"
+              link="/self-introduction/Kadan/html/index.html"
             />
             <WorkItem
               imgSrc={Sousaku}
@@ -84,7 +84,7 @@ const HomePage = () => {
               title="和風なWebサイト模写"
               description="縦書きレイアウト"
               duration="1日"
-              link="/"
+              link="/self-introduction/Sousaku/index.html"
             />
             <WorkItem
               imgSrc={Your}
@@ -92,7 +92,7 @@ const HomePage = () => {
               title="モダンなデザインのWebサイトの模写"
               description="アコーディオン、フェードインetc"
               duration="12日"
-              link="/"
+              link="/self-introduction/Your/index.html"
             />
           </ul>
         </div>

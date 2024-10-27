@@ -36,7 +36,7 @@ const HomePage = () => {
               title="スクロールイベントのWebサイト"
               description="ギャラリーサイト/スクロールイベント"
               duration="3日"
-              link="/index.html"
+              link="/self-introduction/Flower/index.html"
             />
             <WorkItem
               imgSrc={Work}

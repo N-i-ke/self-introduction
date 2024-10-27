@@ -28,7 +28,7 @@ const HomePage = () => {
               title="動画付きカルーセル"
               description="カルーセルグリッドレイアウト"
               duration="2日"
-              link="/Works/index.html"
+              link="/self-introduction/Works/index.html"
             />
             <WorkItem
               imgSrc={Flower}

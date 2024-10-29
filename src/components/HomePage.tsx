@@ -60,7 +60,7 @@ const HomePage = () => {
               title="一般的なLPサイト"
               description="黄色がベースの爽やかなサイト"
               duration="2日"
-              link="/self-introduction/BathSolt/index.html"
+              link="https://n-i-ke.github.io/bathsolt-react-typescript/"
             />
             <WorkItem
               imgSrc={Engress}

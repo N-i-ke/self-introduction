@@ -1,8 +1,13 @@
+# Node.js modules
 node_modules/
-DS_Store/
-src/App.css.map
-src/App.min.css
-src/App.min.css.map
-src/WorkItem.min.css
-src/WorkItem.css.map
-src/WorkItem.min.css.map
+
+# macOS system files
+.DS_Store
+
+# Build output
+build/
+
+# CSS map and minified files
+src/*.css.map
+src/*.min.css
+src/WorkItem*.min.css.map

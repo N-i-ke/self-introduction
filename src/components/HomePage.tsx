@@ -84,7 +84,7 @@ const HomePage = () => {
               title="和風なWebサイト模写"
               description="縦書きレイアウト"
               duration="1日"
-              link="/self-introduction/Sousaku/index.html"
+              link="https://sousaku-hdy9bsdgl-nikes-projects-20ca373d.vercel.app/"
             />
             <WorkItem
               imgSrc={Your}

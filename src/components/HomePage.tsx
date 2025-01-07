@@ -52,7 +52,7 @@ const HomePage = () => {
               title="建設会社のWebサイト"
               description="シンプルな配置を意識しました"
               duration="2日"
-              link="/self-introduction/Building/index.html"
+              link="https://building-kappa.vercel.app/"
             />
             <WorkItem
               imgSrc={BathSalt}
@@ -84,7 +84,7 @@ const HomePage = () => {
               title="和風なWebサイト模写"
               description="縦書きレイアウト"
               duration="1日"
-              link="https://sousaku-clntuby4q-nikes-projects-20ca373d.vercel.app/"
+              link="https://sousaku.vercel.app/"
             />
             <WorkItem
               imgSrc={Your}

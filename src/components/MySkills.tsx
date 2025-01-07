@@ -9,6 +9,8 @@ import {
   SiWordpress,
   SiShopify,
   SiJavascript,
+  SiNextdotjs,
+  SiFlutter,
 } from "react-icons/si";
 
 const MySkills: React.FC = () => {
@@ -36,11 +38,19 @@ const MySkills: React.FC = () => {
       </div>
       <div className="skill-item animated-div">
         <SiReact size={80} color="#61DAFB" title="React" />
-        <h4>React</h4>
+        <h4>React.js</h4>
+      </div>
+      <div className="skill-item animated-div">
+        <SiNextdotjs size={80} color="#000000" title="React" />
+        <h4>Next.js</h4>
       </div>
       <div className="skill-item animated-div">
         <SiTypescript size={80} color="#007ACC" />
         <h4>TypeScript</h4>
+      </div>
+      <div className="skill-item animated-div">
+        <SiFlutter size={80} color="#007ACC" />
+        <h4>Flutter</h4>
       </div>
       <div className="skill-item animated-div">
         <SiWordpress size={80} color="#21759B" title="WordPress" />

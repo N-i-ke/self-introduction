@@ -92,7 +92,7 @@ const HomePage = () => {
               title="モダンなデザインのWebサイトの模写"
               description="アコーディオン、フェードインetc"
               duration="12日"
-              link="/self-introduction/Your/index.html"
+              link="https://your-six.vercel.app/"
             />
           </ul>
         </div>

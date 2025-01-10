@@ -44,7 +44,7 @@ const HomePage = () => {
               title="シンプルなサイトのWordPress構築"
               description="カスタム投稿タイプ、問い合わせフォームなど"
               duration="3日"
-              link="/self-introduction/SimpleSite/index.html"
+              link="https://simple-site-black.vercel.app/"
             />
             <WorkItem
               imgSrc={Building}

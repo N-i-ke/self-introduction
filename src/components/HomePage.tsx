@@ -28,7 +28,7 @@ const HomePage = () => {
               title="動画付きカルーセル"
               description="カルーセルグリッドレイアウト"
               duration="2日"
-              link="/self-introduction/Sneaker/index.html"
+              link="https://sneaker-beta.vercel.app/"
             />
             <WorkItem
               imgSrc={Flower}

@@ -36,7 +36,7 @@ const HomePage = () => {
               title="スクロールイベントのWebサイト"
               description="ギャラリーサイト/スクロールイベント"
               duration="3日"
-              link="/self-introduction/Flower/index.html"
+              link="https://flower-two-tau.vercel.app/"
             />
             <WorkItem
               imgSrc={Work}

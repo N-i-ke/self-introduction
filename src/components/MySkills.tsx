@@ -10,8 +10,8 @@ import {
   SiShopify,
   SiJavascript,
   SiNextdotjs,
-  SiFlutter,
 } from "react-icons/si";
+import { FaNodeJs, FaVuejs } from "react-icons/fa";
 
 const MySkills: React.FC = () => {
   return (
@@ -25,16 +25,8 @@ const MySkills: React.FC = () => {
         <h4>CSS</h4>
       </div>
       <div className="skill-item animated-div">
-        <SiSass size={80} color="#CC6699" title="SASS" />
-        <h4>SASS</h4>
-      </div>
-      <div className="skill-item animated-div">
         <SiJavascript size={80} color="#F7DF1E" title="JavaScript" />
         <h4>JavaScript</h4>
-      </div>
-      <div className="skill-item animated-div">
-        <SiPhp size={80} color="#777BB4" title="PHP" />
-        <h4>PHP</h4>
       </div>
       <div className="skill-item animated-div">
         <SiReact size={80} color="#61DAFB" title="React" />
@@ -45,12 +37,16 @@ const MySkills: React.FC = () => {
         <h4>Next.js</h4>
       </div>
       <div className="skill-item animated-div">
+        <FaVuejs size={80} color="#4FC08D" title="Vue.js" />
+        <h4>Vue.js</h4>
+      </div>
+      <div className="skill-item animated-div">
         <SiTypescript size={80} color="#007ACC" />
         <h4>TypeScript</h4>
       </div>
       <div className="skill-item animated-div">
-        <SiFlutter size={80} color="#007ACC" />
-        <h4>Flutter</h4>
+        <FaNodeJs size={80} color="#339933" />
+        <h4>Node.js</h4>
       </div>
       <div className="skill-item animated-div">
         <SiWordpress size={80} color="#21759B" title="WordPress" />

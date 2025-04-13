@@ -1,27 +1,20 @@
-.aurora-container {
+.topfv-container {
+  position: relative;
   width: 100%;
   height: 100vh;
-  position: relative;
   overflow: hidden;
-  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.aurora-container canvas {
+.aurora-container {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-}
-
-.topfv-container {
-  width: 100%;
-  height: 100vh;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  z-index: 0;
 }
 
 .fuzzy-text-container {
@@ -37,4 +30,25 @@
 
 .fuzzy-text-container canvas {
   pointer-events: auto;
+}
+
+/* Animation classes for loader transitions */
+.fade-in {
+  animation: fadeIn 1s ease forwards;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 } 

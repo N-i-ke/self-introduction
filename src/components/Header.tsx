@@ -5,36 +5,6 @@ const HeaderContainer = styled.header`
   text-align: center;
 `;
 
-const SiteTitle = styled.h1`
-  width: 100%;
-  position: absolute;
-  margin: 0;
-  color: #fff;
-  filter: drop-shadow(1px 1px 10px #c0c0c0);
-  font-size: 4.5rem;
-  font-family: "Alegreya Sans SC", sans-serif;
-  top: 35%;
-
-  @media screen and (max-width: 480px) {
-    font-size: 2rem;
-  }
-`;
-
-const SubSiteTitle = styled.h4`
-  width: 100%;
-  position: absolute;
-  margin: 0;
-  color: #fff;
-  font-size: 1.5rem;
-  font-family: "Alegreya Sans SC", sans-serif;
-  top: 50%;
-  filter: drop-shadow(1px 1px 10px #c0c0c0);
-
-  @media screen and (max-width: 480px) {
-    font-size: 0.3rem;
-  }
-`;
-
 const Nav = styled.nav<{ isOpen: boolean }>`
   width: 300px;
   min-height: 100vh;

@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Renderer, Program, Mesh, Color, Triangle } from "ogl";
 import { useEffect, useRef } from "react";
+import FuzzyText from './FuzzyText';
 
 import './Aurora.css';
 
-// OGL型定義がないため、TypeScriptに型エラーを無視するよう指示
-// @ts-ignore
 const VERT = `#version 300 es
 in vec2 position;
 void main() {
@@ -122,13 +121,17 @@ interface TopFvProps {
   speed?: number;
 }
 
-export default function TopFv(props: TopFvProps) {
+const TopFv: React.FC<TopFvProps> = (props) => {
   const {
     colorStops = ["#00d8ff", "#7cff67", "#00d8ff"],
     amplitude = 1.0,
     blend = 0.5
   } = props;
-  const propsRef = useRef(props);
+  
+  const [hoverIntensity, setHoverIntensity] = useState(0.5);
+  const [enableHover, setEnableHover] = useState(true);
+  
+  const propsRef = useRef<TopFvProps>(props);
   propsRef.current = props;
 
   const ctnDom = useRef<HTMLDivElement>(null);
@@ -146,10 +149,9 @@ export default function TopFv(props: TopFvProps) {
     gl.clearColor(0, 0, 0, 0);
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
-    // @ts-ignore - OGLのキャンバスのスタイルプロパティはTypeScriptの型定義に含まれていない
     gl.canvas.style.backgroundColor = 'transparent';
 
-    let program: any;
+    let program: Program;
 
     function resize() {
       if (!ctn) return;
@@ -185,8 +187,7 @@ export default function TopFv(props: TopFvProps) {
     });
 
     const mesh = new Mesh(gl, { geometry, program });
-    // @ts-ignore - キャンバス操作に関するTypeScriptエラーを無視
-    ctn.appendChild(gl.canvas);
+    ctn.appendChild(gl.canvas as HTMLCanvasElement);
 
     let animateId = 0;
     const update = (t: number) => {
@@ -209,15 +210,31 @@ export default function TopFv(props: TopFvProps) {
     return () => {
       cancelAnimationFrame(animateId);
       window.removeEventListener("resize", resize);
-      // @ts-ignore - キャンバス操作に関するTypeScriptエラーを無視
       if (ctn && gl.canvas.parentNode === ctn) {
-        // @ts-ignore - キャンバス操作に関するTypeScriptエラーを無視
-        ctn.removeChild(gl.canvas);
+        ctn.removeChild(gl.canvas as HTMLCanvasElement);
       }
       gl.getExtension("WEBGL_lose_context")?.loseContext();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [amplitude]);
+  
+  return (
+    <div className="topfv-container">
+      <div ref={ctnDom} className="aurora-container" />
+      
+      <div className="fuzzy-text-container">
+        <FuzzyText 
+          baseIntensity={0.2} 
+          hoverIntensity={hoverIntensity} 
+          enableHover={enableHover}
+          fontSize="clamp(4rem, 12vw, 12rem)"
+          color="#ffffff"
+        >
+          Ken's Portfolio
+        </FuzzyText>
+      </div>
+    </div>
+  );
+};
 
-  return <div ref={ctnDom} className="aurora-container" />;
-} 
+export default TopFv; 

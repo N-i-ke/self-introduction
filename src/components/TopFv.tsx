@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Renderer, Program, Mesh, Color, Triangle } from "ogl";
 import { useEffect, useRef } from "react";
 import FuzzyText from './FuzzyText';
@@ -128,8 +128,8 @@ const TopFv: React.FC<TopFvProps> = (props) => {
     blend = 0.5
   } = props;
   
-  const [hoverIntensity, setHoverIntensity] = useState(0.5);
-  const [enableHover, setEnableHover] = useState(true);
+  const hoverIntensity = 0.5;
+  const enableHover = true;
   
   const propsRef = useRef<TopFvProps>(props);
   propsRef.current = props;

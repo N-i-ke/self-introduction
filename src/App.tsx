@@ -2,7 +2,7 @@ import React from "react";
 import { createGlobalStyle } from "styled-components"; // styledとcreateGlobalStyleを正しくインポート
 import "./App.css";
 import Header from "./components/Header";
-import Video from "./components/Video";
+import TopFv from "./components/TopFv";
 import HomePage from "./components/HomePage";
 import Footer from "./components/Footer";
 import Contact from "./components/Contact";
@@ -45,7 +45,7 @@ const App: React.FC = () => {
     <GlobalStyle />
     <div className="App">
       <Header />
-      <Video />
+      <TopFv />
       <HomePage />
       <Contact />
       <Footer />

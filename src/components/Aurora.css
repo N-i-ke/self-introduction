@@ -1,27 +1,22 @@
-.aurora-container {
+.topfv-container {
+  position: relative;
   width: 100%;
   height: 100vh;
-  position: relative;
+  /* Use CSS variable for iOS */
+  height: calc(var(--vh, 1vh) * 100);
   overflow: hidden;
-  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.aurora-container canvas {
+.aurora-container {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-}
-
-.topfv-container {
-  width: 100%;
-  height: 100vh;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  z-index: 0;
 }
 
 .fuzzy-text-container {
@@ -33,8 +28,52 @@
   width: 100%;
   height: 100%;
   pointer-events: none;
+  padding: 0 20px;
+  box-sizing: border-box;
+  text-align: center;
 }
 
 .fuzzy-text-container canvas {
   pointer-events: auto;
+  max-width: 100%;
+}
+
+/* Animation classes for loader transitions */
+.fade-in {
+  animation: fadeIn 1s ease forwards;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile-specific styles */
+@media screen and (max-width: 768px) {
+  .topfv-container {
+    height: 80vh;
+    height: calc(var(--vh, 1vh) * 80);
+  }
+  
+  .fuzzy-text-container {
+    padding: 0 15px;
+  }
+}
+
+/* Fix for iOS Safari 100vh issue */
+@supports (-webkit-touch-callout: none) {
+  .topfv-container {
+    height: -webkit-fill-available;
+  }
 } 

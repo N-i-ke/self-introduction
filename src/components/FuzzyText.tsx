@@ -108,8 +108,8 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
         navigator.userAgent
       );
       
-      // Adjust intensity for mobile
-      const mobileFuzzIntensity = isMobile ? hoverIntensity * 0.7 : baseIntensity;
+      // Adjust intensity for mobile - increase it to make text more visible
+      const mobileFuzzIntensity = isMobile ? hoverIntensity * 0.85 : baseIntensity;
 
       const run = () => {
         if (isCancelled) return;
@@ -167,7 +167,7 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
 
       const handleTouchStart = (e: TouchEvent) => {
         if (!enableHover) return;
-        e.preventDefault();
+        // Don't prevent default to allow scrolling
         const rect = canvas.getBoundingClientRect();
         const touch = e.touches[0];
         const x = touch.clientX - rect.left;
@@ -177,7 +177,7 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
 
       const handleTouchMove = (e: TouchEvent) => {
         if (!enableHover) return;
-        e.preventDefault();
+        // Don't prevent default to allow scrolling
         const rect = canvas.getBoundingClientRect();
         const touch = e.touches[0];
         const x = touch.clientX - rect.left;
@@ -192,8 +192,8 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
       if (enableHover) {
         canvas.addEventListener("mousemove", handleMouseMove);
         canvas.addEventListener("mouseleave", handleMouseLeave);
-        canvas.addEventListener("touchstart", handleTouchStart, { passive: false } as EventListenerOptions);
-        canvas.addEventListener("touchmove", handleTouchMove, { passive: false } as EventListenerOptions);
+        canvas.addEventListener("touchstart", handleTouchStart);
+        canvas.addEventListener("touchmove", handleTouchMove);
         canvas.addEventListener("touchend", handleTouchEnd);
       }
 
@@ -236,7 +236,8 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
     hoverIntensity,
   ]);
 
-  return <canvas ref={canvasRef} style={{ touchAction: "none" }} />;
+  // Add class to help with styling and positioning
+  return <canvas ref={canvasRef} className="fuzzy-text" />;
 };
 
 export default FuzzyText; 

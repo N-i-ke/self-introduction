@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Renderer, Program, Mesh, Color, Triangle } from "ogl";
 import { useRef } from "react";
-import FuzzyText from './FuzzyText';
+import GlitchText from './GlitchText';
 import AuroraLoader from './AuroraLoader';
 import ViewportHandler from './ViewportHandler';
+import Particles from './Particles';
 
 import './Aurora.css';
 
@@ -135,9 +136,6 @@ const TopFv: React.FC<TopFvProps> = (props) => {
   const [isMobile, setIsMobile] = useState(false);
   const [viewportWidth, setViewportWidth] = useState(0);
   
-  const hoverIntensity = 0.5;
-  const enableHover = true;
-  
   const propsRef = useRef<TopFvProps>(props);
   propsRef.current = props;
 
@@ -253,23 +251,23 @@ const TopFv: React.FC<TopFvProps> = (props) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [amplitude, isLoading]);
   
-  // Calculate the ideal font size based on viewport width
-  const getFontSize = () => {
+  // getCustomGlitchClass関数を作成して、モバイルかどうかに応じてクラスを変更
+  const getCustomGlitchClass = () => {
     if (isMobile) {
-      // スマホの場合はより大きなフォントサイズを使用
       if (viewportWidth < 375) {
-        // 小さい画面のスマホ (iPhone SE等)
-        return "clamp(6rem, 30vw, 12rem)";
+        return 'glitch-mobile-small';
       } else if (viewportWidth < 480) {
-        // 通常のスマホ
-        return "clamp(7rem, 32vw, 14rem)";
+        return 'glitch-mobile-medium';
       } else {
-        // 大きなスマホ
-        return "clamp(8rem, 35vw, 16rem)";
+        return 'glitch-mobile-large';
       }
     }
-    // デスクトップの場合
-    return "clamp(4rem, 12vw, 12rem)";
+    return 'glitch-desktop';
+  };
+  
+  // getGlitchSpeed関数を作成して、モバイルかどうかに応じてスピードを変更
+  const getGlitchSpeed = () => {
+    return isMobile ? 1.5 : 1;
   };
   
   return (
@@ -277,22 +275,32 @@ const TopFv: React.FC<TopFvProps> = (props) => {
       <ViewportHandler />
       <AuroraLoader isLoading={isLoading} onLoadingComplete={handleLoadingComplete} />
       <div className={`topfv-container ${contentVisible ? 'fade-in' : 'hidden'}`}>
-        <div ref={ctnDom} className="aurora-container" />
+        <div className="particles-background">
+          <Particles
+            particleColors={['#ffffff', '#ffffff']}
+            particleCount={200}
+            particleSpread={10}
+            speed={0.1}
+            particleBaseSize={100}
+            moveParticlesOnHover={true}
+            alphaParticles={false}
+            disableRotation={false}
+          />
+        </div>
         
-        <div className="fuzzy-text-container">
-          <FuzzyText 
-            baseIntensity={0.2} 
-            hoverIntensity={hoverIntensity} 
-            enableHover={enableHover}
-            fontSize={getFontSize()}
-            color="#ffffff"
+        <div className="portfolio-title">
+          <GlitchText
+            speed={getGlitchSpeed()}
+            enableShadows={true}
+            enableOnHover={false}
+            className={getCustomGlitchClass()}
           >
             Ken's Portfolio
-          </FuzzyText>
+          </GlitchText>
         </div>
       </div>
     </>
   );
 };
 
-export default TopFv; 
+export default TopFv;

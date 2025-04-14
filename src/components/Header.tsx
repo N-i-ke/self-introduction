@@ -190,10 +190,6 @@ const Header: React.FC = () => {
         <span></span>
         <span></span>
       </MenuButton>
-      <SiteTitle className="site-title">N-i-ke Portfolio</SiteTitle>
-      <SubSiteTitle className="sub-site-title">
-        クリエイティブなWeb制作をお届けします。
-      </SubSiteTitle>
       <Mask isOpen={isOpen} onClick={closeMenu}></Mask>
     </HeaderContainer>
   );

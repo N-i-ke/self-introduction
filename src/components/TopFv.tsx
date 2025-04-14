@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Renderer, Program, Mesh, Color, Triangle } from "ogl";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import FuzzyText from './FuzzyText';
+import AuroraLoader from './AuroraLoader';
+import ViewportHandler from './ViewportHandler';
 
 import './Aurora.css';
 
@@ -128,6 +130,10 @@ const TopFv: React.FC<TopFvProps> = (props) => {
     blend = 0.5
   } = props;
   
+  const [isLoading, setIsLoading] = useState(true);
+  const [contentVisible, setContentVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  
   const hoverIntensity = 0.5;
   const enableHover = true;
   
@@ -136,9 +142,35 @@ const TopFv: React.FC<TopFvProps> = (props) => {
 
   const ctnDom = useRef<HTMLDivElement>(null);
 
+  // Check if device is mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Simulate asset loading
+  useEffect(() => {
+    // Simulate resources loading
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+    
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handleLoadingComplete = () => {
+    setContentVisible(true);
+  };
+
   useEffect(() => {
     const ctn = ctnDom.current;
-    if (!ctn) return;
+    if (!ctn || isLoading) return;
 
     const renderer = new Renderer({
       alpha: true,
@@ -216,24 +248,28 @@ const TopFv: React.FC<TopFvProps> = (props) => {
       gl.getExtension("WEBGL_lose_context")?.loseContext();
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [amplitude]);
+  }, [amplitude, isLoading]);
   
   return (
-    <div className="topfv-container">
-      <div ref={ctnDom} className="aurora-container" />
-      
-      <div className="fuzzy-text-container">
-        <FuzzyText 
-          baseIntensity={0.2} 
-          hoverIntensity={hoverIntensity} 
-          enableHover={enableHover}
-          fontSize="clamp(4rem, 12vw, 12rem)"
-          color="#ffffff"
-        >
-          Ken's Portfolio
-        </FuzzyText>
+    <>
+      <ViewportHandler />
+      <AuroraLoader isLoading={isLoading} onLoadingComplete={handleLoadingComplete} />
+      <div className={`topfv-container ${contentVisible ? 'fade-in' : 'hidden'}`}>
+        <div ref={ctnDom} className="aurora-container" />
+        
+        <div className="fuzzy-text-container">
+          <FuzzyText 
+            baseIntensity={0.2} 
+            hoverIntensity={hoverIntensity} 
+            enableHover={enableHover}
+            fontSize={isMobile ? "clamp(2.5rem, 8vw, 5rem)" : "clamp(4rem, 12vw, 12rem)"}
+            color="#ffffff"
+          >
+            Ken's Portfolio
+          </FuzzyText>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

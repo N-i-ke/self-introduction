@@ -133,6 +133,7 @@ const TopFv: React.FC<TopFvProps> = (props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [contentVisible, setContentVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [viewportWidth, setViewportWidth] = useState(0);
   
   const hoverIntensity = 0.5;
   const enableHover = true;
@@ -142,10 +143,12 @@ const TopFv: React.FC<TopFvProps> = (props) => {
 
   const ctnDom = useRef<HTMLDivElement>(null);
 
-  // Check if device is mobile
+  // Check if device is mobile and get viewport width
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
+      const width = window.innerWidth;
+      setViewportWidth(width);
+      setIsMobile(width <= 768);
     };
     
     checkMobile();
@@ -250,6 +253,25 @@ const TopFv: React.FC<TopFvProps> = (props) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [amplitude, isLoading]);
   
+  // Calculate the ideal font size based on viewport width
+  const getFontSize = () => {
+    if (isMobile) {
+      // スマホの場合はより大きなフォントサイズを使用
+      if (viewportWidth < 375) {
+        // 小さい画面のスマホ (iPhone SE等)
+        return "clamp(4rem, 25vw, 9rem)";
+      } else if (viewportWidth < 480) {
+        // 通常のスマホ
+        return "clamp(5rem, 25vw, 10rem)";
+      } else {
+        // 大きなスマホ
+        return "clamp(6rem, 25vw, 12rem)";
+      }
+    }
+    // デスクトップの場合
+    return "clamp(4rem, 12vw, 12rem)";
+  };
+  
   return (
     <>
       <ViewportHandler />
@@ -262,7 +284,7 @@ const TopFv: React.FC<TopFvProps> = (props) => {
             baseIntensity={0.2} 
             hoverIntensity={hoverIntensity} 
             enableHover={enableHover}
-            fontSize={isMobile ? "clamp(3.5rem, 12vw, 8rem)" : "clamp(4rem, 12vw, 12rem)"}
+            fontSize={getFontSize()}
             color="#ffffff"
           >
             Ken's Portfolio

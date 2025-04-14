@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './AuroraLoader.css';
 
 interface AuroraLoaderProps {
@@ -8,53 +8,48 @@ interface AuroraLoaderProps {
 
 const AuroraLoader: React.FC<AuroraLoaderProps> = ({ isLoading, onLoadingComplete }) => {
   const [progress, setProgress] = useState(0);
-  const [visible, setVisible] = useState(true);
+  const [fadeOut, setFadeOut] = useState(false);
 
   useEffect(() => {
-    if (!isLoading) {
-      // Complete the progress bar when loading is done
-      setProgress(100);
+    if (isLoading) {
+      // Simulated progress animation
+      let currentProgress = 0;
+      const interval = setInterval(() => {
+        // Slow down progress as it approaches 100%
+        const increment = Math.max(1, 10 * (1 - currentProgress / 100));
+        currentProgress = Math.min(99, currentProgress + increment);
+        setProgress(currentProgress);
+        
+        if (currentProgress >= 99 && !isLoading) {
+          clearInterval(interval);
+          setProgress(100);
+        }
+      }, 100);
       
-      // Delay hiding the loader for smooth transition
-      const timeout = setTimeout(() => {
-        setVisible(false);
-        if (onLoadingComplete) onLoadingComplete();
-      }, 600);
-      
-      return () => clearTimeout(timeout);
-    }
-    
-    // Simulate loading progress
-    let currentProgress = 0;
-    const interval = setInterval(() => {
-      // Slow down progress as it approaches 90%
-      const increment = Math.max(1, 10 * (1 - currentProgress / 100));
-      currentProgress = Math.min(90, currentProgress + increment);
-      setProgress(currentProgress);
-      
-      if (currentProgress >= 90 && !isLoading) {
-        clearInterval(interval);
+      return () => clearInterval(interval);
+    } else {
+      // Simulate final loading complete
+      setTimeout(() => {
         setProgress(100);
-      }
-    }, 100);
-    
-    return () => clearInterval(interval);
+        setTimeout(() => {
+          setFadeOut(true);
+          setTimeout(() => {
+            if (onLoadingComplete) onLoadingComplete();
+          }, 500);
+        }, 500);
+      }, 300);
+    }
   }, [isLoading, onLoadingComplete]);
 
-  if (!visible) return null;
-
   return (
-    <div className={`aurora-loader ${progress >= 100 ? 'fade-out' : ''}`}>
-      <div className="loader-inner">
+    <div className={`aurora-loader ${fadeOut ? 'fade-out' : ''}`}>
+      <div className="loader-content">
+        <div className="loader-spinner"></div>
         <div className="loader-text">Loading</div>
-        <div className="progress-container">
-          <div className="progress-bar" style={{ width: `${progress}%` }} />
+        <div className="progress-bar">
+          <div className="progress-fill" style={{ width: `${progress}%` }}></div>
         </div>
-        <div className="loader-dots">
-          <span className="dot" style={{ animationDelay: '0s' }}></span>
-          <span className="dot" style={{ animationDelay: '0.2s' }}></span>
-          <span className="dot" style={{ animationDelay: '0.4s' }}></span>
-        </div>
+        <div className="progress-text">{progress}%</div>
       </div>
     </div>
   );

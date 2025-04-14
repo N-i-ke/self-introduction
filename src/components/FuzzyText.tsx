@@ -102,6 +102,14 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
 
       let isHovering = false;
       const fuzzRange = 30;
+      
+      // Detect if device is mobile
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      );
+      
+      // Adjust intensity for mobile
+      const mobileFuzzIntensity = isMobile ? hoverIntensity * 0.7 : baseIntensity;
 
       const run = () => {
         if (isCancelled) return;
@@ -111,7 +119,10 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
           offscreenWidth + 2 * fuzzRange,
           tightHeight + 2 * fuzzRange
         );
-        const intensity = isHovering ? hoverIntensity : baseIntensity;
+        
+        // Use mobile intensity on mobile devices regardless of hover state
+        const intensity = isMobile ? mobileFuzzIntensity : (isHovering ? hoverIntensity : baseIntensity);
+        
         for (let j = 0; j < tightHeight; j++) {
           const dx = Math.floor(intensity * (Math.random() - 0.5) * fuzzRange);
           ctx.drawImage(
@@ -141,7 +152,7 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
       };
 
       const handleMouseMove = (e: MouseEvent) => {
-        if (!enableHover) return;
+        if (!enableHover || isMobile) return;
         const rect = canvas.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
@@ -149,7 +160,19 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
       };
 
       const handleMouseLeave = () => {
-        isHovering = false;
+        if (!isMobile) {
+          isHovering = false;
+        }
+      };
+
+      const handleTouchStart = (e: TouchEvent) => {
+        if (!enableHover) return;
+        e.preventDefault();
+        const rect = canvas.getBoundingClientRect();
+        const touch = e.touches[0];
+        const x = touch.clientX - rect.left;
+        const y = touch.clientY - rect.top;
+        isHovering = isInsideTextArea(x, y);
       };
 
       const handleTouchMove = (e: TouchEvent) => {
@@ -169,6 +192,7 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
       if (enableHover) {
         canvas.addEventListener("mousemove", handleMouseMove);
         canvas.addEventListener("mouseleave", handleMouseLeave);
+        canvas.addEventListener("touchstart", handleTouchStart, { passive: false } as EventListenerOptions);
         canvas.addEventListener("touchmove", handleTouchMove, { passive: false } as EventListenerOptions);
         canvas.addEventListener("touchend", handleTouchEnd);
       }
@@ -182,6 +206,7 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
         if (enableHover) {
           canvas.removeEventListener("mousemove", handleMouseMove);
           canvas.removeEventListener("mouseleave", handleMouseLeave);
+          canvas.removeEventListener("touchstart", handleTouchStart);
           canvas.removeEventListener("touchmove", handleTouchMove);
           canvas.removeEventListener("touchend", handleTouchEnd);
         }
@@ -211,7 +236,7 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
     hoverIntensity,
   ]);
 
-  return <canvas ref={canvasRef} />;
+  return <canvas ref={canvasRef} style={{ touchAction: "none" }} />;
 };
 
 export default FuzzyText; 

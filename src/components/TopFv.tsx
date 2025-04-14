@@ -3,6 +3,7 @@ import { Renderer, Program, Mesh, Color, Triangle } from "ogl";
 import { useRef } from "react";
 import FuzzyText from './FuzzyText';
 import AuroraLoader from './AuroraLoader';
+import ViewportHandler from './ViewportHandler';
 
 import './Aurora.css';
 
@@ -131,6 +132,7 @@ const TopFv: React.FC<TopFvProps> = (props) => {
   
   const [isLoading, setIsLoading] = useState(true);
   const [contentVisible, setContentVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   
   const hoverIntensity = 0.5;
   const enableHover = true;
@@ -139,6 +141,18 @@ const TopFv: React.FC<TopFvProps> = (props) => {
   propsRef.current = props;
 
   const ctnDom = useRef<HTMLDivElement>(null);
+
+  // Check if device is mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Simulate asset loading
   useEffect(() => {
@@ -238,6 +252,7 @@ const TopFv: React.FC<TopFvProps> = (props) => {
   
   return (
     <>
+      <ViewportHandler />
       <AuroraLoader isLoading={isLoading} onLoadingComplete={handleLoadingComplete} />
       <div className={`topfv-container ${contentVisible ? 'fade-in' : 'hidden'}`}>
         <div ref={ctnDom} className="aurora-container" />
@@ -247,7 +262,7 @@ const TopFv: React.FC<TopFvProps> = (props) => {
             baseIntensity={0.2} 
             hoverIntensity={hoverIntensity} 
             enableHover={enableHover}
-            fontSize="clamp(4rem, 12vw, 12rem)"
+            fontSize={isMobile ? "clamp(2.5rem, 8vw, 5rem)" : "clamp(4rem, 12vw, 12rem)"}
             color="#ffffff"
           >
             Ken's Portfolio

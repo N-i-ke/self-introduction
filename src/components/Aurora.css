@@ -33,9 +33,11 @@
   text-align: center;
 }
 
-.fuzzy-text-container canvas {
+.fuzzy-text-container canvas,
+.fuzzy-text {
   pointer-events: auto;
   max-width: 100%;
+  touch-action: auto;
 }
 
 /* Animation classes for loader transitions */
@@ -59,15 +61,29 @@
   }
 }
 
+/* Allow page to be scrollable */
+html, body {
+  height: auto;
+  overflow-y: auto;
+  overscroll-behavior-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 /* Mobile-specific styles */
 @media screen and (max-width: 768px) {
   .topfv-container {
     height: 80vh;
     height: calc(var(--vh, 1vh) * 80);
+    min-height: 500px; /* Ensure minimum height for the content */
   }
   
   .fuzzy-text-container {
     padding: 0 15px;
+  }
+  
+  .fuzzy-text {
+    max-height: 80vh;
+    display: block;
   }
 }
 

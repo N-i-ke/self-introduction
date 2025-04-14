@@ -262,7 +262,7 @@ const TopFv: React.FC<TopFvProps> = (props) => {
             baseIntensity={0.2} 
             hoverIntensity={hoverIntensity} 
             enableHover={enableHover}
-            fontSize={isMobile ? "clamp(2.5rem, 8vw, 5rem)" : "clamp(4rem, 12vw, 12rem)"}
+            fontSize={isMobile ? "clamp(3.5rem, 12vw, 8rem)" : "clamp(4rem, 12vw, 12rem)"}
             color="#ffffff"
           >
             Ken's Portfolio

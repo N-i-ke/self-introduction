@@ -109,7 +109,18 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
       );
       
       // Adjust intensity for mobile - increase it to make text more visible
-      const mobileFuzzIntensity = isMobile ? hoverIntensity * 0.85 : baseIntensity;
+      const mobileFuzzIntensity = isMobile ? hoverIntensity * 0.95 : baseIntensity;
+      
+      // Mobile-specific optimizations
+      if (isMobile) {
+        // Increase text rendering quality for mobile
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+        
+        // Make sure font is rendered at highest quality
+        offCtx.imageSmoothingEnabled = true;
+        offCtx.imageSmoothingQuality = 'high';
+      }
 
       const run = () => {
         if (isCancelled) return;

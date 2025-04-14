@@ -259,13 +259,13 @@ const TopFv: React.FC<TopFvProps> = (props) => {
       // スマホの場合はより大きなフォントサイズを使用
       if (viewportWidth < 375) {
         // 小さい画面のスマホ (iPhone SE等)
-        return "clamp(4rem, 25vw, 9rem)";
+        return "clamp(6rem, 30vw, 12rem)";
       } else if (viewportWidth < 480) {
         // 通常のスマホ
-        return "clamp(5rem, 25vw, 10rem)";
+        return "clamp(7rem, 32vw, 14rem)";
       } else {
         // 大きなスマホ
-        return "clamp(6rem, 25vw, 12rem)";
+        return "clamp(8rem, 35vw, 16rem)";
       }
     }
     // デスクトップの場合

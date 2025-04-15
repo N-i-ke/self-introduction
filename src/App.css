@@ -227,6 +227,14 @@
   section {
     padding-top: 50px;
   }
+  #work .work-wrapper ul {
+    justify-content: center;
+  }
+  #work .work-item {
+    width: 80%;
+    min-width: unset;
+    margin: 0 auto 20px;
+  }
   #about .profile {
     display: inline-block;
   }
@@ -303,6 +311,15 @@
   section {
     padding-top: 50px;
   }
+  #work .work-wrapper ul {
+    padding: 50px 0;
+    justify-content: center;
+  }
+  #work .work-item {
+    width: 90%;
+    min-width: unset;
+    margin: 0 auto 15px;
+  }
   .slides li img {
     width: 280px;
     height: 160px;
@@ -323,9 +340,6 @@
     box-sizing: border-box;
     padding: 5%;
     margin: 0;
-  }
-  #work .work-wrapper ul {
-    padding: 50px 0;
   }
   #skill .skill-wrap {
     width: 75%;

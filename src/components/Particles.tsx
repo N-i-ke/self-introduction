@@ -49,9 +49,9 @@ const vertex = /* glsl */ `
     vec4 mvPos = viewMatrix * mPos;
     
     // Calculate point size based on the point's distance from camera
-    // Multiplied by 3 to ensure visibility
-    float pointSize = (uBaseSize * (1.0 + uSizeRandomness * (random.x - 0.5))) / length(mvPos.xyz) * 3.0;
-    gl_PointSize = max(pointSize, 1.0); // Ensure minimum size
+    // Multiplied by 2.0 instead of 3.0 to make them smaller
+    float pointSize = (uBaseSize * (1.0 + uSizeRandomness * (random.x - 0.5))) / length(mvPos.xyz) * 2.0;
+    gl_PointSize = max(pointSize, 0.8); // Ensure minimum size, but smaller than before
     
     gl_Position = projectionMatrix * mvPos;
   }

@@ -278,10 +278,10 @@ const TopFv: React.FC<TopFvProps> = (props) => {
         <div className="particles-background">
           <Particles
             particleColors={['#ffffff', '#ffffff']}
-            particleCount={500}
+            particleCount={400}
             particleSpread={15}
             speed={0.2}
-            particleBaseSize={150}
+            particleBaseSize={100}
             moveParticlesOnHover={true}
             alphaParticles={false}
             disableRotation={false}

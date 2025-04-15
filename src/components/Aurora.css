@@ -46,18 +46,18 @@
 }
 
 .glitch-mobile-small {
-  font-size: clamp(3rem, 10vw, 6rem);
-  transform: scale(1.2);
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  transform: scale(1.1);
 }
 
 .glitch-mobile-medium {
-  font-size: clamp(3.5rem, 12vw, 7rem);
-  transform: scale(1.15);
+  font-size: clamp(3rem, 9vw, 6rem);
+  transform: scale(1.1);
 }
 
 .glitch-mobile-large {
-  font-size: clamp(4rem, 14vw, 8rem);
-  transform: scale(1.1);
+  font-size: clamp(3.5rem, 10vw, 7rem);
+  transform: scale(1.05);
 }
 
 /* Animation classes for loader transitions */

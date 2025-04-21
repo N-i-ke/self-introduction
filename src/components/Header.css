@@ -1,0 +1,55 @@
+/* Header.css */
+.mobile-menu {
+  display: none;
+}
+
+.desktop-menu {
+  display: flex;
+}
+
+/* リンク色の統一 */
+.mobile-menu a {
+  color: white !important;
+  text-decoration: none;
+}
+
+.mobile-menu a:hover {
+  color: white !important;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+/* Mobile styles */
+@media screen and (max-width: 768px) {
+  .mobile-menu {
+    display: block;
+  }
+  
+  .desktop-menu {
+    display: none !important;
+    visibility: hidden;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    position: absolute;
+    pointer-events: none;
+  }
+}
+
+/* Desktop styles */
+@media screen and (min-width: 769px) {
+  .mobile-menu {
+    display: none !important;
+    visibility: hidden;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    position: absolute;
+    pointer-events: none;
+  }
+  
+  .desktop-menu {
+    display: flex !important;
+    visibility: visible;
+    opacity: 1;
+  }
+} 

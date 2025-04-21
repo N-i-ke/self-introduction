@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, RefObject } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import "./GooeyNav.css";
 
 // 項目の型を定義
@@ -221,6 +221,7 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
     }, 100);
 
     return () => clearTimeout(timer);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeIndex, initialized]);
 
   // リサイズ対応
@@ -248,6 +249,7 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
       resizeObserver.disconnect();
       window.removeEventListener('resize', handleResize);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeIndex]);
 
   return (
@@ -284,4 +286,4 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
   );
 };
 
-export default GooeyNav; 
+export default GooeyNav;

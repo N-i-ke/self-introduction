@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import GooeyNav from './GooeyNav';
+import './Header.css';
 
 const HeaderContainer = styled.header`
   text-align: center;
@@ -34,15 +36,16 @@ const Nav = styled.nav<{ isOpen: boolean }>`
 
   a {
     padding: 10px;
-    color: #fff;
+    color: #fff !important;
     text-align: center;
     display: block;
     transition: all 0.6s;
 
     &:hover {
-      color: #1a1a1a;
-      background-color: #fff;
+      color: #fff !important;
+      background-color: rgba(255, 255, 255, 0.2);
       font-size: 1.3rem;
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
     }
   }
 `;
@@ -51,7 +54,7 @@ const MenuButton = styled.div`
   display: block;
   position: fixed;
   top: 25px;
-  right: 45px;
+  right: 25px;
   z-index: 999;
   width: 40px;
   height: 40px;
@@ -108,6 +111,21 @@ const Mask = styled.div<{ isOpen: boolean }>`
   transition: all 0.6s;
 `;
 
+const GooeyNavWrapper = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  z-index: 99;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  background-color: rgba(14, 8, 8, 0.8);
+  backdrop-filter: blur(5px);
+`;
+
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -119,48 +137,75 @@ const Header: React.FC = () => {
     setIsOpen(false);
   };
 
+  // Nav items for GooeyNav
+  const items = [
+    { label: "TOP", href: "#top" },
+    { label: "WORK", href: "#work" },
+    { label: "ABOUT", href: "#about" },
+    { label: "SKILLS", href: "#skill" },
+    { label: "SERVICE", href: "#service" },
+    { label: "CONTACT", href: "#contact" },
+  ];
+
   return (
     <HeaderContainer id="top" className={isOpen ? "open" : ""}>
-      <Nav isOpen={isOpen}>
-        <ul className="nav-menu">
-          <li>
-            <a href="#top" className="top">
-              TOP
-            </a>
-          </li>
-          <li>
-            <a href="#work" className="work">
-              WORK
-            </a>
-          </li>
-          <li>
-            <a href="#about" className="about">
-              ABOUT
-            </a>
-          </li>
-          <li>
-            <a href="#skill" className="skill">
-              SKILLS
-            </a>
-          </li>
-          <li>
-            <a href="#service" className="service">
-              SERVICE
-            </a>
-          </li>
-          <li>
-            <a href="#contact" className="contact">
-              CONTACT
-            </a>
-          </li>
-        </ul>
-      </Nav>
-      <MenuButton className={isOpen ? "open" : ""} onClick={toggleMenu}>
-        <span></span>
-        <span></span>
-        <span></span>
-      </MenuButton>
-      <Mask isOpen={isOpen} onClick={closeMenu}></Mask>
+      {/* Mobile menu (hidden on desktop) */}
+      <div className="mobile-menu">
+        <Nav isOpen={isOpen}>
+          <ul className="nav-menu">
+            <li>
+              <a href="#top" className="top" onClick={closeMenu}>
+                TOP
+              </a>
+            </li>
+            <li>
+              <a href="#work" className="work" onClick={closeMenu}>
+                WORK
+              </a>
+            </li>
+            <li>
+              <a href="#about" className="about" onClick={closeMenu}>
+                ABOUT
+              </a>
+            </li>
+            <li>
+              <a href="#skill" className="skill" onClick={closeMenu}>
+                SKILLS
+              </a>
+            </li>
+            <li>
+              <a href="#service" className="service" onClick={closeMenu}>
+                SERVICE
+              </a>
+            </li>
+            <li>
+              <a href="#contact" className="contact" onClick={closeMenu}>
+                CONTACT
+              </a>
+            </li>
+          </ul>
+        </Nav>
+        <MenuButton className={isOpen ? "open" : ""} onClick={toggleMenu}>
+          <span></span>
+          <span></span>
+          <span></span>
+        </MenuButton>
+        <Mask isOpen={isOpen} onClick={closeMenu}></Mask>
+      </div>
+
+      {/* Desktop GooeyNav menu */}
+      <GooeyNavWrapper className="desktop-menu">
+        <GooeyNav
+          items={items}
+          particleCount={25}
+          particleDistances={[120, 15]}
+          particleR={120}
+          initialActiveIndex={0}
+          animationTime={800}
+          timeVariance={400}
+          colors={[1, 2, 3, 4, 1, 2, 3, 4]}
+        />
+      </GooeyNavWrapper>
     </HeaderContainer>
   );
 };

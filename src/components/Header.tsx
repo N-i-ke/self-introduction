@@ -197,13 +197,13 @@ const Header: React.FC = () => {
       <GooeyNavWrapper className="desktop-menu">
         <GooeyNav
           items={items}
-          particleCount={25}
-          particleDistances={[120, 15]}
-          particleR={120}
+          particleCount={8}
+          particleDistances={[180, 50]}
+          particleR={180}
           initialActiveIndex={0}
-          animationTime={800}
-          timeVariance={400}
-          colors={[1, 2, 3, 4, 1, 2, 3, 4]}
+          animationTime={900}
+          timeVariance={200}
+          colors={[0, 0, 0, 0, 0, 0, 0, 0]}
         />
       </GooeyNavWrapper>
     </HeaderContainer>

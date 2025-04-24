@@ -1,9 +1,10 @@
 :root {
   --linear-ease: linear(0, 0.068, 0.19 2.7%, 0.804 8.1%, 1.037, 1.199 13.2%, 1.245, 1.27 15.8%, 1.274, 1.272 17.4%, 1.249 19.1%, 0.996 28%, 0.949, 0.928 33.3%, 0.926, 0.933 36.8%, 1.001 45.6%, 1.013, 1.019 50.8%, 1.018 54.4%, 1 63.1%, 0.995 68%, 1.001 85%, 1);
-  --color-1: #ff9a3c;
-  --color-2: #ff70a6;
-  --color-3: #3f84e5;
-  --color-4: #21e6c1;
+  --color-0: #ffffff;
+  --color-1: #ffffff;
+  --color-2: #ffffff;
+  --color-3: #ffffff;
+  --color-4: #ffffff;
 }
 
 .gooey-nav-container {
@@ -89,12 +90,12 @@
 }
 
 .gooey-nav-container .effect.filter {
-  filter: url('#gooey') blur(7px) contrast(100) blur(0);
-  mix-blend-mode: lighten;
+  filter: url('#gooey') blur(2px) contrast(120) blur(0);
+  mix-blend-mode: screen;
   position: absolute;
   left: 0;
   top: 0;
-  opacity: 1;
+  opacity: 0.9;
   transform: translate3d(0, 0, 0);
   will-change: transform;
   pointer-events: none;
@@ -126,8 +127,8 @@
 .point {
   display: block;
   opacity: 0;
-  width: 25px;
-  height: 25px;
+  width: 30px;
+  height: 30px;
   border-radius: 100%;
   transform-origin: center;
 }
@@ -135,40 +136,43 @@
 .particle {
   --time: 5s;
   position: absolute;
-  top: calc(50% - 12px);
-  left: calc(50% - 12px);
+  top: calc(50% - 15px);
+  left: calc(50% - 15px);
   animation: particle calc(var(--time)) ease 1 -350ms;
   z-index: 10;
 }
 
 .point {
-  background: var(--color);
+  background: rgba(255, 255, 255, 0.7);
   opacity: 1;
   animation: point calc(var(--time)) ease 1 -350ms;
-  box-shadow: 0 0 10px 2px var(--color);
+  box-shadow: 
+    0 0 15px 3px rgba(255, 255, 255, 0.5), 
+    0 0 5px 1px rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.6);
 }
 
 @keyframes particle {
   0% {
     transform: rotate(0deg) translate(calc(var(--start-x)), calc(var(--start-y)));
-    opacity: 1;
+    opacity: 0.6;
     animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
   }
 
   70% {
     transform: rotate(calc(var(--rotate) * 0.5)) translate(calc(var(--end-x) * 1.2), calc(var(--end-y) * 1.2));
-    opacity: 1;
+    opacity: 0.7;
     animation-timing-function: ease;
   }
 
   85% {
     transform: rotate(calc(var(--rotate) * 0.66)) translate(calc(var(--end-x)), calc(var(--end-y)));
-    opacity: 1;
+    opacity: 0.6;
   }
 
   100% {
     transform: rotate(calc(var(--rotate) * 1.2)) translate(calc(var(--end-x) * 0.5), calc(var(--end-y) * 0.5));
-    opacity: 1;
+    opacity: 0;
   }
 }
 
@@ -184,18 +188,18 @@
   }
 
   38% {
-    opacity: 1;
+    opacity: 0.7;
   }
 
   65% {
     transform: scale(var(--scale));
-    opacity: 1;
+    opacity: 0.7;
     animation-timing-function: ease;
   }
 
   85% {
     transform: scale(var(--scale));
-    opacity: 1;
+    opacity: 0.6;
   }
 
   100% {

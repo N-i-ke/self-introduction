@@ -43,8 +43,10 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
     pointIndex: number,
     totalPoints: number
   ): [number, number] => {
-    const angle =
-      ((360 + noise(8)) / totalPoints) * pointIndex * (Math.PI / 180);
+    // 角度の範囲を制限して、特定の方向に集中させる（45度から135度の範囲）
+    const angleRange = 90; // 角度の範囲（度数法）
+    const startAngle = 45; // 開始角度（度数法）
+    const angle = (startAngle + (angleRange / totalPoints) * pointIndex + noise(5)) * (Math.PI / 180);
     return [distance * Math.cos(angle), distance * Math.sin(angle)];
   };
 
@@ -63,14 +65,14 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
     d: number[],
     r: number
   ): Particle => {
-    let rotate = noise(r / 10);
+    let rotate = noise(r / 8) * 2;
     return {
       start: getXY(d[0], particleCount - i, particleCount),
-      end: getXY(d[1] + noise(7), particleCount - i, particleCount),
+      end: getXY(d[1] + noise(15), particleCount - i, particleCount),
       time: t,
-      scale: 1 + noise(0.2),
+      scale: 1.2 + noise(0.5),
       color: colors[Math.floor(Math.random() * colors.length)],
-      rotate: rotate > 0 ? (rotate + r / 20) * 10 : (rotate - r / 20) * 10,
+      rotate: rotate > 0 ? (rotate + r / 10) * 15 : (rotate - r / 10) * 15,
     };
   };
 
@@ -258,8 +260,8 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
       <svg width="0" height="0" style={{ position: 'absolute', pointerEvents: 'none' }}>
         <defs>
           <filter id="gooey">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur" />
-            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="gooey" />
+            <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur" />
+            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 15 -6" result="gooey" />
             <feComposite in="SourceGraphic" in2="gooey" operator="atop" />
           </filter>
         </defs>

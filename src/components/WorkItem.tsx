@@ -21,28 +21,38 @@ const WorkItem: React.FC<WorkItemProps> = ({
 }) => (
   <li className={`work-item animated-li ${disabled ? 'disabled-item' : ''}`}>
     <figure>
-      <a 
-        href={disabled ? "#" : link} 
-        target={disabled ? "_self" : "_blank"} 
-        rel="noopener noreferrer"
-        className={disabled ? "disabled-link" : ""}
-      >
-        <img src={imgSrc} alt={imgAlt} />
-        {disabled && (
+      {disabled ? (
+        <div className="disabled-link-container">
+          <img src={imgSrc} alt={imgAlt} />
           <div className="disabled-overlay">
             <span>
               Coming Soon
             </span>
           </div>
-        )}
-        <figcaption>
-          <div className="fig-inner">
-            <h3>{title}</h3>
-            <p>{description}</p>
-            <p>制作期間: {duration}</p>
-          </div>
-        </figcaption>
-      </a>
+          <figcaption>
+            <div className="fig-inner">
+              <h3>{title}</h3>
+              <p>{description}</p>
+              <p>制作期間: {duration}</p>
+            </div>
+          </figcaption>
+        </div>
+      ) : (
+        <a 
+          href={link} 
+          target="_blank" 
+          rel="noopener noreferrer"
+        >
+          <img src={imgSrc} alt={imgAlt} />
+          <figcaption>
+            <div className="fig-inner">
+              <h3>{title}</h3>
+              <p>{description}</p>
+              <p>制作期間: {duration}</p>
+            </div>
+          </figcaption>
+        </a>
+      )}
     </figure>
   </li>
 );

@@ -436,6 +436,16 @@
   opacity: 0.65;
 }
 
+.disabled-link-container {
+  position: relative;
+  display: block;
+  cursor: not-allowed;
+}
+
+.disabled-link-container figcaption {
+  pointer-events: none;
+}
+
 .disabled-overlay {
   position: absolute;
   top: 0;
@@ -462,11 +472,6 @@
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
   transform: rotate(-10deg);
   user-select: none;
-}
-
-.disabled-link {
-  cursor: not-allowed;
-  pointer-events: auto;
 }
 
 #work .disabled-item figcaption {

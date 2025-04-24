@@ -69,6 +69,7 @@ const HomePage = () => {
               description="WordPressで構築しました"
               duration="16日"
               link="/self-introduction/Engress/index.html"
+              disabled={true}
             />
             <WorkItem
               imgSrc={Kadan}
@@ -77,6 +78,7 @@ const HomePage = () => {
               description="モーダル/マップ埋め込みetc"
               duration="16日"
               link="/self-introduction/Kadan/html/index.html"
+              disabled={true}
             />
             <WorkItem
               imgSrc={Sousaku}

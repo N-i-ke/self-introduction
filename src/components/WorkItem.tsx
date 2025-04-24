@@ -7,6 +7,7 @@ type WorkItemProps = {
   description: string;
   duration: string;
   link: string;
+  disabled?: boolean;
 };
 
 const WorkItem: React.FC<WorkItemProps> = ({
@@ -16,11 +17,24 @@ const WorkItem: React.FC<WorkItemProps> = ({
   description,
   duration,
   link,
+  disabled = false,
 }) => (
-  <li className="work-item animated-li">
+  <li className={`work-item animated-li ${disabled ? 'disabled-item' : ''}`}>
     <figure>
-      <a href={link} target="_blank" rel="noopener noreferrer">
+      <a 
+        href={disabled ? "#" : link} 
+        target={disabled ? "_self" : "_blank"} 
+        rel="noopener noreferrer"
+        className={disabled ? "disabled-link" : ""}
+      >
         <img src={imgSrc} alt={imgAlt} />
+        {disabled && (
+          <div className="disabled-overlay">
+            <span>
+              Coming Soon
+            </span>
+          </div>
+        )}
         <figcaption>
           <div className="fig-inner">
             <h3>{title}</h3>

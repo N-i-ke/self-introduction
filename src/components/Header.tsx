@@ -16,7 +16,7 @@ const Nav = styled.nav<{ isOpen: boolean }>`
   top: 0;
   left: ${(props) => (props.isOpen ? "0" : "-400px")};
   opacity: ${(props) => (props.isOpen ? "1" : "0")};
-  transition: all 0.6s;
+  transition: all 0.15s;
   overflow-x: hidden;
   overflow-y: auto;
   font-family: "Quicksand", sans-serif;
@@ -39,7 +39,7 @@ const Nav = styled.nav<{ isOpen: boolean }>`
     color: #fff !important;
     text-align: center;
     display: block;
-    transition: all 0.6s;
+    transition: all 0.15s;
 
     &:hover {
       color: #fff !important;
@@ -60,7 +60,7 @@ const MenuButton = styled.div`
   height: 40px;
   border-radius: 10px;
   cursor: pointer;
-  transition: all 0.6s;
+  transition: all 0.15s;
 
   span {
     position: absolute;
@@ -70,7 +70,7 @@ const MenuButton = styled.div`
     height: 2px;
     border-radius: 1px;
     background-color: #fff;
-    transition: all 0.6s;
+    transition: all 0.15s;
 
     &:nth-child(1) {
       top: 9px;
@@ -108,7 +108,7 @@ const Mask = styled.div<{ isOpen: boolean }>`
   width: 100%;
   height: 100%;
   min-height: 100vh;
-  transition: all 0.6s;
+  transition: all 0.15s;
 `;
 
 const GooeyNavWrapper = styled.div`
@@ -197,13 +197,9 @@ const Header: React.FC = () => {
       <GooeyNavWrapper className="desktop-menu">
         <GooeyNav
           items={items}
-          particleCount={8}
-          particleDistances={[180, 50]}
-          particleR={180}
-          initialActiveIndex={0}
-          animationTime={900}
-          timeVariance={200}
-          colors={[0, 0, 0, 0, 0, 0, 0, 0]}
+          particleCount={4}
+          animationTime={100}
+          timeVariance={50}
         />
       </GooeyNavWrapper>
     </HeaderContainer>

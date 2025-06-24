@@ -17,7 +17,7 @@ const ContactWrapper = styled.div`
   .contact-info {
     margin: 0 auto;
     max-width: 600px;
-    padding-bottom: 50px;
+    padding-bottom: 100px;
   }
 
   .contact-text {

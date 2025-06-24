@@ -7,7 +7,7 @@ const Service: React.FC = () => {
         <i className="fas fa-edit animated"></i>
         <h3 className="animated">Webアプリケーション開発</h3>
         <p className="animated">
-          現職がWebアプリケーション開発のフロントエンドエンジニアという経歴から、React•TypeScriptを使ったWebアプリケーション開発を得意としています。
+          現職がWebアプリケーション開発のフロントエンドエンジニアという経歴から、React.js•Next.js•TypeScriptを使ったWebアプリケーション開発を得意としています。
         </p>
       </div>
       <div className="service-wrap-right wrapper animated">

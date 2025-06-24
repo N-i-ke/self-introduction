@@ -1,6 +1,5 @@
-import React, { useRef } from "react";
+import React from "react";
 import SectionTitle from "./SectionTitle";
-import emailjs from "emailjs-com";
 import styled from "styled-components";
 
 // Styled components
@@ -15,65 +14,70 @@ const ContactWrapper = styled.div`
   margin-bottom: 0;
   font-family: "Montserrat Subrayada", sans-serif;
 
-  form {
+  .contact-info {
     margin: 0 auto;
     max-width: 600px;
-    display: flex;
-    flex-direction: column;
     padding-bottom: 50px;
   }
 
-  dt {
-    padding: 10px;
-    text-align: left;
-  }
-
-  dd {
-    margin-left: 0;
-  }
-
-  p {
+  .contact-text {
     margin-top: 40px;
     padding-bottom: 20px;
     text-align: center;
     font-family: "Quicksand", sans-serif;
+    color: #fff;
+    line-height: 1.8;
+    font-size: 1.1rem;
   }
 
-  #name,
-  #mail {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border: none;
-    border-radius: 4px;
-    width: 98%;
-  }
-
-  #message {
-    padding-top: 20px;
-    padding-bottom: 20px;
-    border: none;
-    border-radius: 4px;
-    width: 98%;
-    margin-bottom: 20px;
-  }
-
-  #button {
-    padding: 10px;
+  .google-form-button {
+    padding: 15px 30px;
     border: 2px solid #dc143c;
     background-color: #dc143c;
     color: #fff;
     border-radius: 7px;
-    width: 200px;
-    margin: 0 auto;
     font-family: "Montserrat Subrayada", sans-serif;
+    font-size: 1.1rem;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 20px;
     transition: all 0.5s;
+    cursor: pointer;
   }
 
-  #button:hover {
+  .google-form-button:hover {
     color: #dc143c;
     border: 2px solid #fff;
     background-color: #fff;
     transition: all 0.5s;
+  }
+
+  .form-features {
+    margin-top: 30px;
+    color: #fff;
+    font-family: "Quicksand", sans-serif;
+    font-size: 0.9rem;
+    opacity: 0.8;
+  }
+
+  .form-features ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+  }
+
+  .form-features li {
+    margin: 5px 0;
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .form-features li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #4CAF50;
+    font-weight: bold;
   }
 
   @media screen and (max-width: 1000px) {
@@ -83,17 +87,26 @@ const ContactWrapper = styled.div`
   }
 
   @media screen and (max-width: 600px) {
-    form {
+    .contact-info {
       max-width: 300px;
     }
 
     .sub-sec-title {
       left: 30%;
     }
+
+    .contact-text {
+      font-size: 1rem;
+    }
+
+    .google-form-button {
+      font-size: 1rem;
+      padding: 12px 25px;
+    }
   }
 
   @media screen and (max-width: 480px) {
-    form {
+    .contact-info {
       max-width: 300px;
     }
 
@@ -104,57 +117,26 @@ const ContactWrapper = styled.div`
 `;
 
 const Contact: React.FC = () => {
-  const form = useRef<HTMLFormElement>(null); // useRefに型を指定
-
-  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    if (form.current) {
-      emailjs
-        .sendForm(
-          "react_contact_detail", // email.js REACT_APP_TEMPLATE_ID
-          "react_contact_form", // email.js REACT_APP_SERVICE_ID
-          form.current, // 送信するフォーム
-          "OAR2oEySxt3bu59bL" // email.js REACT_APP_PUBLIC_KEY
-        )
-        .then(
-          (result) => {
-            console.log(result.text);
-          },
-          (error) => {
-            console.log(error.text);
-          }
-        );
-    }
-  };
-
   return (
     <ContactSection id="contact">
       <SectionTitle mainTitle="Contact" subTitle="Contact" />
       <ContactWrapper className="contact-wrapper animated">
-        <form className="contact-form" ref={form} onSubmit={sendEmail}>
-          <dl>
-            <dt>
-              <label htmlFor="name">NAME:</label>
-            </dt>
-            <dd>
-              <input id="name" type="text" name="to_name" />
-            </dd>
-            <dt>
-              <label htmlFor="mail">YOUR MAIL:</label>
-            </dt>
-            <dd>
-              <input id="mail" type="email" name="to_email" />
-            </dd>
-            <dt>
-              <label htmlFor="message">MESSAGE:</label>
-            </dt>
-            <dd>
-              <textarea id="message" name="message"></textarea>
-            </dd>
-          </dl>
-          <input id="button" type="submit" />
-        </form>
+        <div className="contact-info">
+          <p className="contact-text">
+            お問い合わせは以下ボタンからGoogleフォームにアクセスしてください。
+            <br />
+            お気軽にご連絡ください。
+          </p>
+          
+          <a 
+            href="https://docs.google.com/forms/d/14xlSmgOBjRniA-eGkcnvbUB025-Yzt0Q8f4iQlZ2DnE/viewform" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="google-form-button"
+          >
+            お問い合わせフォームを開く
+          </a>
+        </div>
       </ContactWrapper>
     </ContactSection>
   );

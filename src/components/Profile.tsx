@@ -19,10 +19,10 @@ const Profile: React.FC = () => {
           東京育ち、東京在住
           <br />
           <i className="fa-regular fa-dot-circle"></i>
-          都内のShopify専門制作会社でフロントエンドエンジニアとして勤務したのちに、Webアプリケーション開発(HR系)のフロントエンドエンジニアに転身
+          都内のShopify専門制作会社でフロントエンドエンジニアとして勤務したのちに、Webアプリケーション開発のフロントエンドエンジニアに転身
           <br />
           <i className="fa-regular fa-dot-circle"></i>
-          Shopifyを使ったECサイトやLP・コーポレートサイトなどのWebサイト制作を経験後、現在は主にReact・TypeScriptを使ったフロントエンド開発に取り組む
+          Shopifyを使ったECサイトやLP・コーポレートサイトなどのWebサイト制作を経験後、現在は主にReact.js・Next.js・Vue.js・TypeScriptを使ったフロントエンド開発に取り組む
           <br />
         </p>
         <h4 className="animated">

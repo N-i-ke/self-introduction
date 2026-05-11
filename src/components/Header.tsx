@@ -157,7 +157,7 @@ const Header: React.FC = () => {
               <li key={item.href}>
                 <a
                   href={item.href}
-                  className={item.label.toLowerCase()}
+                  className={item.href.slice(1)}
                   onClick={closeMenu}
                 >
                   {item.label}

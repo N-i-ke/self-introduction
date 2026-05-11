@@ -93,9 +93,6 @@ const SectionTitle: React.FC<TitleProps> = ({ mainTitle, subTitle }) => {
         animateBy="words"
         direction="top"
         className="main-title-blur"
-        animationFrom={undefined}
-        animationTo={undefined}
-        onAnimationComplete={undefined}
       />
       <SubSecTitle
         className="sub-sec-title"
@@ -110,9 +107,6 @@ const SectionTitle: React.FC<TitleProps> = ({ mainTitle, subTitle }) => {
           animateBy="words"
           direction="bottom"
           className="subtitle-blur"
-          animationFrom={undefined}
-          animationTo={undefined}
-          onAnimationComplete={undefined}
         />
       </SubSecTitle>
     </SecTitle>

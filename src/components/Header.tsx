@@ -153,36 +153,17 @@ const Header: React.FC = () => {
       <div className="mobile-menu">
         <Nav isOpen={isOpen}>
           <ul className="nav-menu">
-            <li>
-              <a href="#top" className="top" onClick={closeMenu}>
-                TOP
-              </a>
-            </li>
-            <li>
-              <a href="#work" className="work" onClick={closeMenu}>
-                WORK
-              </a>
-            </li>
-            <li>
-              <a href="#about" className="about" onClick={closeMenu}>
-                ABOUT
-              </a>
-            </li>
-            <li>
-              <a href="#skill" className="skill" onClick={closeMenu}>
-                SKILLS
-              </a>
-            </li>
-            <li>
-              <a href="#service" className="service" onClick={closeMenu}>
-                SERVICE
-              </a>
-            </li>
-            <li>
-              <a href="#contact" className="contact" onClick={closeMenu}>
-                CONTACT
-              </a>
-            </li>
+            {items.map((item) => (
+              <li key={item.href}>
+                <a
+                  href={item.href}
+                  className={item.label.toLowerCase()}
+                  onClick={closeMenu}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
           </ul>
         </Nav>
         <MenuButton className={isOpen ? "open" : ""} onClick={toggleMenu}>

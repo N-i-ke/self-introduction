@@ -1,4 +1,5 @@
 import React from "react";
+import "./WorkItem.css";
 
 type WorkItemProps = {
   imgSrc: string;
@@ -19,7 +20,7 @@ const WorkItem: React.FC<WorkItemProps> = ({
   link,
   disabled = false,
 }) => (
-  <li className={`work-item animated-li ${disabled ? 'disabled-item' : ''}`}>
+  <li className={`work-item ${disabled ? 'disabled-item' : ''}`}>
     <figure>
       {disabled ? (
         <div className="disabled-link-container">

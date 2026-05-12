@@ -8,13 +8,13 @@ interface DecryptedLoaderProps {
   text?: string;
 }
 
-const MIN_DISPLAY_MS = 1800;
+const MIN_DISPLAY_MS = 2400;
 const FADE_DURATION_MS = 600;
 
 const DecryptedLoader: React.FC<DecryptedLoaderProps> = ({
   isLoading,
   onLoadingComplete,
-  text = 'WELCOME'
+  text = 'WELCOME TO N-i-ke WebSite'
 }) => {
   const [fadeOut, setFadeOut] = useState(false);
   const [minDisplayDone, setMinDisplayDone] = useState(false);

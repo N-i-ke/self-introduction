@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { motion } from 'framer-motion';
-import BlurText from "./BlurText";
+import BlurText from "../BlurText";
 
 interface TitleProps {
   mainTitle: string;

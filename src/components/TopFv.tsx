@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Renderer, Program, Mesh, Color, Triangle } from "ogl";
-import { useRef } from "react";
 import GlitchText from './GlitchText';
 import AuroraLoader from './AuroraLoader';
 import ViewportHandler from './ViewportHandler';
 import Particles from './Particles';
+import { useViewport } from '../hooks/useViewport';
 
 import './Aurora.css';
 
@@ -133,27 +133,12 @@ const TopFv: React.FC<TopFvProps> = (props) => {
   
   const [isLoading, setIsLoading] = useState(true);
   const [contentVisible, setContentVisible] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-  const [viewportWidth, setViewportWidth] = useState(0);
-  
+  const { width: viewportWidth, isMobile } = useViewport();
+
   const propsRef = useRef<TopFvProps>(props);
   propsRef.current = props;
 
   const ctnDom = useRef<HTMLDivElement>(null);
-
-  // Check if device is mobile and get viewport width
-  useEffect(() => {
-    const checkMobile = () => {
-      const width = window.innerWidth;
-      setViewportWidth(width);
-      setIsMobile(width <= 768);
-    };
-    
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
 
   // Simulate asset loading
   useEffect(() => {

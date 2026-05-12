@@ -280,7 +280,7 @@ const TopFv: React.FC<TopFvProps> = (props) => {
             enableOnHover={false}
             className={getCustomGlitchClass()}
           >
-            Ken's Portfolio
+            N-i-ke's Portfolio
           </GlitchText>
         </div>
       </div>

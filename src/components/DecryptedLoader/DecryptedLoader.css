@@ -27,15 +27,19 @@
   font-weight: 700;
   text-align: center;
   max-width: 90vw;
-  text-shadow: 0 0 18px rgba(0, 216, 255, 0.45);
+  filter: drop-shadow(0 0 18px rgba(255, 255, 255, 0.35));
 }
 
 .decrypted-loader__char--revealed {
-  color: #00d8ff;
+  background: linear-gradient(180deg, #ffffff 0%, #ffffff 45%, #b8b8b8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 
 .decrypted-loader__char--encrypted {
-  color: rgba(255, 255, 255, 0.55);
+  color: rgba(255, 255, 255, 0.35);
 }
 
 @media screen and (max-width: 768px) {

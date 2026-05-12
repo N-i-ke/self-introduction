@@ -1,4 +1,3 @@
-import React from "react";
 import SectionTitle from "./SectionTitle";
 import WorkItem from "./WorkItem";
 import Profile from "./Profile";

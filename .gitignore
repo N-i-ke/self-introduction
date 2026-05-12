@@ -4,6 +4,9 @@ node_modules/
 # macOS system files
 .DS_Store
 
+# Build output (deployed via GitHub Actions, not committed)
+docs/
+
 # Vite local build cache
 .vite/
 

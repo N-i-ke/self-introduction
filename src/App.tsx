@@ -6,6 +6,7 @@ import TopFv from "./components/TopFv";
 import HomePage from "./components/HomePage";
 import Footer from "./components/Footer";
 import Contact from "./components/Contact";
+import TargetCursor from "./components/TargetCursor";
 
 // グローバルスタイルを作成
 const GlobalStyle = createGlobalStyle`
@@ -43,6 +44,7 @@ const App: React.FC = () => {
   return (
   <>
     <GlobalStyle />
+    <TargetCursor targetSelector=".cursor-target" />
     <div className="App">
       <Header />
       <TopFv />

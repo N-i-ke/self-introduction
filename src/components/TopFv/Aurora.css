@@ -45,19 +45,19 @@
   font-size: clamp(4rem, 12vw, 12rem);
 }
 
+/* "Ken's Portfolio" (15文字) が white-space: nowrap で
+   横にはみ出さないよう、SP では font-size を viewport 幅基準で
+   抑え、scale 拡大も外す */
 .glitch-mobile-small {
-  font-size: clamp(2.5rem, 8vw, 5rem);
-  transform: scale(1.1);
+  font-size: clamp(1.6rem, 7vw, 2.2rem);
 }
 
 .glitch-mobile-medium {
-  font-size: clamp(3rem, 9vw, 6rem);
-  transform: scale(1.1);
+  font-size: clamp(1.9rem, 7.5vw, 2.6rem);
 }
 
 .glitch-mobile-large {
-  font-size: clamp(3.5rem, 10vw, 7rem);
-  transform: scale(1.05);
+  font-size: clamp(2.2rem, 8vw, 3.2rem);
 }
 
 /* Animation classes for loader transitions */

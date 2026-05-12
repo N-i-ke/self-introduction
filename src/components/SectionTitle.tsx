@@ -44,10 +44,6 @@ const SubSecTitle = styled(motion.span)`
 `;
 
 const SectionTitle: React.FC<TitleProps> = ({ mainTitle, subTitle }) => {
-  const handleAnimationComplete = () => {
-    console.log('Section title animation completed!');
-  };
-
   const titleVariants = {
     hidden: { 
       opacity: 0, 
@@ -84,8 +80,8 @@ const SectionTitle: React.FC<TitleProps> = ({ mainTitle, subTitle }) => {
   };
 
   return (
-    <SecTitle 
-      className="sec-title animated-div"
+    <SecTitle
+      className="sec-title"
       variants={titleVariants}
       initial="hidden"
       whileInView="visible"
@@ -96,13 +92,10 @@ const SectionTitle: React.FC<TitleProps> = ({ mainTitle, subTitle }) => {
         delay={100}
         animateBy="words"
         direction="top"
-        onAnimationComplete={handleAnimationComplete}
         className="main-title-blur"
-        animationFrom={undefined}
-        animationTo={undefined}
       />
-      <SubSecTitle 
-        className="sub-sec-title animated-li"
+      <SubSecTitle
+        className="sub-sec-title"
         variants={subtitleVariants}
         initial="hidden"
         whileInView="visible"
@@ -114,9 +107,6 @@ const SectionTitle: React.FC<TitleProps> = ({ mainTitle, subTitle }) => {
           animateBy="words"
           direction="bottom"
           className="subtitle-blur"
-          animationFrom={undefined}
-          animationTo={undefined}
-          onAnimationComplete={undefined}
         />
       </SubSecTitle>
     </SecTitle>

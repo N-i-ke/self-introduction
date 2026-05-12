@@ -120,7 +120,7 @@ const Contact: React.FC = () => {
   return (
     <ContactSection id="contact">
       <SectionTitle mainTitle="Contact" subTitle="Contact" />
-      <ContactWrapper className="contact-wrapper animated">
+      <ContactWrapper className="contact-wrapper">
         <div className="contact-info">
           <p className="contact-text">
             お問い合わせは以下ボタンからGoogleフォームにアクセスしてください。

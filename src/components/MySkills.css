@@ -1,0 +1,63 @@
+#skill .sec-title {
+  color: rgba(255, 255, 255, 0.1882352941);
+}
+
+#skill .skill-wrap {
+  display: flex;
+  text-align: center;
+  flex-wrap: wrap;
+  max-width: 80%;
+  justify-content: space-around;
+  margin-left: 10%;
+  padding: 30px 20px;
+  font-family: "Quicksand", sans-serif;
+  color: #333;
+}
+
+#skill .skill-wrap .skill-item {
+  text-align: center;
+}
+
+#skill .fab {
+  font-size: 5rem;
+  transition: all 0.5s;
+}
+
+#skill .fab:hover {
+  transform: rotate(-25deg);
+  transition: all 0.5s;
+}
+
+@media screen and (max-width: 1000px) {
+  #skill .fab {
+    font-size: 4rem;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  #skill .skill-wrap {
+    width: 80%;
+    padding: 10px 20px;
+    margin: 0 auto;
+    font-size: 0.7rem;
+  }
+  #skill .fab {
+    font-size: 3rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #skill .skill-wrap {
+    width: 75%;
+    padding: 10px 10px;
+    margin: 0 auto;
+    font-size: 0.5rem;
+  }
+  #skill .skill-item {
+    padding-right: 5px;
+    padding-left: 5px;
+  }
+  #skill .fab {
+    font-size: 2rem;
+  }
+}

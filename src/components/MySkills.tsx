@@ -9,6 +9,8 @@ import {
   SiShopify,
   SiJavascript,
   SiNextdotjs,
+  SiNuxt,
+  SiKubernetes,
 } from "react-icons/si";
 import { FaNodeJs, FaVuejs } from "react-icons/fa";
 
@@ -40,12 +42,20 @@ const MySkills: React.FC = () => {
         <h4>Vue.js</h4>
       </div>
       <div className="skill-item">
+        <SiNuxt size={80} color="#00DC82" title="Nuxt.js" />
+        <h4>Nuxt.js</h4>
+      </div>
+      <div className="skill-item">
         <SiTypescript size={80} color="#007ACC" />
         <h4>TypeScript</h4>
       </div>
       <div className="skill-item">
         <FaNodeJs size={80} color="#339933" />
         <h4>Node.js</h4>
+      </div>
+      <div className="skill-item">
+        <SiKubernetes size={80} color="#326CE5" title="Kubernetes" />
+        <h4>Kubernetes</h4>
       </div>
       <div className="skill-item">
         <SiWordpress size={80} color="#21759B" title="WordPress" />

@@ -1,5 +1,5 @@
 import React from "react";
-import SectionTitle from "./SectionTitle";
+import SectionTitle from "../SectionTitle";
 import styled from "styled-components";
 
 // Styled components

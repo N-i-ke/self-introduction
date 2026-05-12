@@ -4,10 +4,11 @@ node_modules/
 # macOS system files
 .DS_Store
 
-# Build output
-build/
+# Build output (deployed via GitHub Actions, not committed)
+docs/
 
-# CSS map and minified files
-src/*.css.map
-src/*.min.css
-src/WorkItem*.min.css.map
+# Vite local build cache
+.vite/
+
+# Logs
+*.log

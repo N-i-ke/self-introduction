@@ -37,13 +37,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-      - name: build
-        run: npm ci && npm run build
+          cache: "yarn"
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Build
+        run: yarn build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
-          path: './build'
+          path: "./docs"
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

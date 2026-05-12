@@ -12,6 +12,8 @@
 
 #about .icon-wrapper img {
   width: 35vw;
+  max-width: 360px;
+  height: auto;
   box-shadow: 0 0 6px #eee;
 }
 
@@ -57,13 +59,19 @@
 
 @media screen and (max-width: 600px) {
   #about .profile {
-    display: inline-block;
+    display: block;
+  }
+  #about .icon-wrapper {
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0;
   }
   #about .about-wrapper {
-    width: 75%;
-    margin-right: 0;
-    float: right;
+    width: auto;
+    padding-right: 8%;
+    padding-left: 8%;
     margin-top: 30px;
+    line-height: 2;
   }
   #about .icon-wrapper .name .name-main {
     font-size: 2rem;
@@ -77,40 +85,24 @@
   #about .sub-sec-title {
     left: 40%;
   }
-  #about .profile {
-    display: inline-block;
-  }
-  #about .icon-wrapper {
-    width: 100%;
-    margin-right: 0;
-    margin-left: 0;
-  }
-  #about .icon-wrapper img {
-    width: 240px;
-    height: 275px;
-  }
-  #about .icon-wrapper h3 {
-    margin: 0;
-  }
-  #about .about-wrapper h4 {
-    margin: 0;
-    font-size: 1rem;
-  }
   #about .icon-wrapper .name .name-main {
-    font-size: 1rem;
+    font-size: 1.6rem;
     margin-right: 5px;
   }
   #about .icon-wrapper .name .name-sub {
-    font-size: 0.7rem;
+    font-size: 1rem;
     margin: 0;
   }
   #about .about-wrapper {
-    width: 75%;
-    margin-right: 0;
-    float: right;
-    margin-top: 30px;
+    padding-right: 6%;
+    padding-left: 6%;
+    line-height: 1.9;
   }
   #about .about-wrapper p {
-    font-size: 0.3rem;
+    font-size: 0.9rem;
+  }
+  #about .about-wrapper h4 {
+    margin: 0;
+    font-size: 1.1rem;
   }
 }

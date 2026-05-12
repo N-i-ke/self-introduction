@@ -16,12 +16,18 @@ const SecTitle = styled(motion.h2)`
   letter-spacing: 5px;
   font-weight: 900;
 
-  @media screen and (max-width: 600px) {
-    font-size: 4rem;
+  @media screen and (max-width: 768px) {
+    font-size: 5rem;
   }
 
   @media screen and (max-width: 480px) {
-    font-size: 4rem;
+    font-size: 3.6rem;
+    letter-spacing: 3px;
+  }
+
+  @media screen and (max-width: 374px) {
+    font-size: 2.8rem;
+    letter-spacing: 2px;
   }
 `;
 
@@ -34,12 +40,16 @@ const SubSecTitle = styled(motion.span)`
   left: 50%;
   transform: translate(-50%, -50%);
 
-  @media screen and (max-width: 600px) {
-    font-size: 1.4rem;
+  @media screen and (max-width: 768px) {
+    font-size: 1.8rem;
   }
 
   @media screen and (max-width: 480px) {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
+  }
+
+  @media screen and (max-width: 374px) {
+    font-size: 1rem;
   }
 `;
 

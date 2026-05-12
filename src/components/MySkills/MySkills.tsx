@@ -13,56 +13,67 @@ import {
   SiKubernetes,
 } from "react-icons/si";
 import { FaNodeJs, FaVuejs } from "react-icons/fa";
+import { useViewport } from "../../hooks/useViewport";
+
+const getIconSize = (width: number): number => {
+  if (width <= 374) return 40;
+  if (width <= 480) return 52;
+  if (width <= 768) return 64;
+  return 80;
+};
 
 const MySkills: React.FC = () => {
+  const { width } = useViewport();
+  const size = getIconSize(width);
+
   return (
     <div className="skill-wrap wrapper">
       <div className="skill-item">
-        <SiHtml5 size={80} color="#E34F26" title="HTML5" />
+        <SiHtml5 size={size} color="#E34F26" title="HTML5" />
         <h4>HTML</h4>
       </div>
       <div className="skill-item">
-        <SiCss size={80} color="#1572B6" title="CSS3" />
+        <SiCss size={size} color="#1572B6" title="CSS3" />
         <h4>CSS</h4>
       </div>
       <div className="skill-item">
-        <SiJavascript size={80} color="#F7DF1E" title="JavaScript" />
+        <SiJavascript size={size} color="#F7DF1E" title="JavaScript" />
         <h4>JavaScript</h4>
       </div>
       <div className="skill-item">
-        <SiReact size={80} color="#61DAFB" title="React" />
+        <SiReact size={size} color="#61DAFB" title="React" />
         <h4>React.js</h4>
       </div>
       <div className="skill-item">
-        <SiNextdotjs size={80} color="#000000" title="React" />
+        <SiNextdotjs size={size} color="#000000" title="Next.js" />
         <h4>Next.js</h4>
       </div>
       <div className="skill-item">
-        <FaVuejs size={80} color="#4FC08D" title="Vue.js" />
+        <FaVuejs size={size} color="#4FC08D" title="Vue.js" />
         <h4>Vue.js</h4>
       </div>
       <div className="skill-item">
-        <SiNuxt size={80} color="#00DC82" title="Nuxt.js" />
+        <SiNuxt size={size} color="#00DC82" title="Nuxt.js" />
         <h4>Nuxt.js</h4>
       </div>
       <div className="skill-item">
-        <SiTypescript size={80} color="#007ACC" />
+        <SiTypescript size={size} color="#007ACC" title="TypeScript" />
         <h4>TypeScript</h4>
       </div>
       <div className="skill-item">
-        <FaNodeJs size={80} color="#339933" />
+        <FaNodeJs size={size} color="#339933" title="Node.js" />
         <h4>Node.js</h4>
       </div>
       <div className="skill-item">
-        <SiKubernetes size={80} color="#326CE5" title="Kubernetes" />
+        <SiKubernetes size={size} color="#326CE5" title="Kubernetes" />
         <h4>Kubernetes</h4>
       </div>
       <div className="skill-item">
-        <SiWordpress size={80} color="#21759B" title="WordPress" />
+        <SiWordpress size={size} color="#21759B" title="WordPress" />
         <h4>WordPress</h4>
       </div>
       <div className="skill-item">
-        <SiShopify size={80} color="#96BF48" title="Shopify" />
+        <SiShopify size={size} color="#96BF48" title="Shopify" />
         <h4>Shopify</h4>
       </div>
     </div>

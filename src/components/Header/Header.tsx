@@ -35,10 +35,13 @@ const Nav = styled.nav<{ isOpen: boolean }>`
   }
 
   a {
-    padding: 10px;
+    padding: 16px;
+    min-height: 44px;
     color: #fff !important;
     text-align: center;
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: all 0.15s;
 
     &:hover {
@@ -53,18 +56,18 @@ const Nav = styled.nav<{ isOpen: boolean }>`
 const MenuButton = styled.div`
   display: block;
   position: fixed;
-  top: 25px;
-  right: 25px;
+  top: 20px;
+  right: 20px;
   z-index: 999;
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.15s;
 
   span {
     position: absolute;
-    left: 5px;
+    left: 9px;
     display: block;
     width: 30px;
     height: 2px;
@@ -73,15 +76,15 @@ const MenuButton = styled.div`
     transition: all 0.15s;
 
     &:nth-child(1) {
-      top: 9px;
+      top: 13px;
     }
 
     &:nth-child(2) {
-      top: 19px;
+      top: 23px;
     }
 
     &:nth-child(3) {
-      top: 29px;
+      top: 33px;
     }
   }
 

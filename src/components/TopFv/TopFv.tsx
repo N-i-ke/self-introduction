@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Renderer, Program, Mesh, Color, Triangle } from "ogl";
 import GlitchText from '../GlitchText';
-import AuroraLoader from '../AuroraLoader';
+import DecryptedLoader from '../DecryptedLoader';
 import ViewportHandler from '../ViewportHandler';
 import Particles from '../Particles';
 import { useViewport } from '../../hooks/useViewport';
@@ -258,7 +258,7 @@ const TopFv: React.FC<TopFvProps> = (props) => {
   return (
     <>
       <ViewportHandler />
-      <AuroraLoader isLoading={isLoading} onLoadingComplete={handleLoadingComplete} />
+      <DecryptedLoader isLoading={isLoading} onLoadingComplete={handleLoadingComplete} />
       <div className={`topfv-container ${contentVisible ? 'fade-in' : 'hidden'}`}>
         <div className="particles-background">
           <Particles

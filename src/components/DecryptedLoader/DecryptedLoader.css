@@ -1,0 +1,48 @@
+.decrypted-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  transition: opacity 0.6s ease;
+  opacity: 1;
+}
+
+.decrypted-loader.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.decrypted-loader__text {
+  font-family: 'Courier New', 'Menlo', 'Consolas', monospace;
+  font-size: clamp(2rem, 6vw, 4rem);
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  text-shadow: 0 0 18px rgba(0, 216, 255, 0.45);
+}
+
+.decrypted-loader__char--revealed {
+  color: #00d8ff;
+}
+
+.decrypted-loader__char--encrypted {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+@media screen and (max-width: 768px) {
+  .decrypted-loader__text {
+    letter-spacing: 0.14em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .decrypted-loader {
+    transition: opacity 0.2s ease;
+  }
+}

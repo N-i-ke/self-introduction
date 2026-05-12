@@ -1,70 +1,100 @@
-# Getting Started with Create React App
+# N-i-ke's Portfolio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+個人ポートフォリオサイト。Web 制作実績、スキル、プロフィール、サービス内容を掲載しています。
 
-## Available Scripts
+🌐 **公開ページ**: https://n-i-ke.github.io/self-introduction/
 
-In the project directory, you can run:
+## 技術スタック
 
-### `npm start`
+| カテゴリ | 採用技術 |
+|---|---|
+| ビルドツール | Vite 5 |
+| UI ライブラリ | React 18 |
+| 言語 | TypeScript 5 |
+| スタイリング | styled-components 6 / 通常 CSS |
+| アニメーション | framer-motion / OGL (WebGL) |
+| アイコン | react-icons |
+| ホスティング | GitHub Pages (Actions 経由デプロイ) |
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## ローカル開発
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 必要環境
+- Node.js 20 系
+- Yarn 1 (Classic)
 
-### `npm test`
+### セットアップ
+```bash
+yarn install
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 開発サーバー起動
+```bash
+yarn dev
+```
+→ http://localhost:3000/self-introduction/
 
-### `npm run build`
+### 型チェック
+```bash
+yarn typecheck
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 本番ビルド
+```bash
+yarn build
+```
+→ `docs/` に出力（`.gitignore` 済、CI でアーティファクトとしてアップロード）
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### ビルド結果のプレビュー
+```bash
+yarn preview
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## デプロイフロー
 
-### `npm run eject`
+`main` への push をトリガーに、GitHub Actions (`.github/workflows/static.yml`) が自動で:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. `yarn install --frozen-lockfile`
+2. `yarn build` (`docs/` 生成)
+3. `actions/upload-pages-artifact` で `docs/` をアップロード
+4. `actions/deploy-pages` で GitHub Pages にデプロイ
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+ローカルからの手動デプロイは不要。
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## ディレクトリ構成
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```
+.
+├── index.html              # Vite エントリ HTML
+├── vite.config.ts          # Vite 設定 (base: /self-introduction/, outDir: docs)
+├── tsconfig.json           # TypeScript 設定 (Vite + react-jsx)
+├── tsconfig.node.json      # vite.config.ts 用
+├── .github/
+│   └── workflows/
+│       └── static.yml      # GitHub Pages デプロイ用 CI
+├── public/                 # 静的アセット (favicon, manifest 等)
+└── src/
+    ├── App.tsx             # ルートコンポーネント、グローバルスタイル
+    ├── index.tsx           # エントリポイント
+    ├── components/         # UI コンポーネント (Header / TopFv / HomePage / Footer 等)
+    ├── data/
+    │   └── works.ts        # 作品一覧データ
+    ├── hooks/
+    │   └── useViewport.ts  # ビューポート判定用 hook
+    ├── Image/              # 作品サムネイル画像
+    ├── declarations.d.ts   # *.png のモジュール宣言
+    └── ogl.d.ts            # ogl ライブラリの型補完
+```
 
-## Learn More
+## 主なコンポーネント
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+| コンポーネント | 役割 |
+|---|---|
+| `Header` | ナビゲーション (GooeyNav / モバイル時はサイドメニュー) |
+| `TopFv` | ファーストビュー (OGL の WebGL シェーダーで Aurora 背景、グリッチタイトル) |
+| `HomePage` | Works / About / Skills / Service 各セクションのコンテナ |
+| `WorkItem` | 作品 1 件のカード (data/works.ts からデータ駆動) |
+| `Profile` | プロフィール情報 |
+| `MySkills` | 保有スキルアイコン一覧 (react-icons) |
+| `Service` | 提供サービス紹介 |
+| `Contact` | Google フォームへの導線 |
+| `Footer` | コピーライト |

@@ -1,9 +1,9 @@
-import SectionTitle from "./SectionTitle";
-import WorkItem from "./WorkItem";
-import Profile from "./Profile";
-import MySkills from "./MySkills";
-import Service from "./Service";
-import { works } from "../data/works";
+import SectionTitle from "../SectionTitle";
+import WorkItem from "../WorkItem";
+import Profile from "../Profile";
+import MySkills from "../MySkills";
+import Service from "../Service";
+import { works } from "../../data/works";
 
 const HomePage = () => {
   return (

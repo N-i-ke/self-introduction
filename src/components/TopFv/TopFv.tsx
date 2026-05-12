@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Renderer, Program, Mesh, Color, Triangle } from "ogl";
-import GlitchText from './GlitchText';
-import AuroraLoader from './AuroraLoader';
-import ViewportHandler from './ViewportHandler';
-import Particles from './Particles';
-import { useViewport } from '../hooks/useViewport';
+import GlitchText from '../GlitchText';
+import AuroraLoader from '../AuroraLoader';
+import ViewportHandler from '../ViewportHandler';
+import Particles from '../Particles';
+import { useViewport } from '../../hooks/useViewport';
 
 import './Aurora.css';
 

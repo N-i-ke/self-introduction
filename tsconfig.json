@@ -1,15 +1,23 @@
 {
   "compilerOptions": {
-    "target": "es6",                          // 出力するJavaScriptのバージョン
-    "module": "commonjs",                     // モジュールシステム
-    "jsx": "react",                           // ReactのJSXサポート
-    "strict": true,                           // 厳格な型チェック
-    "esModuleInterop": true,                  // ESモジュールとの互換性
-    "skipLibCheck": true,                     // 外部ライブラリの型チェックをスキップ
-    "forceConsistentCasingInFileNames": true, // 大文字小文字のファイル名を強制
-    "moduleResolution": "node",               // Node.jsのモジュール解決
-    "allowSyntheticDefaultImports": true      // デフォルトインポートのサポート
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "strict": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "types": ["vite/client"]
   },
-  "include": ["src"],                         // プロジェクト内のソースコードを含む
-  "exclude": ["node_modules"]                 // 除外するフォルダ
+  "include": ["src"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }

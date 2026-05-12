@@ -3,7 +3,7 @@ import "./MySkills.css";
 import {
   SiTypescript,
   SiHtml5,
-  SiCss3,
+  SiCss,
   SiReact,
   SiWordpress,
   SiShopify,
@@ -20,7 +20,7 @@ const MySkills: React.FC = () => {
         <h4>HTML</h4>
       </div>
       <div className="skill-item">
-        <SiCss3 size={80} color="#1572B6" title="CSS3" />
+        <SiCss size={80} color="#1572B6" title="CSS3" />
         <h4>CSS</h4>
       </div>
       <div className="skill-item">

@@ -13,58 +13,54 @@ import {
   SiKubernetes,
 } from "react-icons/si";
 import { FaNodeJs, FaVuejs } from "react-icons/fa";
+import LogoLoop, { type LogoItem } from "../LogoLoop";
+import { useViewport } from "../../hooks/useViewport";
+
+const skillLogos: LogoItem[] = [
+  { node: <SiHtml5 color="#E34F26" />, title: "HTML5", ariaLabel: "HTML5" },
+  { node: <SiCss color="#1572B6" />, title: "CSS3", ariaLabel: "CSS3" },
+  { node: <SiJavascript color="#F7DF1E" />, title: "JavaScript", ariaLabel: "JavaScript" },
+  { node: <SiReact color="#61DAFB" />, title: "React.js", ariaLabel: "React.js" },
+  { node: <SiNextdotjs color="#000000" />, title: "Next.js", ariaLabel: "Next.js" },
+  { node: <FaVuejs color="#4FC08D" />, title: "Vue.js", ariaLabel: "Vue.js" },
+  { node: <SiNuxt color="#00DC82" />, title: "Nuxt.js", ariaLabel: "Nuxt.js" },
+  { node: <SiTypescript color="#007ACC" />, title: "TypeScript", ariaLabel: "TypeScript" },
+  { node: <FaNodeJs color="#339933" />, title: "Node.js", ariaLabel: "Node.js" },
+  { node: <SiKubernetes color="#326CE5" />, title: "Kubernetes", ariaLabel: "Kubernetes" },
+  { node: <SiWordpress color="#21759B" />, title: "WordPress", ariaLabel: "WordPress" },
+  { node: <SiShopify color="#96BF48" />, title: "Shopify", ariaLabel: "Shopify" },
+];
+
+const getLogoHeight = (width: number): number => {
+  if (width <= 374) return 40;
+  if (width <= 480) return 48;
+  if (width <= 768) return 56;
+  return 72;
+};
+
+const getGap = (width: number): number => {
+  if (width <= 480) return 32;
+  if (width <= 768) return 40;
+  return 56;
+};
 
 const MySkills: React.FC = () => {
+  const { width } = useViewport();
+
   return (
     <div className="skill-wrap wrapper">
-      <div className="skill-item">
-        <SiHtml5 size={80} color="#E34F26" title="HTML5" />
-        <h4>HTML</h4>
-      </div>
-      <div className="skill-item">
-        <SiCss size={80} color="#1572B6" title="CSS3" />
-        <h4>CSS</h4>
-      </div>
-      <div className="skill-item">
-        <SiJavascript size={80} color="#F7DF1E" title="JavaScript" />
-        <h4>JavaScript</h4>
-      </div>
-      <div className="skill-item">
-        <SiReact size={80} color="#61DAFB" title="React" />
-        <h4>React.js</h4>
-      </div>
-      <div className="skill-item">
-        <SiNextdotjs size={80} color="#000000" title="React" />
-        <h4>Next.js</h4>
-      </div>
-      <div className="skill-item">
-        <FaVuejs size={80} color="#4FC08D" title="Vue.js" />
-        <h4>Vue.js</h4>
-      </div>
-      <div className="skill-item">
-        <SiNuxt size={80} color="#00DC82" title="Nuxt.js" />
-        <h4>Nuxt.js</h4>
-      </div>
-      <div className="skill-item">
-        <SiTypescript size={80} color="#007ACC" />
-        <h4>TypeScript</h4>
-      </div>
-      <div className="skill-item">
-        <FaNodeJs size={80} color="#339933" />
-        <h4>Node.js</h4>
-      </div>
-      <div className="skill-item">
-        <SiKubernetes size={80} color="#326CE5" title="Kubernetes" />
-        <h4>Kubernetes</h4>
-      </div>
-      <div className="skill-item">
-        <SiWordpress size={80} color="#21759B" title="WordPress" />
-        <h4>WordPress</h4>
-      </div>
-      <div className="skill-item">
-        <SiShopify size={80} color="#96BF48" title="Shopify" />
-        <h4>Shopify</h4>
-      </div>
+      <LogoLoop
+        logos={skillLogos}
+        speed={90}
+        direction="left"
+        logoHeight={getLogoHeight(width)}
+        gap={getGap(width)}
+        pauseOnHover
+        scaleOnHover
+        fadeOut
+        fadeOutColor="#ffffff"
+        ariaLabel="My skills"
+      />
     </div>
   );
 };

@@ -76,6 +76,14 @@
   padding-right: 15%;
   padding-left: 15%;
   line-height: 2.5;
+  position: relative;
+  isolation: isolate;
+}
+
+#about .about-wrapper > h4,
+#about .about-wrapper > p {
+  position: relative;
+  z-index: 1;
 }
 
 #about .about-wrapper p {

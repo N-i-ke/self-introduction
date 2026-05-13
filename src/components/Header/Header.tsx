@@ -62,6 +62,10 @@ const RightCluster = styled.div`
   align-items: center;
   gap: 12px;
   min-width: 0;
+
+  @media screen and (max-width: 480px) {
+    gap: 8px;
+  }
 `;
 
 const GitHubIconLink = styled.a`
@@ -76,6 +80,7 @@ const GitHubIconLink = styled.a`
   background-color: rgba(0, 0, 0, 0.25);
   text-decoration: none;
   transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  flex-shrink: 0;
 
   &:hover {
     color: #00d8ff;
@@ -88,6 +93,11 @@ const GitHubIconLink = styled.a`
   &:focus-visible {
     outline: 2px solid #00d8ff;
     outline-offset: 2px;
+  }
+
+  @media screen and (max-width: 374px) {
+    width: 32px;
+    height: 32px;
   }
 `;
 
@@ -390,6 +400,15 @@ const Header: React.FC = () => {
         </Brand>
         <RightCluster>
           <LangToggle locale={locale} onChange={setLocale} />
+          <GitHubIconLink
+            href={REPO_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="cursor-target"
+            aria-label="View source on GitHub"
+          >
+            <FaGithub size={18} aria-hidden="true" />
+          </GitHubIconLink>
           <MenuButton
             type="button"
             className={isOpen ? "open" : ""}

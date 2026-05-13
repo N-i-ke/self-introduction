@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useParallax } from "../../hooks/useParallax";
+import EarthBackground from "../EarthBackground";
 import "./Profile.css";
 
 type Locale = "ja" | "en";
@@ -82,6 +83,7 @@ const Profile: React.FC = () => {
       </div>
 
       <div className="about-wrapper" lang={locale}>
+        <EarthBackground />
         <h4>
           <i className="fas fa-chess-king"></i>
           {current.historyHeading}

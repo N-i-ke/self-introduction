@@ -45,6 +45,9 @@ const EarthBackground: React.FC<EarthBackgroundProps> = ({
       map: earthTexture,
       roughness: 0.7,
       metalness: 0.05,
+      emissive: 0xffffff,
+      emissiveMap: earthTexture,
+      emissiveIntensity: 0.35,
     });
     // テクスチャ色の彩度をブースト (1.0 = 元のまま, 1.4 ≒ +40%)
     material.onBeforeCompile = shader => {
@@ -63,14 +66,14 @@ const EarthBackground: React.FC<EarthBackgroundProps> = ({
     earth.rotation.z = EARTH_AXIAL_TILT_RAD;
     scene.add(earth);
 
-    const ambient = new THREE.AmbientLight(0xffffff, 0.5);
+    const ambient = new THREE.AmbientLight(0xffffff, 0.8);
     scene.add(ambient);
 
-    const sun = new THREE.DirectionalLight(0xffffff, 1.8);
+    const sun = new THREE.DirectionalLight(0xffffff, 2.4);
     sun.position.set(5, 2, 4);
     scene.add(sun);
 
-    const rim = new THREE.DirectionalLight(0x88aaff, 0.5);
+    const rim = new THREE.DirectionalLight(0xaaccff, 0.8);
     rim.position.set(-3, -1, -2);
     scene.add(rim);
 

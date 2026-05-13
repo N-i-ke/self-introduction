@@ -6,7 +6,7 @@
 
 #work .work-item {
   box-sizing: border-box;
-  padding: 5px;
+  padding: 16px;
   width: 33.3%;
   min-width: 333px;
   text-align: center;
@@ -16,9 +16,20 @@
   padding: 50px;
 }
 
+#work .work-item__border {
+  display: block;
+  border-radius: 10px;
+}
+
 #work figure {
   margin: 0;
   position: relative;
+  border-radius: 10px;
+}
+
+#work figure img {
+  border-radius: 10px;
+  display: block;
 }
 
 #work figcaption {

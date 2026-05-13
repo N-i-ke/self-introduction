@@ -1,9 +1,8 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { useParallax } from "../../hooks/useParallax";
 import EarthBackground from "../EarthBackground";
+import { useLocale, type Locale } from "../../contexts/LocaleContext";
 import "./Profile.css";
-
-type Locale = "ja" | "en";
 
 type ProfileContent = {
   historyHeading: string;
@@ -47,7 +46,7 @@ const content: Record<Locale, ProfileContent> = {
 };
 
 const Profile: React.FC = () => {
-  const [locale, setLocale] = useState<Locale>("ja");
+  const { locale } = useLocale();
   const current = content[locale];
   const nameRef = useRef<HTMLDivElement>(null);
   useParallax(nameRef, { yPercent: -25 });
@@ -59,27 +58,6 @@ const Profile: React.FC = () => {
           <p className="name-main">N-i-ke</p>
           <p className="name-sub">N-i-ke</p>
         </h3>
-      </div>
-
-      <div className="profile-lang-tabs" role="tablist" aria-label="Language">
-        <button
-          type="button"
-          role="tab"
-          aria-selected={locale === "ja"}
-          className={`profile-lang-tab cursor-target ${locale === "ja" ? "is-active" : ""}`}
-          onClick={() => setLocale("ja")}
-        >
-          JA
-        </button>
-        <button
-          type="button"
-          role="tab"
-          aria-selected={locale === "en"}
-          className={`profile-lang-tab cursor-target ${locale === "en" ? "is-active" : ""}`}
-          onClick={() => setLocale("en")}
-        >
-          EN
-        </button>
       </div>
 
       <div className="about-wrapper" lang={locale}>

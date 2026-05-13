@@ -1,10 +1,102 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import GooeyNav from '../GooeyNav';
-import './Header.css';
+import GooeyNav from "../GooeyNav";
+import { useLocale, type Locale } from "../../contexts/LocaleContext";
+import "./Header.css";
 
 const HeaderContainer = styled.header`
   text-align: center;
+  font-family: "Quicksand", sans-serif;
+`;
+
+const Bar = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 clamp(16px, 3vw, 32px);
+  background-color: rgba(14, 8, 8, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-sizing: border-box;
+  border-bottom: 1px solid rgba(0, 216, 255, 0.18);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35), 0 1px 12px rgba(0, 216, 255, 0.12);
+  color: #fff;
+`;
+
+const Brand = styled.a`
+  font-family: "Courier New", "Menlo", monospace;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  color: #ffffff !important;
+  text-decoration: none;
+  text-transform: uppercase;
+  text-shadow: 0 0 12px rgba(0, 216, 255, 0.35);
+  white-space: nowrap;
+  transition: text-shadow 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    text-shadow: 0 0 16px rgba(0, 216, 255, 0.6);
+    transform: translateY(-1px);
+  }
+`;
+
+const NavCenter = styled.div`
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  min-width: 0;
+`;
+
+const RightCluster = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+`;
+
+const LangToggleWrapper = styled.div`
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(0, 216, 255, 0.45);
+  border-radius: 999px;
+  padding: 3px;
+  background-color: rgba(0, 0, 0, 0.25);
+`;
+
+const LangButton = styled.button<{ $active: boolean }>`
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  font-family: "Courier New", "Menlo", monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  padding: 6px 12px;
+  min-width: 44px;
+  min-height: 30px;
+  border-radius: 999px;
+  background-color: ${({ $active }) => ($active ? "#00d8ff" : "transparent")};
+  color: ${({ $active }) => ($active ? "#0b0b0b" : "#cfeaff")};
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: ${({ $active }) => ($active ? "0 0 10px rgba(0, 216, 255, 0.55)" : "none")};
+
+  &:hover {
+    color: ${({ $active }) => ($active ? "#0b0b0b" : "#ffffff")};
+    background-color: ${({ $active }) =>
+      $active ? "#00d8ff" : "rgba(0, 216, 255, 0.12)"};
+  }
+
+  &:focus-visible {
+    outline: 2px solid #00d8ff;
+    outline-offset: 2px;
+  }
 `;
 
 const Nav = styled.nav<{ isOpen: boolean }>`
@@ -16,55 +108,84 @@ const Nav = styled.nav<{ isOpen: boolean }>`
   top: 0;
   left: ${(props) => (props.isOpen ? "0" : "-400px")};
   opacity: ${(props) => (props.isOpen ? "1" : "0")};
-  transition: all 0.15s;
+  background-color: rgba(14, 8, 8, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.2s ease;
   overflow-x: hidden;
   overflow-y: auto;
   font-family: "Quicksand", sans-serif;
+  display: flex;
+  flex-direction: column;
 
   ul {
-    padding: 70px 0;
+    padding: 80px 0 24px;
+    margin: 0;
   }
 
   li {
-    padding: 0 0;
-    border-bottom: 1px solid #fff;
+    padding: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
 
     &:first-child {
-      border-top: 1px solid #fff;
+      border-top: 1px solid rgba(255, 255, 255, 0.18);
     }
   }
 
   a {
-    padding: 10px;
+    padding: 16px;
+    min-height: 44px;
     color: #fff !important;
     text-align: center;
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: all 0.15s;
+    letter-spacing: 0.12em;
 
     &:hover {
       color: #fff !important;
-      background-color: rgba(255, 255, 255, 0.2);
-      font-size: 1.3rem;
-      text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+      background-color: rgba(0, 216, 255, 0.15);
+      text-shadow: 0 0 8px rgba(0, 216, 255, 0.8);
     }
   }
 `;
 
-const MenuButton = styled.div`
-  display: block;
-  position: fixed;
-  top: 25px;
-  right: 25px;
-  z-index: 999;
-  width: 40px;
-  height: 40px;
+const DrawerLangSection = styled.div`
+  margin-top: auto;
+  padding: 24px 16px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+`;
+
+const DrawerLangLabel = styled.span`
+  font-family: "Courier New", "Menlo", monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  color: rgba(207, 234, 255, 0.7);
+  text-transform: uppercase;
+`;
+
+const MenuButton = styled.button`
+  appearance: none;
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 44px;
+  height: 44px;
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.15s;
+  padding: 0;
 
   span {
     position: absolute;
-    left: 5px;
+    left: 7px;
     display: block;
     width: 30px;
     height: 2px;
@@ -73,20 +194,20 @@ const MenuButton = styled.div`
     transition: all 0.15s;
 
     &:nth-child(1) {
-      top: 9px;
+      top: 14px;
     }
 
     &:nth-child(2) {
-      top: 19px;
+      top: 22px;
     }
 
     &:nth-child(3) {
-      top: 29px;
+      top: 30px;
     }
   }
 
   &.open span:nth-child(1) {
-    transform: translateY(10px) rotate(-315deg);
+    transform: translateY(8px) rotate(-315deg);
   }
 
   &.open span:nth-child(2) {
@@ -94,7 +215,12 @@ const MenuButton = styled.div`
   }
 
   &.open span:nth-child(3) {
-    transform: translateY(-10px) rotate(315deg);
+    transform: translateY(-8px) rotate(315deg);
+  }
+
+  &:focus-visible {
+    outline: 2px solid #00d8ff;
+    outline-offset: 2px;
   }
 `;
 
@@ -111,33 +237,42 @@ const Mask = styled.div<{ isOpen: boolean }>`
   transition: all 0.15s;
 `;
 
-const GooeyNavWrapper = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 60px;
-  z-index: 99;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #fff;
-  background-color: rgba(14, 8, 8, 0.8);
-  backdrop-filter: blur(5px);
-`;
+interface LangToggleProps {
+  locale: Locale;
+  onChange: (next: Locale) => void;
+  className?: string;
+}
+
+const LangToggle: React.FC<LangToggleProps> = ({ locale, onChange, className }) => (
+  <LangToggleWrapper className={className} role="group" aria-label="Language">
+    <LangButton
+      type="button"
+      className="cursor-target"
+      $active={locale === "ja"}
+      aria-pressed={locale === "ja"}
+      onClick={() => onChange("ja")}
+    >
+      JA
+    </LangButton>
+    <LangButton
+      type="button"
+      className="cursor-target"
+      $active={locale === "en"}
+      aria-pressed={locale === "en"}
+      onClick={() => onChange("en")}
+    >
+      EN
+    </LangButton>
+  </LangToggleWrapper>
+);
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { locale, setLocale } = useLocale();
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
+  const toggleMenu = () => setIsOpen((prev) => !prev);
+  const closeMenu = () => setIsOpen(false);
 
-  const closeMenu = () => {
-    setIsOpen(false);
-  };
-
-  // Nav items for GooeyNav
   const items = [
     { label: "TOP", href: "#top" },
     { label: "WORK", href: "#work" },
@@ -149,40 +284,59 @@ const Header: React.FC = () => {
 
   return (
     <HeaderContainer id="top" className={isOpen ? "open" : ""}>
-      {/* Mobile menu (hidden on desktop) */}
-      <div className="mobile-menu">
-        <Nav isOpen={isOpen}>
+      {/* Desktop top bar */}
+      <Bar className="header-bar header-bar--desktop">
+        <Brand href="#top" className="cursor-target" aria-label="Back to top">
+          N-I-KE
+        </Brand>
+        <NavCenter>
+          <GooeyNav items={items} particleCount={4} animationTime={100} timeVariance={50} />
+        </NavCenter>
+        <RightCluster>
+          <LangToggle locale={locale} onChange={setLocale} />
+        </RightCluster>
+      </Bar>
+
+      {/* Mobile top bar */}
+      <Bar className="header-bar header-bar--mobile">
+        <Brand href="#top" className="cursor-target" aria-label="Back to top">
+          N-I-KE
+        </Brand>
+        <RightCluster>
+          <LangToggle locale={locale} onChange={setLocale} />
+          <MenuButton
+            type="button"
+            className={isOpen ? "open" : ""}
+            onClick={toggleMenu}
+            aria-label={isOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isOpen}
+          >
+            <span />
+            <span />
+            <span />
+          </MenuButton>
+        </RightCluster>
+      </Bar>
+
+      {/* Mobile drawer */}
+      <div className="header-drawer">
+        <Nav isOpen={isOpen} aria-hidden={!isOpen}>
           <ul className="nav-menu">
             {items.map((item) => (
               <li key={item.href}>
-                <a
-                  href={item.href}
-                  className={item.href.slice(1)}
-                  onClick={closeMenu}
-                >
+                <a href={item.href} className={item.href.slice(1)} onClick={closeMenu}>
                   {item.label}
                 </a>
               </li>
             ))}
           </ul>
+          <DrawerLangSection>
+            <DrawerLangLabel>Language</DrawerLangLabel>
+            <LangToggle locale={locale} onChange={setLocale} />
+          </DrawerLangSection>
         </Nav>
-        <MenuButton className={isOpen ? "open" : ""} onClick={toggleMenu}>
-          <span></span>
-          <span></span>
-          <span></span>
-        </MenuButton>
-        <Mask isOpen={isOpen} onClick={closeMenu}></Mask>
+        <Mask isOpen={isOpen} onClick={closeMenu} />
       </div>
-
-      {/* Desktop GooeyNav menu */}
-      <GooeyNavWrapper className="desktop-menu">
-        <GooeyNav
-          items={items}
-          particleCount={4}
-          animationTime={100}
-          timeVariance={50}
-        />
-      </GooeyNavWrapper>
     </HeaderContainer>
   );
 };

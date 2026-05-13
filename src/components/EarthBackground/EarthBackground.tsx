@@ -43,21 +43,34 @@ const EarthBackground: React.FC<EarthBackgroundProps> = ({
     const geometry = new THREE.SphereGeometry(1, 64, 64);
     const material = new THREE.MeshStandardMaterial({
       map: earthTexture,
-      roughness: 0.85,
+      roughness: 0.7,
       metalness: 0.05,
     });
+    // テクスチャ色の彩度をブースト (1.0 = 元のまま, 1.4 ≒ +40%)
+    material.onBeforeCompile = shader => {
+      shader.fragmentShader = shader.fragmentShader.replace(
+        '#include <map_fragment>',
+        `
+        #include <map_fragment>
+        {
+          float luma = dot(diffuseColor.rgb, vec3(0.299, 0.587, 0.114));
+          diffuseColor.rgb = mix(vec3(luma), diffuseColor.rgb, 1.4);
+        }
+        `
+      );
+    };
     const earth = new THREE.Mesh(geometry, material);
     earth.rotation.z = EARTH_AXIAL_TILT_RAD;
     scene.add(earth);
 
-    const ambient = new THREE.AmbientLight(0xffffff, 0.45);
+    const ambient = new THREE.AmbientLight(0xffffff, 0.5);
     scene.add(ambient);
 
-    const sun = new THREE.DirectionalLight(0xffffff, 1.4);
+    const sun = new THREE.DirectionalLight(0xffffff, 1.8);
     sun.position.set(5, 2, 4);
     scene.add(sun);
 
-    const rim = new THREE.DirectionalLight(0x88aaff, 0.4);
+    const rim = new THREE.DirectionalLight(0x88aaff, 0.5);
     rim.position.set(-3, -1, -2);
     scene.add(rim);
 

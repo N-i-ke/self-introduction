@@ -2,45 +2,6 @@
   padding-bottom: 70px;
 }
 
-.profile-lang-tabs {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  margin: 16px 0 28px;
-}
-
-.profile-lang-tab {
-  appearance: none;
-  background: transparent;
-  border: 1px solid rgba(255, 46, 99, 0.6);
-  color: #ff2e63;
-  padding: 8px 20px;
-  min-width: 64px;
-  min-height: 36px;
-  font-family: "Quicksand", sans-serif;
-  font-size: 0.95rem;
-  font-weight: 600;
-  letter-spacing: 2px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.profile-lang-tab:hover {
-  background-color: rgba(255, 46, 99, 0.08);
-}
-
-.profile-lang-tab.is-active {
-  background-color: #ff2e63;
-  color: #fff;
-  box-shadow: 0 0 8px rgba(255, 46, 99, 0.45);
-}
-
-.profile-lang-tab:focus-visible {
-  outline: 2px solid #ff2e63;
-  outline-offset: 2px;
-}
-
 #about .icon-wrapper {
   width: 80%;
   margin-right: 10%;

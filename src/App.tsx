@@ -9,6 +9,7 @@ import Contact from "./components/Contact";
 import TargetCursor from "./components/TargetCursor";
 import SiteBackground from "./components/SiteBackground";
 import SmoothScrollProvider from "./components/SmoothScrollProvider";
+import { LocaleProvider } from "./contexts/LocaleContext";
 
 // グローバルスタイルを作成
 const GlobalStyle = createGlobalStyle`
@@ -44,18 +45,20 @@ const GlobalStyle = createGlobalStyle`
 
 const App: React.FC = () => {
   return (
-  <SmoothScrollProvider>
-    <GlobalStyle />
-    <SiteBackground />
-    <TargetCursor targetSelector=".cursor-target" />
-    <div className="App">
-      <Header />
-      <TopFv />
-      <HomePage />
-      <Contact />
-      <Footer />
-    </div>
-  </SmoothScrollProvider>
+  <LocaleProvider>
+    <SmoothScrollProvider>
+      <GlobalStyle />
+      <SiteBackground />
+      <TargetCursor targetSelector=".cursor-target" />
+      <div className="App">
+        <Header />
+        <TopFv />
+        <HomePage />
+        <Contact />
+        <Footer />
+      </div>
+    </SmoothScrollProvider>
+  </LocaleProvider>
   );
 };
 

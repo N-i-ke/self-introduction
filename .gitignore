@@ -12,3 +12,7 @@ docs/
 
 # Logs
 *.log
+
+# Vite env (local overrides only — .env / .env.production はコミット対象)
+.env.local
+.env.*.local

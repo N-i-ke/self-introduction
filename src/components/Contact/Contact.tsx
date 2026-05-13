@@ -1,8 +1,8 @@
 import React from "react";
 import SectionTitle from "../SectionTitle";
 import styled from "styled-components";
+import { useLocale, type Locale } from "../../contexts/LocaleContext";
 
-// Styled components
 const ContactSection = styled.section`
   padding-top: 20px;
   background-color: #808080;
@@ -52,34 +52,6 @@ const ContactWrapper = styled.div`
     transition: all 0.5s;
   }
 
-  .form-features {
-    margin-top: 30px;
-    color: #fff;
-    font-family: "Quicksand", sans-serif;
-    font-size: 0.9rem;
-    opacity: 0.8;
-  }
-
-  .form-features ul {
-    list-style: none;
-    padding: 0;
-    margin: 10px 0;
-  }
-
-  .form-features li {
-    margin: 5px 0;
-    padding-left: 20px;
-    position: relative;
-  }
-
-  .form-features li:before {
-    content: "✓";
-    position: absolute;
-    left: 0;
-    color: #4CAF50;
-    font-weight: bold;
-  }
-
   @media screen and (max-width: 1000px) {
     .sub-sec-title {
       left: 40%;
@@ -116,25 +88,54 @@ const ContactWrapper = styled.div`
   }
 `;
 
+type ContactCopy = {
+  subTitle: string;
+  description: React.ReactNode;
+  buttonLabel: string;
+};
+
+const copy: Record<Locale, ContactCopy> = {
+  ja: {
+    subTitle: "お問い合わせ",
+    description: (
+      <>
+        お問い合わせは以下ボタンからGoogleフォームにアクセスしてください。
+        <br />
+        お気軽にご連絡ください。
+      </>
+    ),
+    buttonLabel: "お問い合わせフォームを開く",
+  },
+  en: {
+    subTitle: "Contact",
+    description: (
+      <>
+        Please use the Google Form below to get in touch.
+        <br />
+        Feel free to reach out about anything.
+      </>
+    ),
+    buttonLabel: "Open contact form",
+  },
+};
+
 const Contact: React.FC = () => {
+  const { locale } = useLocale();
+  const c = copy[locale];
+
   return (
     <ContactSection id="contact">
-      <SectionTitle mainTitle="Contact" subTitle="Contact" />
-      <ContactWrapper className="contact-wrapper">
+      <SectionTitle mainTitle="Contact" subTitle={c.subTitle} />
+      <ContactWrapper className="contact-wrapper" lang={locale}>
         <div className="contact-info">
-          <p className="contact-text">
-            お問い合わせは以下ボタンからGoogleフォームにアクセスしてください。
-            <br />
-            お気軽にご連絡ください。
-          </p>
-          
-          <a 
-            href="https://docs.google.com/forms/d/14xlSmgOBjRniA-eGkcnvbUB025-Yzt0Q8f4iQlZ2DnE/viewform" 
-            target="_blank" 
+          <p className="contact-text">{c.description}</p>
+          <a
+            href="https://docs.google.com/forms/d/14xlSmgOBjRniA-eGkcnvbUB025-Yzt0Q8f4iQlZ2DnE/viewform"
+            target="_blank"
             rel="noopener noreferrer"
-            className="google-form-button"
+            className="google-form-button cursor-target"
           >
-            お問い合わせフォームを開く
+            {c.buttonLabel}
           </a>
         </div>
       </ContactWrapper>

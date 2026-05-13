@@ -7,6 +7,7 @@ import HomePage from "./components/HomePage";
 import Footer from "./components/Footer";
 import Contact from "./components/Contact";
 import TargetCursor from "./components/TargetCursor";
+import SiteBackground from "./components/SiteBackground";
 
 // グローバルスタイルを作成
 const GlobalStyle = createGlobalStyle`
@@ -22,7 +23,7 @@ const GlobalStyle = createGlobalStyle`
     line-height: 1.7;
     margin: 0;
     color: #f6f6e9;
-    background-color: rgba(28, 28, 28, 1);
+    background-color: transparent;
   }
   .wrapper {
     box-sizing:border-box;
@@ -44,6 +45,7 @@ const App: React.FC = () => {
   return (
   <>
     <GlobalStyle />
+    <SiteBackground />
     <TargetCursor targetSelector=".cursor-target" />
     <div className="App">
       <Header />

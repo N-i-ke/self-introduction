@@ -22,8 +22,8 @@ const WorkItem: React.FC<WorkItemProps> = ({
   disabled = false,
 }) => {
   const borderColor = disabled ? "#7a7a7a" : "#00d8ff";
-  const borderSpeed = disabled ? 0.4 : 1;
-  const borderChaos = disabled ? 0.2 : 0.5;
+  const borderSpeed = disabled ? 0.4 : 0.8;
+  const borderChaos = disabled ? 0.08 : 0.18;
 
   return (
     <li className={`work-item ${disabled ? "disabled-item" : ""}`}>

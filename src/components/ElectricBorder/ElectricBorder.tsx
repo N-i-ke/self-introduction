@@ -171,8 +171,8 @@ const ElectricBorder: React.FC<ElectricBorderProps> = ({
     const amplitude = chaos;
     const frequency = 10;
     const baseFlatness = 0;
-    const displacement = 60;
-    const borderOffset = 60;
+    const displacement = 24;
+    const borderOffset = 28;
 
     const updateSize = () => {
       const rect = container.getBoundingClientRect();

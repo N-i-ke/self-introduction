@@ -160,6 +160,53 @@ const DrawerLangSection = styled.div`
   gap: 10px;
 `;
 
+const DrawerCloseButton = styled.button`
+  appearance: none;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  cursor: pointer;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 2px;
+    background-color: #fff;
+    border-radius: 1px;
+  }
+
+  &::before {
+    transform: rotate(45deg);
+  }
+
+  &::after {
+    transform: rotate(-45deg);
+  }
+
+  &:hover {
+    background-color: rgba(0, 216, 255, 0.15);
+    border-color: rgba(0, 216, 255, 0.55);
+    transform: rotate(90deg);
+  }
+
+  &:focus-visible {
+    outline: 2px solid #00d8ff;
+    outline-offset: 2px;
+  }
+`;
+
 const DrawerLangLabel = styled.span`
   font-family: "Courier New", "Menlo", monospace;
   font-size: 0.7rem;
@@ -321,6 +368,12 @@ const Header: React.FC = () => {
       {/* Mobile drawer */}
       <div className="header-drawer">
         <Nav isOpen={isOpen} aria-hidden={!isOpen}>
+          <DrawerCloseButton
+            type="button"
+            className="cursor-target"
+            onClick={closeMenu}
+            aria-label="Close menu"
+          />
           <ul className="nav-menu">
             {items.map((item) => (
               <li key={item.href}>

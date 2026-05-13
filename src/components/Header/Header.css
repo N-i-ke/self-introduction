@@ -1,14 +1,16 @@
 /* Header.css */
+/* styled-components が後勝ちで上書きする可能性があるため、全て !important で固定 */
 
-/* PC のみ表示 */
 .header-bar--desktop {
   display: flex !important;
 }
 
-/* SP のみ表示 */
-.header-bar--mobile,
+.header-bar--mobile {
+  display: none !important;
+}
+
 .header-drawer {
-  display: none;
+  display: none !important;
 }
 
 @media screen and (max-width: 768px) {
@@ -19,6 +21,6 @@
     display: flex !important;
   }
   .header-drawer {
-    display: block;
+    display: block !important;
   }
 }

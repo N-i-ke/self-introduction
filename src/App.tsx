@@ -8,6 +8,7 @@ import Footer from "./components/Footer";
 import Contact from "./components/Contact";
 import TargetCursor from "./components/TargetCursor";
 import SiteBackground from "./components/SiteBackground";
+import SmoothScrollProvider from "./components/SmoothScrollProvider";
 
 // グローバルスタイルを作成
 const GlobalStyle = createGlobalStyle`
@@ -43,7 +44,7 @@ const GlobalStyle = createGlobalStyle`
 
 const App: React.FC = () => {
   return (
-  <>
+  <SmoothScrollProvider>
     <GlobalStyle />
     <SiteBackground />
     <TargetCursor targetSelector=".cursor-target" />
@@ -54,7 +55,7 @@ const App: React.FC = () => {
       <Contact />
       <Footer />
     </div>
-  </>
+  </SmoothScrollProvider>
   );
 };
 

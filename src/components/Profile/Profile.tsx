@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import { useParallax } from "../../hooks/useParallax";
 import "./Profile.css";
 
 type Locale = "ja" | "en";
@@ -47,10 +48,12 @@ const content: Record<Locale, ProfileContent> = {
 const Profile: React.FC = () => {
   const [locale, setLocale] = useState<Locale>("ja");
   const current = content[locale];
+  const nameRef = useRef<HTMLDivElement>(null);
+  useParallax(nameRef, { yPercent: -25 });
 
   return (
     <div className="profile">
-      <div className="icon-wrapper">
+      <div className="icon-wrapper" ref={nameRef}>
         <h3 className="name">
           <p className="name-main">N-i-ke</p>
           <p className="name-sub">N-i-ke</p>

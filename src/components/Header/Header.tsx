@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { FaGithub } from "react-icons/fa";
 import GooeyNav from "../GooeyNav";
 import { useLocale, type Locale } from "../../contexts/LocaleContext";
 import "./Header.css";
+
+const REPO_URL = "https://github.com/N-i-ke/self-introduction";
 
 const HeaderContainer = styled.header`
   text-align: center;
@@ -59,6 +62,43 @@ const RightCluster = styled.div`
   align-items: center;
   gap: 12px;
   min-width: 0;
+
+  @media screen and (max-width: 480px) {
+    gap: 8px;
+  }
+`;
+
+const GitHubIconLink = styled.a`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 216, 255, 0.45);
+  color: #cfeaff;
+  background-color: rgba(0, 0, 0, 0.25);
+  text-decoration: none;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  flex-shrink: 0;
+
+  &:hover {
+    color: #00d8ff;
+    border-color: rgba(0, 216, 255, 0.85);
+    background-color: rgba(0, 216, 255, 0.12);
+    box-shadow: 0 0 12px rgba(0, 216, 255, 0.4);
+    transform: translateY(-1px);
+  }
+
+  &:focus-visible {
+    outline: 2px solid #00d8ff;
+    outline-offset: 2px;
+  }
+
+  @media screen and (max-width: 374px) {
+    width: 32px;
+    height: 32px;
+  }
 `;
 
 const LangToggleWrapper = styled.div`
@@ -341,6 +381,15 @@ const Header: React.FC = () => {
         </NavCenter>
         <RightCluster>
           <LangToggle locale={locale} onChange={setLocale} />
+          <GitHubIconLink
+            href={REPO_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="cursor-target"
+            aria-label="View source on GitHub"
+          >
+            <FaGithub size={18} aria-hidden="true" />
+          </GitHubIconLink>
         </RightCluster>
       </Bar>
 
@@ -351,6 +400,15 @@ const Header: React.FC = () => {
         </Brand>
         <RightCluster>
           <LangToggle locale={locale} onChange={setLocale} />
+          <GitHubIconLink
+            href={REPO_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="cursor-target"
+            aria-label="View source on GitHub"
+          >
+            <FaGithub size={18} aria-hidden="true" />
+          </GitHubIconLink>
           <MenuButton
             type="button"
             className={isOpen ? "open" : ""}

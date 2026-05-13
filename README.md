@@ -19,7 +19,6 @@ JA / EN の言語切替に対応し、サイト全体に演出系のアニメー
 | スタイリング | styled-components 6 / 通常 CSS / CSS Modules 風命名 |
 | アイコン | react-icons |
 | ホスティング | GitHub Pages (Actions 経由デプロイ) |
-| アクセス解析 | Google Analytics 4 (`G-8HD78GNJH4`, IP 匿名化済み) |
 
 ### アニメーション / 演出系ライブラリ
 

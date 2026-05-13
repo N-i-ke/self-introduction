@@ -1,55 +1,26 @@
 /* Header.css */
-.mobile-menu {
-  display: none;
+/* styled-components が後勝ちで上書きする可能性があるため、全て !important で固定 */
+
+.header-bar--desktop {
+  display: flex !important;
 }
 
-.desktop-menu {
-  display: flex;
+.header-bar--mobile {
+  display: none !important;
 }
 
-/* リンク色の統一 */
-.mobile-menu a {
-  color: white !important;
-  text-decoration: none;
+.header-drawer {
+  display: none !important;
 }
 
-.mobile-menu a:hover {
-  color: white !important;
-  text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
-}
-
-/* Mobile styles */
 @media screen and (max-width: 768px) {
-  .mobile-menu {
-    display: block;
-  }
-  
-  .desktop-menu {
+  .header-bar--desktop {
     display: none !important;
-    visibility: hidden;
-    opacity: 0;
-    height: 0;
-    overflow: hidden;
-    position: absolute;
-    pointer-events: none;
+  }
+  .header-bar--mobile {
+    display: flex !important;
+  }
+  .header-drawer {
+    display: block !important;
   }
 }
-
-/* Desktop styles */
-@media screen and (min-width: 769px) {
-  .mobile-menu {
-    display: none !important;
-    visibility: hidden;
-    opacity: 0;
-    height: 0;
-    overflow: hidden;
-    position: absolute;
-    pointer-events: none;
-  }
-  
-  .desktop-menu {
-    display: flex !important;
-    visibility: visible;
-    opacity: 1;
-  }
-} 

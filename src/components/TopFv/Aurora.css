@@ -10,36 +10,6 @@
   align-items: center;
 }
 
-.aurora-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-}
-
-.fuzzy-text-container {
-  position: absolute;
-  z-index: 10;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  padding: 0 20px;
-  box-sizing: border-box;
-  text-align: center;
-}
-
-.fuzzy-text-container canvas,
-.fuzzy-text {
-  pointer-events: auto;
-  max-width: 100%;
-  touch-action: auto;
-}
-
 /* GlitchTextのカスタムクラス */
 .glitch-desktop {
   font-size: clamp(4rem, 12vw, 12rem);
@@ -133,15 +103,6 @@ html, body {
   .topfv-container {
     height: -webkit-fill-available;
   }
-}
-
-.particles-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
 }
 
 .portfolio-title {

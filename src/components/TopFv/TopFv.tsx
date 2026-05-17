@@ -1,10 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import GlitchText from '../GlitchText';
 import DecryptedLoader from '../DecryptedLoader';
 import ViewportHandler from '../ViewportHandler';
 import LiquidChrome from '../LiquidChrome';
 import { useViewport } from '../../hooks/useViewport';
-import { useParallax } from '../../hooks/useParallax';
 
 import './Aurora.css';
 
@@ -12,9 +11,6 @@ const TopFv: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [contentVisible, setContentVisible] = useState(false);
   const { width: viewportWidth, isMobile } = useViewport();
-  const titleRef = useRef<HTMLDivElement>(null);
-
-  useParallax(titleRef, { yPercent: 60 });
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -63,7 +59,7 @@ const TopFv: React.FC = () => {
         />
       </div>
       <div className={`topfv-container ${contentVisible ? 'fade-in' : 'hidden'}`}>
-        <div className="portfolio-title" ref={titleRef}>
+        <div className="portfolio-title">
           <GlitchText
             speed={getGlitchSpeed()}
             enableShadows={true}

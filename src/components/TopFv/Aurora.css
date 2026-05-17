@@ -10,9 +10,69 @@
   align-items: center;
 }
 
+/* LiquidChrome 背景。topfv-container の "hidden / fade-in" opacity gating の
+   外側に置き、ローダーが消えた瞬間から即時可視にする。
+   absolute + top: 0 でドキュメント先頭 = topfv-container と同じ位置を覆い、
+   高さは topfv-container と同じく viewport 単位で同期させる。
+   レイヤー: SiteBackground (z=-1) ← LiquidChrome (z=0) ← title (z=2). */
+.topfv-liquid-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: auto;
+}
+
+.topfv-liquid-bg .liquidChrome-container,
+.topfv-liquid-bg canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+@media screen and (max-width: 374px) {
+  .topfv-liquid-bg {
+    height: 85vh;
+    height: calc(var(--vh, 1vh) * 85);
+    min-height: 450px;
+  }
+}
+
+@media screen and (min-width: 375px) and (max-width: 479px) {
+  .topfv-liquid-bg {
+    height: 80vh;
+    height: calc(var(--vh, 1vh) * 80);
+    min-height: 480px;
+  }
+}
+
+@media screen and (min-width: 480px) and (max-width: 768px) {
+  .topfv-liquid-bg {
+    height: 80vh;
+    height: calc(var(--vh, 1vh) * 80);
+    min-height: 500px;
+  }
+}
+
+@supports (-webkit-touch-callout: none) {
+  .topfv-liquid-bg {
+    height: -webkit-fill-available;
+  }
+}
+
 /* GlitchTextのカスタムクラス */
+/* "N-i-ke's Portfolio" (18文字 + white-space: nowrap) が
+   PC で viewport をはみ出さないよう、vw 係数と max を抑えめに。
+   - 1024px: 7vw ≈ 72px
+   - 1440px: 7vw ≈ 100px
+   - 1920px: 7vw ≈ 134px → cap 8rem (128px)
+   - 2560px+: cap 8rem */
 .glitch-desktop {
-  font-size: clamp(4rem, 12vw, 12rem);
+  font-size: clamp(3.5rem, 7vw, 8rem);
 }
 
 /* "Ken's Portfolio" (15文字) が white-space: nowrap で

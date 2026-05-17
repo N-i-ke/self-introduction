@@ -65,8 +65,14 @@
 }
 
 /* GlitchTextのカスタムクラス */
+/* "N-i-ke's Portfolio" (18文字 + white-space: nowrap) が
+   PC で viewport をはみ出さないよう、vw 係数と max を抑えめに。
+   - 1024px: 7vw ≈ 72px
+   - 1440px: 7vw ≈ 100px
+   - 1920px: 7vw ≈ 134px → cap 8rem (128px)
+   - 2560px+: cap 8rem */
 .glitch-desktop {
-  font-size: clamp(4rem, 12vw, 12rem);
+  font-size: clamp(3.5rem, 7vw, 8rem);
 }
 
 /* "Ken's Portfolio" (15文字) が white-space: nowrap で

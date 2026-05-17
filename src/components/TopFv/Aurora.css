@@ -10,6 +10,24 @@
   align-items: center;
 }
 
+/* LiquidChrome 背景。topfv-container を埋め、portfolio-title (z-index: 2) より下、
+   global SiteBackground (z-index: -1) より上に重ねる。 */
+.topfv-liquid-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.topfv-liquid-bg .liquidChrome-container,
+.topfv-liquid-bg canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
 /* GlitchTextのカスタムクラス */
 .glitch-desktop {
   font-size: clamp(4rem, 12vw, 12rem);

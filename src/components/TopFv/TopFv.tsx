@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import GlitchText from '../GlitchText';
 import DecryptedLoader from '../DecryptedLoader';
 import ViewportHandler from '../ViewportHandler';
+import LiquidChrome from '../LiquidChrome';
 import { useViewport } from '../../hooks/useViewport';
 import { useParallax } from '../../hooks/useParallax';
 
@@ -49,6 +50,16 @@ const TopFv: React.FC = () => {
       <ViewportHandler />
       <DecryptedLoader isLoading={isLoading} onLoadingComplete={handleLoadingComplete} />
       <div className={`topfv-container ${contentVisible ? 'fade-in' : 'hidden'}`}>
+        <div className="topfv-liquid-bg" aria-hidden="true">
+          <LiquidChrome
+            baseColor={[0.1, 0.1, 0.1]}
+            speed={0.2}
+            amplitude={0.5}
+            frequencyX={3}
+            frequencyY={2}
+            interactive
+          />
+        </div>
         <div className="portfolio-title" ref={titleRef}>
           <GlitchText
             speed={getGlitchSpeed()}

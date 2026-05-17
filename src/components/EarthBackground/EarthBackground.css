@@ -5,12 +5,16 @@
   height: 100%;
   z-index: 0;
   pointer-events: none;
+  overflow: hidden;
   opacity: 0.9;
-  overflow: visible;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .earth-background canvas {
   display: block;
-  width: 100% !important;
-  height: 100% !important;
+  /* renderer.setSize で正方形 (min(width, height)) に設定される。
+     CSS で 100% などに上書きせず、そのままアスペクトを維持して
+     コンテナ内に flex で中央配置する。 */
 }

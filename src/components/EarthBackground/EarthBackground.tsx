@@ -21,17 +21,22 @@ const EarthBackground: React.FC<EarthBackgroundProps> = ({
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    const width = container.clientWidth;
-    const height = container.clientHeight;
+    // コンテナの長辺に依存せず常に正方形 viewport で描画することで、
+    // 本文ボリュームに応じて .about-wrapper の高さが変動しても
+    // 球が常に正円で表示されるようにする。
+    const initialSize = Math.max(
+      1,
+      Math.min(container.clientWidth, container.clientHeight)
+    );
 
     const scene = new THREE.Scene();
 
-    const camera = new THREE.PerspectiveCamera(35, width / Math.max(height, 1), 0.1, 100);
+    const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
     camera.position.set(0, 0, 3.2);
 
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.setSize(width, height);
+    renderer.setSize(initialSize, initialSize);
     renderer.setClearColor(0x000000, 0);
     container.appendChild(renderer.domElement);
 
@@ -62,9 +67,18 @@ const EarthBackground: React.FC<EarthBackgroundProps> = ({
         `
       );
     };
+    // 親 Group で 23.5° の地軸傾斜を表現し、メッシュ自身は局所 Y 軸
+    // (= 傾いた軸) まわりに自転させる。
+    // 直接 mesh.rotation.z + mesh.rotation.y にすると Euler XYZ の
+    // 既定順序により「先に傾けてからワールド Y まわりに回す」となり、
+    // 傾いた極がワールド Y のまわりを振り回されて手前/奥を向く位相で
+    // foreshortening により極が潰れて見える。
+    const earthGroup = new THREE.Group();
+    earthGroup.rotation.z = EARTH_AXIAL_TILT_RAD;
+    scene.add(earthGroup);
+
     const earth = new THREE.Mesh(geometry, material);
-    earth.rotation.z = EARTH_AXIAL_TILT_RAD;
-    scene.add(earth);
+    earthGroup.add(earth);
 
     const ambient = new THREE.AmbientLight(0xffffff, 0.8);
     scene.add(ambient);
@@ -94,9 +108,9 @@ const EarthBackground: React.FC<EarthBackgroundProps> = ({
       const w = container.clientWidth;
       const h = container.clientHeight;
       if (w === 0 || h === 0) return;
-      camera.aspect = w / h;
-      camera.updateProjectionMatrix();
-      renderer.setSize(w, h);
+      const size = Math.min(w, h);
+      // 正方形固定なので aspect は常に 1
+      renderer.setSize(size, size);
     });
     resizeObserver.observe(container);
 

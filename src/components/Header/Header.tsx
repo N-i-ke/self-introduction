@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FaGithub } from "react-icons/fa";
-import GooeyNav from "../GooeyNav";
+import BubbleMenu, { type BubbleMenuItem } from "../BubbleMenu";
 import { useLocale, type Locale } from "../../contexts/LocaleContext";
 import "./Header.css";
 
@@ -48,13 +48,6 @@ const Brand = styled.a`
     text-shadow: 0 0 16px rgba(0, 216, 255, 0.6);
     transform: translateY(-1px);
   }
-`;
-
-const NavCenter = styled.div`
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  min-width: 0;
 `;
 
 const RightCluster = styled.div`
@@ -139,162 +132,59 @@ const LangButton = styled.button<{ $active: boolean }>`
   }
 `;
 
-const Nav = styled.nav<{ isOpen: boolean }>`
-  width: 300px;
-  min-height: 100vh;
-  color: #ffffff;
-  z-index: 99;
-  position: fixed;
-  top: 0;
-  left: ${(props) => (props.isOpen ? "0" : "-400px")};
-  opacity: ${(props) => (props.isOpen ? "1" : "0")};
-  background-color: rgba(14, 8, 8, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  transition: all 0.2s ease;
-  overflow-x: hidden;
-  overflow-y: auto;
-  font-family: "Quicksand", sans-serif;
-  display: flex;
-  flex-direction: column;
-
-  ul {
-    padding: 80px 0 24px;
-    margin: 0;
-  }
-
-  li {
-    padding: 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
-
-    &:first-child {
-      border-top: 1px solid rgba(255, 255, 255, 0.18);
-    }
-  }
-
-  a {
-    padding: 16px;
-    min-height: 44px;
-    color: #fff !important;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.15s;
-    letter-spacing: 0.12em;
-
-    &:hover {
-      color: #fff !important;
-      background-color: rgba(0, 216, 255, 0.15);
-      text-shadow: 0 0 8px rgba(0, 216, 255, 0.8);
-    }
-  }
-`;
-
-const DrawerLangSection = styled.div`
-  margin-top: auto;
-  padding: 24px 16px 32px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-`;
-
-const DrawerCloseButton = styled.button`
-  appearance: none;
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  cursor: pointer;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
-
-  &::before,
-  &::after {
-    content: "";
-    position: absolute;
-    width: 18px;
-    height: 2px;
-    background-color: #fff;
-    border-radius: 1px;
-  }
-
-  &::before {
-    transform: rotate(45deg);
-  }
-
-  &::after {
-    transform: rotate(-45deg);
-  }
-
-  &:hover {
-    background-color: rgba(0, 216, 255, 0.15);
-    border-color: rgba(0, 216, 255, 0.55);
-    transform: rotate(90deg);
-  }
-
-  &:focus-visible {
-    outline: 2px solid #00d8ff;
-    outline-offset: 2px;
-  }
-`;
-
-const DrawerLangLabel = styled.span`
-  font-family: "Courier New", "Menlo", monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.3em;
-  color: rgba(207, 234, 255, 0.7);
-  text-transform: uppercase;
-`;
-
 const MenuButton = styled.button`
   appearance: none;
-  border: none;
-  background: transparent;
+  border: 1px solid rgba(0, 216, 255, 0.45);
+  background-color: rgba(0, 0, 0, 0.25);
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  width: 44px;
-  height: 44px;
-  border-radius: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   cursor: pointer;
-  transition: all 0.15s;
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
   padding: 0;
+  flex-shrink: 0;
 
   span {
     position: absolute;
-    left: 7px;
+    left: 50%;
     display: block;
-    width: 30px;
+    width: 20px;
     height: 2px;
     border-radius: 1px;
-    background-color: #fff;
-    transition: all 0.15s;
+    background-color: #cfeaff;
+    transform: translate(-50%, 0);
+    transition: transform 0.25s ease, opacity 0.2s ease, background-color 0.2s ease;
 
     &:nth-child(1) {
-      top: 14px;
+      top: calc(50% - 7px);
     }
 
     &:nth-child(2) {
-      top: 22px;
+      top: calc(50% - 1px);
     }
 
     &:nth-child(3) {
-      top: 30px;
+      top: calc(50% + 5px);
+    }
+  }
+
+  &:hover {
+    border-color: rgba(0, 216, 255, 0.85);
+    background-color: rgba(0, 216, 255, 0.12);
+    box-shadow: 0 0 12px rgba(0, 216, 255, 0.4);
+    transform: translateY(-1px);
+
+    span {
+      background-color: #00d8ff;
     }
   }
 
   &.open span:nth-child(1) {
-    transform: translateY(8px) rotate(-315deg);
+    transform: translate(-50%, 6px) rotate(45deg);
   }
 
   &.open span:nth-child(2) {
@@ -302,26 +192,18 @@ const MenuButton = styled.button`
   }
 
   &.open span:nth-child(3) {
-    transform: translateY(-8px) rotate(315deg);
+    transform: translate(-50%, -6px) rotate(-45deg);
   }
 
   &:focus-visible {
     outline: 2px solid #00d8ff;
     outline-offset: 2px;
   }
-`;
 
-const Mask = styled.div<{ isOpen: boolean }>`
-  display: ${(props) => (props.isOpen ? "block" : "none")};
-  position: fixed;
-  left: 0;
-  top: 0;
-  z-index: 10;
-  background-color: rgba(20, 20, 20, 0.7);
-  width: 100%;
-  height: 100%;
-  min-height: 100vh;
-  transition: all 0.15s;
+  @media screen and (max-width: 374px) {
+    width: 36px;
+    height: 36px;
+  }
 `;
 
 interface LangToggleProps {
@@ -353,6 +235,51 @@ const LangToggle: React.FC<LangToggleProps> = ({ locale, onChange, className }) 
   </LangToggleWrapper>
 );
 
+const MENU_ITEMS: BubbleMenuItem[] = [
+  {
+    label: "TOP",
+    href: "#top",
+    ariaLabel: "Scroll to top",
+    rotation: -8,
+    hoverStyles: { bgColor: "rgba(0, 216, 255, 0.22)", textColor: "#ffffff" },
+  },
+  {
+    label: "WORK",
+    href: "#work",
+    ariaLabel: "Scroll to work",
+    rotation: 8,
+    hoverStyles: { bgColor: "rgba(0, 216, 255, 0.22)", textColor: "#ffffff" },
+  },
+  {
+    label: "ABOUT",
+    href: "#about",
+    ariaLabel: "Scroll to about",
+    rotation: 8,
+    hoverStyles: { bgColor: "rgba(0, 216, 255, 0.22)", textColor: "#ffffff" },
+  },
+  {
+    label: "SKILLS",
+    href: "#skill",
+    ariaLabel: "Scroll to skills",
+    rotation: -8,
+    hoverStyles: { bgColor: "rgba(0, 216, 255, 0.22)", textColor: "#ffffff" },
+  },
+  {
+    label: "SERVICE",
+    href: "#service",
+    ariaLabel: "Scroll to service",
+    rotation: 8,
+    hoverStyles: { bgColor: "rgba(0, 216, 255, 0.22)", textColor: "#ffffff" },
+  },
+  {
+    label: "CONTACT",
+    href: "#contact",
+    ariaLabel: "Scroll to contact",
+    rotation: -8,
+    hoverStyles: { bgColor: "rgba(0, 216, 255, 0.22)", textColor: "#ffffff" },
+  },
+];
+
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { locale, setLocale } = useLocale();
@@ -360,42 +287,19 @@ const Header: React.FC = () => {
   const toggleMenu = () => setIsOpen((prev) => !prev);
   const closeMenu = () => setIsOpen(false);
 
-  const items = [
-    { label: "TOP", href: "#top" },
-    { label: "WORK", href: "#work" },
-    { label: "ABOUT", href: "#about" },
-    { label: "SKILLS", href: "#skill" },
-    { label: "SERVICE", href: "#service" },
-    { label: "CONTACT", href: "#contact" },
-  ];
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeMenu();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [isOpen]);
 
   return (
     <HeaderContainer id="top" className={isOpen ? "open" : ""}>
-      {/* Desktop top bar */}
-      <Bar className="header-bar header-bar--desktop">
-        <Brand href="#top" className="cursor-target" aria-label="Back to top">
-          N-I-KE
-        </Brand>
-        <NavCenter>
-          <GooeyNav items={items} particleCount={4} animationTime={100} timeVariance={50} />
-        </NavCenter>
-        <RightCluster>
-          <LangToggle locale={locale} onChange={setLocale} />
-          <GitHubIconLink
-            href={REPO_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="cursor-target"
-            aria-label="View source on GitHub"
-          >
-            <FaGithub size={18} aria-hidden="true" />
-          </GitHubIconLink>
-        </RightCluster>
-      </Bar>
-
-      {/* Mobile top bar */}
-      <Bar className="header-bar header-bar--mobile">
-        <Brand href="#top" className="cursor-target" aria-label="Back to top">
+      <Bar>
+        <Brand href="#top" className="cursor-target" aria-label="Back to top" onClick={closeMenu}>
           N-I-KE
         </Brand>
         <RightCluster>
@@ -411,10 +315,11 @@ const Header: React.FC = () => {
           </GitHubIconLink>
           <MenuButton
             type="button"
-            className={isOpen ? "open" : ""}
+            className={`cursor-target${isOpen ? " open" : ""}`}
             onClick={toggleMenu}
             aria-label={isOpen ? "Close menu" : "Open menu"}
             aria-expanded={isOpen}
+            aria-controls="bubble-menu-overlay"
           >
             <span />
             <span />
@@ -423,31 +328,7 @@ const Header: React.FC = () => {
         </RightCluster>
       </Bar>
 
-      {/* Mobile drawer */}
-      <div className="header-drawer">
-        <Nav isOpen={isOpen} aria-hidden={!isOpen}>
-          <DrawerCloseButton
-            type="button"
-            className="cursor-target"
-            onClick={closeMenu}
-            aria-label="Close menu"
-          />
-          <ul className="nav-menu">
-            {items.map((item) => (
-              <li key={item.href}>
-                <a href={item.href} className={item.href.slice(1)} onClick={closeMenu}>
-                  {item.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-          <DrawerLangSection>
-            <DrawerLangLabel>Language</DrawerLangLabel>
-            <LangToggle locale={locale} onChange={setLocale} />
-          </DrawerLangSection>
-        </Nav>
-        <Mask isOpen={isOpen} onClick={closeMenu} />
-      </div>
+      <BubbleMenu isOpen={isOpen} items={MENU_ITEMS} onItemClick={closeMenu} />
     </HeaderContainer>
   );
 };

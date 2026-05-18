@@ -41,6 +41,17 @@ interface ScrollStackProps {
   onStackComplete?: () => void;
 }
 
+// transform の影響を受けないレイアウト上の絶対 Y 座標を返す
+const layoutOffsetTop = (el: HTMLElement): number => {
+  let top = 0;
+  let node: HTMLElement | null = el;
+  while (node) {
+    top += node.offsetTop;
+    node = node.offsetParent as HTMLElement | null;
+  }
+  return top;
+};
+
 const ScrollStack: React.FC<ScrollStackProps> = ({
   children,
   className = "",
@@ -58,8 +69,11 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
   const scrollerRef = useRef<HTMLDivElement>(null);
   const stackCompletedRef = useRef(false);
   const animationFrameRef = useRef<number | null>(null);
+  const scrollRafRef = useRef<number | null>(null);
   const lenisRef = useRef<Lenis | null>(null);
   const cardsRef = useRef<HTMLElement[]>([]);
+  const cardLayoutTopsRef = useRef<number[]>([]);
+  const endLayoutTopRef = useRef<number>(0);
   const lastTransformsRef = useRef(new Map<number, CardTransform>());
   const isUpdatingRef = useRef(false);
 
@@ -96,16 +110,25 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
     };
   }, [useWindowScroll]);
 
-  const getElementOffset = useCallback(
-    (element: HTMLElement) => {
-      if (useWindowScroll) {
-        const rect = element.getBoundingClientRect();
-        return rect.top + window.scrollY;
-      }
-      return element.offsetTop;
-    },
-    [useWindowScroll],
-  );
+  // カード/エンドスペーサーのレイアウト上の Y 座標をキャッシュ。
+  // ここで getBoundingClientRect ではなく offsetParent を辿るため、
+  // カードに transform が乗っていても影響を受けない。
+  const recomputeLayoutOffsets = useCallback(() => {
+    const cards = cardsRef.current;
+    if (useWindowScroll) {
+      cardLayoutTopsRef.current = cards.map((card) => layoutOffsetTop(card));
+      const endEl = scrollerRef.current?.querySelector(
+        ".scroll-stack-end",
+      ) as HTMLElement | null;
+      endLayoutTopRef.current = endEl ? layoutOffsetTop(endEl) : 0;
+    } else {
+      cardLayoutTopsRef.current = cards.map((card) => card.offsetTop);
+      const endEl = scrollerRef.current?.querySelector(
+        ".scroll-stack-end",
+      ) as HTMLElement | null;
+      endLayoutTopRef.current = endEl ? endEl.offsetTop : 0;
+    }
+  }, [useWindowScroll]);
 
   const updateCardTransforms = useCallback(() => {
     if (!cardsRef.current.length || isUpdatingRef.current) return;
@@ -114,16 +137,12 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
     const { scrollTop, containerHeight } = getScrollData();
     const stackPositionPx = parsePercentage(stackPosition, containerHeight);
     const scaleEndPositionPx = parsePercentage(scaleEndPosition, containerHeight);
-
-    const endElement = scrollerRef.current?.querySelector(
-      ".scroll-stack-end",
-    ) as HTMLElement | null;
-    const endElementTop = endElement ? getElementOffset(endElement) : 0;
+    const endElementTop = endLayoutTopRef.current;
 
     cardsRef.current.forEach((card, i) => {
       if (!card) return;
 
-      const cardTop = getElementOffset(card);
+      const cardTop = cardLayoutTopsRef.current[i] ?? 0;
       const triggerStart = cardTop - stackPositionPx - itemStackDistance * i;
       const triggerEnd = cardTop - scaleEndPositionPx;
       const pinStart = cardTop - stackPositionPx - itemStackDistance * i;
@@ -138,7 +157,7 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
       if (blurAmount) {
         let topCardIndex = 0;
         for (let j = 0; j < cardsRef.current.length; j++) {
-          const jCardTop = getElementOffset(cardsRef.current[j]);
+          const jCardTop = cardLayoutTopsRef.current[j] ?? 0;
           const jTriggerStart = jCardTop - stackPositionPx - itemStackDistance * j;
           if (scrollTop >= jTriggerStart) topCardIndex = j;
         }
@@ -202,9 +221,17 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
     calculateProgress,
     parsePercentage,
     getScrollData,
-    getElementOffset,
     onStackComplete,
   ]);
+
+  // 1 フレームに 1 回しか更新しないようにスロットル
+  const scheduleUpdate = useCallback(() => {
+    if (scrollRafRef.current !== null) return;
+    scrollRafRef.current = requestAnimationFrame(() => {
+      scrollRafRef.current = null;
+      updateCardTransforms();
+    });
+  }, [updateCardTransforms]);
 
   useLayoutEffect(() => {
     const scroller = scrollerRef.current;
@@ -228,18 +255,32 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
       card.style.perspective = "1000px";
     });
 
+    recomputeLayoutOffsets();
+
+    // 画像ロードや動的サイズ変化に追従するため、内側コンテナを監視して再計算
+    const inner = scroller.querySelector(".scroll-stack-inner") as HTMLElement | null;
+    const resizeObserver = new ResizeObserver(() => {
+      recomputeLayoutOffsets();
+      scheduleUpdate();
+    });
+    if (inner) resizeObserver.observe(inner);
+
     let cleanup: (() => void) | null = null;
 
     if (useWindowScroll) {
       // グローバル Lenis (SmoothScrollProvider) が既に走っているため、
-      // ここでは追加の Lenis を作らず native scroll を監視する
-      const onScroll = () => updateCardTransforms();
+      // ここでは追加の Lenis を作らず native scroll を rAF スロットルで監視する
+      const onScroll = () => scheduleUpdate();
+      const onResize = () => {
+        recomputeLayoutOffsets();
+        scheduleUpdate();
+      };
       window.addEventListener("scroll", onScroll, { passive: true });
-      window.addEventListener("resize", onScroll);
-      updateCardTransforms();
+      window.addEventListener("resize", onResize);
+      scheduleUpdate();
       cleanup = () => {
         window.removeEventListener("scroll", onScroll);
-        window.removeEventListener("resize", onScroll);
+        window.removeEventListener("resize", onResize);
       };
     } else {
       const lenis = new Lenis({
@@ -255,14 +296,14 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
         syncTouch: true,
         syncTouchLerp: 0.075,
       });
-      lenis.on("scroll", updateCardTransforms);
+      lenis.on("scroll", scheduleUpdate);
       const raf = (time: number) => {
         lenis.raf(time);
         animationFrameRef.current = requestAnimationFrame(raf);
       };
       animationFrameRef.current = requestAnimationFrame(raf);
       lenisRef.current = lenis;
-      updateCardTransforms();
+      scheduleUpdate();
       cleanup = () => {
         if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
         lenis.destroy();
@@ -272,8 +313,15 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
 
     return () => {
       cleanup?.();
+      resizeObserver.disconnect();
+      if (scrollRafRef.current !== null) {
+        cancelAnimationFrame(scrollRafRef.current);
+        scrollRafRef.current = null;
+      }
       stackCompletedRef.current = false;
       cardsRef.current = [];
+      cardLayoutTopsRef.current = [];
+      endLayoutTopRef.current = 0;
       transformsCache.clear();
       isUpdatingRef.current = false;
     };
@@ -287,7 +335,8 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
     rotationAmount,
     blurAmount,
     useWindowScroll,
-    updateCardTransforms,
+    recomputeLayoutOffsets,
+    scheduleUpdate,
   ]);
 
   return (

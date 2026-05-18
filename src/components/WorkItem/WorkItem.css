@@ -1,8 +1,25 @@
-/* ScrollStack 内では 1 カード = 1 WorkItem の縦並び */
+/* ScrollStack 内では 1 カード = 1 WorkItem の縦並び。
+   PC (>= MOBILE_BREAKPOINT) は 2 列を横並びで配置、SP は 1 列 */
 
 #work .work-wrapper {
   position: relative;
   padding: 24px 0;
+}
+
+#work .work-stacks-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(16px, 3vw, 40px);
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 clamp(16px, 4vw, 64px);
+  align-items: start;
+}
+
+/* 2 列モード時はグリッド側で横方向の余白を持つので、各 stack 内の横 padding を打ち消す */
+#work .work-stacks-grid .scroll-stack-inner {
+  padding-left: 0;
+  padding-right: 0;
 }
 
 #work .work-item {

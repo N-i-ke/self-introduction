@@ -4,8 +4,9 @@ import ScrollStack, { ScrollStackItem } from "../ScrollStack";
 import Profile from "../Profile";
 import MySkills from "../MySkills";
 import Service from "../Service";
-import { works } from "../../data/works";
+import { works, type Work } from "../../data/works";
 import { useLocale, type Locale } from "../../contexts/LocaleContext";
+import { useViewport } from "../../hooks/useViewport";
 
 const subtitles: Record<Locale, Record<"work" | "about" | "skill" | "service", string>> = {
   ja: {
@@ -22,9 +23,29 @@ const subtitles: Record<Locale, Record<"work" | "about" | "skill" | "service", s
   },
 };
 
+const SCROLL_STACK_PROPS = {
+  useWindowScroll: true as const,
+  itemDistance: 120,
+  itemStackDistance: 28,
+  stackPosition: "22%",
+  scaleEndPosition: "12%",
+  baseScale: 0.88,
+};
+
+const renderWorkItem = (work: Work) => (
+  <ScrollStackItem key={work.title} itemClassName="work-stack-card">
+    <WorkItem {...work} />
+  </ScrollStackItem>
+);
+
 const HomePage = () => {
   const { locale } = useLocale();
   const t = subtitles[locale];
+  const { isMobile } = useViewport();
+
+  const half = Math.ceil(works.length / 2);
+  const leftWorks = works.slice(0, half);
+  const rightWorks = works.slice(half);
 
   return (
     <main id="main">
@@ -32,21 +53,20 @@ const HomePage = () => {
       <section id="work">
         <SectionTitle mainTitle="Works" subTitle={t.work} />
         <div className="work-wrapper">
-          <ScrollStack
-            className="work-stack"
-            useWindowScroll
-            itemDistance={120}
-            itemStackDistance={28}
-            stackPosition="22%"
-            scaleEndPosition="12%"
-            baseScale={0.88}
-          >
-            {works.map((work) => (
-              <ScrollStackItem key={work.title} itemClassName="work-stack-card">
-                <WorkItem {...work} />
-              </ScrollStackItem>
-            ))}
-          </ScrollStack>
+          {isMobile ? (
+            <ScrollStack className="work-stack" {...SCROLL_STACK_PROPS}>
+              {works.map(renderWorkItem)}
+            </ScrollStack>
+          ) : (
+            <div className="work-stacks-grid">
+              <ScrollStack className="work-stack" {...SCROLL_STACK_PROPS}>
+                {leftWorks.map(renderWorkItem)}
+              </ScrollStack>
+              <ScrollStack className="work-stack" {...SCROLL_STACK_PROPS}>
+                {rightWorks.map(renderWorkItem)}
+              </ScrollStack>
+            </div>
+          )}
         </div>
       </section>
       {/* about */}

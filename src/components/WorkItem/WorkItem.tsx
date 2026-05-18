@@ -26,7 +26,7 @@ const WorkItem: React.FC<WorkItemProps> = ({
   const borderChaos = disabled ? 0.08 : 0.18;
 
   return (
-    <li className={`work-item ${disabled ? "disabled-item" : ""}`}>
+    <div className={`work-item ${disabled ? "disabled-item" : ""}`}>
       <ElectricBorder
         color={borderColor}
         speed={borderSpeed}
@@ -63,7 +63,7 @@ const WorkItem: React.FC<WorkItemProps> = ({
           )}
         </figure>
       </ElectricBorder>
-    </li>
+    </div>
   );
 };
 

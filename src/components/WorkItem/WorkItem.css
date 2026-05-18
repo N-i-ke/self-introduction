@@ -1,19 +1,14 @@
-#work .work-wrapper ul {
-  padding: 50px 30px;
-  display: flex;
-  flex-wrap: wrap;
+/* ScrollStack 内では 1 カード = 1 WorkItem の縦並び */
+
+#work .work-wrapper {
+  position: relative;
+  padding: 24px 0;
 }
 
 #work .work-item {
   box-sizing: border-box;
-  padding: 16px;
-  width: 33.3%;
-  min-width: 333px;
+  width: 100%;
   text-align: center;
-}
-
-#work .work-item:hover .work-item li {
-  padding: 50px;
 }
 
 #work .work-item__border {
@@ -30,6 +25,8 @@
 #work figure img {
   border-radius: 10px;
   display: block;
+  width: 100%;
+  height: auto;
 }
 
 #work figcaption {
@@ -55,11 +52,11 @@
 }
 
 #work figcaption h3 {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
 }
 
 #work figcaption p {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
 }
 
 #work figcaption .fig-inner {
@@ -128,31 +125,11 @@
   z-index: 5;
 }
 
-@media screen and (max-width: 1000px) {
-  #work .work-item {
-    width: 50%;
-  }
-}
-
 @media screen and (max-width: 600px) {
-  #work .work-wrapper ul {
-    justify-content: center;
+  #work figcaption h3 {
+    font-size: 1.1rem;
   }
-  #work .work-item {
-    width: 80%;
-    min-width: unset;
-    margin: 0 auto 20px;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  #work .work-wrapper ul {
-    padding: 50px 0;
-    justify-content: center;
-  }
-  #work .work-item {
-    width: 90%;
-    min-width: unset;
-    margin: 0 auto 15px;
+  #work figcaption p {
+    font-size: 0.8rem;
   }
 }

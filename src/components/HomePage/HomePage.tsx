@@ -1,5 +1,6 @@
 import SectionTitle from "../SectionTitle";
 import WorkItem from "../WorkItem";
+import ScrollStack, { ScrollStackItem } from "../ScrollStack";
 import Profile from "../Profile";
 import MySkills from "../MySkills";
 import Service from "../Service";
@@ -31,11 +32,21 @@ const HomePage = () => {
       <section id="work">
         <SectionTitle mainTitle="Works" subTitle={t.work} />
         <div className="work-wrapper">
-          <ul>
+          <ScrollStack
+            className="work-stack"
+            useWindowScroll
+            itemDistance={120}
+            itemStackDistance={28}
+            stackPosition="22%"
+            scaleEndPosition="12%"
+            baseScale={0.88}
+          >
             {works.map((work) => (
-              <WorkItem key={work.title} {...work} />
+              <ScrollStackItem key={work.title} itemClassName="work-stack-card">
+                <WorkItem {...work} />
+              </ScrollStackItem>
             ))}
-          </ul>
+          </ScrollStack>
         </div>
       </section>
       {/* about */}

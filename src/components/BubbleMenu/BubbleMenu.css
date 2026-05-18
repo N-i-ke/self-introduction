@@ -1,0 +1,153 @@
+/* BubbleMenu overlay (controlled). Adapted from https://reactbits.dev/components/bubble-menu */
+
+.bubble-menu-items {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 90;
+}
+
+.bubble-menu-items.fixed {
+  position: fixed;
+}
+
+.bubble-menu-backdrop {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(8, 6, 12, 0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  pointer-events: auto;
+  z-index: 0;
+}
+
+.bubble-menu-items .pill-list {
+  list-style: none;
+  margin: 0;
+  padding: 0 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  row-gap: 8px;
+  width: 100%;
+  max-width: 1600px;
+  margin-left: auto;
+  margin-right: auto;
+  pointer-events: auto;
+  justify-content: stretch;
+  position: relative;
+  z-index: 1;
+}
+
+.bubble-menu-items .pill-list .pill-col {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  flex: 0 0 calc(100% / 3);
+  box-sizing: border-box;
+}
+
+.bubble-menu-items .pill-list .pill-col:nth-child(4):nth-last-child(2) {
+  margin-left: calc(100% / 6);
+}
+
+.bubble-menu-items .pill-list .pill-col:nth-child(4):last-child {
+  margin-left: calc(100% / 3);
+}
+
+.bubble-menu-items .pill-link {
+  --pill-bg: rgba(14, 8, 8, 0.92);
+  --pill-color: #cfeaff;
+  --item-rot: 0deg;
+  --pill-min-h: 120px;
+  --hover-bg: rgba(0, 216, 255, 0.18);
+  --hover-color: #ffffff;
+  width: 100%;
+  min-height: var(--pill-min-h);
+  padding: clamp(1.2rem, 2.5vw, 6rem) 0;
+  font-family: "Courier New", "Menlo", monospace;
+  font-size: clamp(1.4rem, 3.4vw, 3.4rem);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 0;
+  border-radius: 999px;
+  background: var(--pill-bg);
+  color: var(--pill-color);
+  text-decoration: none;
+  border: 1px solid rgba(0, 216, 255, 0.35);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45), 0 0 18px rgba(0, 216, 255, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease,
+    box-shadow 0.3s ease;
+  will-change: transform;
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  height: 10px;
+}
+
+@media (min-width: 900px) {
+  .bubble-menu-items .pill-link {
+    transform: rotate(var(--item-rot));
+  }
+
+  .bubble-menu-items .pill-link:hover {
+    transform: rotate(var(--item-rot)) scale(1.06);
+    background: var(--hover-bg);
+    color: var(--hover-color);
+    border-color: rgba(0, 216, 255, 0.75);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5), 0 0 26px rgba(0, 216, 255, 0.45);
+  }
+
+  .bubble-menu-items .pill-link:active {
+    transform: rotate(var(--item-rot)) scale(0.94);
+  }
+}
+
+.bubble-menu-items .pill-link .pill-label {
+  display: inline-block;
+  will-change: transform, opacity;
+  height: 1.2em;
+  line-height: 1.2;
+}
+
+@media (max-width: 899px) {
+  .bubble-menu-items {
+    align-items: flex-start;
+    padding-top: 96px;
+  }
+
+  .bubble-menu-items .pill-list {
+    row-gap: 14px;
+  }
+
+  .bubble-menu-items .pill-list .pill-col {
+    flex: 0 0 100%;
+    margin-left: 0 !important;
+    overflow: visible;
+  }
+
+  .bubble-menu-items .pill-link {
+    font-size: clamp(1.1rem, 4.5vw, 2.4rem);
+    padding: clamp(0.9rem, 2vw, 1.8rem) 0;
+    min-height: 72px;
+  }
+
+  .bubble-menu-items .pill-link:hover {
+    transform: scale(1.04);
+    background: var(--hover-bg);
+    color: var(--hover-color);
+    border-color: rgba(0, 216, 255, 0.75);
+  }
+
+  .bubble-menu-items .pill-link:active {
+    transform: scale(0.94);
+  }
+}

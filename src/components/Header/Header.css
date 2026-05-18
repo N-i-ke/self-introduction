@@ -1,26 +1,2 @@
 /* Header.css */
-/* styled-components が後勝ちで上書きする可能性があるため、全て !important で固定 */
-
-.header-bar--desktop {
-  display: flex !important;
-}
-
-.header-bar--mobile {
-  display: none !important;
-}
-
-.header-drawer {
-  display: none !important;
-}
-
-@media screen and (max-width: 768px) {
-  .header-bar--desktop {
-    display: none !important;
-  }
-  .header-bar--mobile {
-    display: flex !important;
-  }
-  .header-drawer {
-    display: block !important;
-  }
-}
+/* PC / SP 共通レイアウト。レスポンシブ切り替えは styled-components 側のメディアクエリで吸収する */

@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import { SiQiita, SiZenn } from "react-icons/si";
 import { useParallax } from "../../hooks/useParallax";
 import EarthBackground from "../EarthBackground";
 import { useLocale, type Locale } from "../../contexts/LocaleContext";
@@ -9,6 +10,10 @@ type ProfileContent = {
   historyItems: React.ReactNode[];
   mindHeading: string;
   mind: React.ReactNode;
+  articlesHeading: string;
+  articlesLead: string;
+  qiitaLabel: string;
+  zennLabel: string;
 };
 
 const content: Record<Locale, ProfileContent> = {
@@ -26,6 +31,10 @@ const content: Record<Locale, ProfileContent> = {
         業務においては「レスの速さ」を大切にしております。急なデザインの変更や修正なども、その都度しっかりと対応できるように心がけております。
       </>
     ),
+    articlesHeading: "アウトプット",
+    articlesLead: "Qiita / Zenn で学習メモや実装記事を公開しています。",
+    qiitaLabel: "Qiita @N-i-ke の記事一覧を開く",
+    zennLabel: "Zenn @ken32 の記事一覧を開く",
   },
   en: {
     historyHeading: "Personal History",
@@ -42,8 +51,15 @@ const content: Record<Locale, ProfileContent> = {
         and revisions promptly and reliably.
       </>
     ),
+    articlesHeading: "Articles",
+    articlesLead: "I publish learning notes and implementation write-ups on Qiita and Zenn.",
+    qiitaLabel: "Open Qiita @N-i-ke article list",
+    zennLabel: "Open Zenn @ken32 article list",
   },
 };
+
+const QIITA_URL = "https://qiita.com/N-i-ke";
+const ZENN_URL = "https://zenn.dev/ken32";
 
 const Profile: React.FC = () => {
   const { locale } = useLocale();
@@ -80,6 +96,38 @@ const Profile: React.FC = () => {
           {current.mindHeading}
         </h4>
         <p>{current.mind}</p>
+
+        <h4 id="articles">
+          <i className="fas fa-feather"></i>
+          {current.articlesHeading}
+        </h4>
+        <p>{current.articlesLead}</p>
+        <ul className="articles-links" aria-label={current.articlesHeading}>
+          <li>
+            <a
+              className="articles-link articles-link--qiita cursor-target"
+              href={QIITA_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={current.qiitaLabel}
+            >
+              <SiQiita className="articles-link__icon" aria-hidden="true" />
+              <span className="articles-link__label">Qiita</span>
+            </a>
+          </li>
+          <li>
+            <a
+              className="articles-link articles-link--zenn cursor-target"
+              href={ZENN_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={current.zennLabel}
+            >
+              <SiZenn className="articles-link__icon" aria-hidden="true" />
+              <span className="articles-link__label">Zenn</span>
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
   );

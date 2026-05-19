@@ -258,10 +258,17 @@ const MENU_ITEMS: BubbleMenuItem[] = [
     hoverStyles: { bgColor: "rgba(0, 216, 255, 0.22)", textColor: "#ffffff" },
   },
   {
+    label: "ARTICLES",
+    href: "#articles",
+    ariaLabel: "Scroll to articles",
+    rotation: -8,
+    hoverStyles: { bgColor: "rgba(0, 216, 255, 0.22)", textColor: "#ffffff" },
+  },
+  {
     label: "SKILLS",
     href: "#skill",
     ariaLabel: "Scroll to skills",
-    rotation: -8,
+    rotation: 8,
     hoverStyles: { bgColor: "rgba(0, 216, 255, 0.22)", textColor: "#ffffff" },
   },
   {

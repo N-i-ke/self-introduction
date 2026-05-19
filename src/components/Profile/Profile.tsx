@@ -31,7 +31,7 @@ const content: Record<Locale, ProfileContent> = {
         業務においては「レスの速さ」を大切にしております。急なデザインの変更や修正なども、その都度しっかりと対応できるように心がけております。
       </>
     ),
-    articlesHeading: "アウトプット",
+    articlesHeading: "Articles",
     articlesLead: "Qiita / Zenn で学習メモや実装記事を公開しています。",
     qiitaLabel: "Qiita @N-i-ke の記事一覧を開く",
     zennLabel: "Zenn @ken32 の記事一覧を開く",

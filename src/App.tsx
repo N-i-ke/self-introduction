@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createGlobalStyle } from "styled-components"; // styledとcreateGlobalStyleを正しくインポート
 import "./App.css";
 import Header from "./components/Header";
@@ -10,6 +10,7 @@ import TargetCursor from "./components/TargetCursor";
 import SiteBackground from "./components/SiteBackground";
 import SmoothScrollProvider from "./components/SmoothScrollProvider";
 import { LocaleProvider } from "./contexts/LocaleContext";
+import { captureUtmFromLocation } from "./lib/utm";
 
 // グローバルスタイルを作成
 const GlobalStyle = createGlobalStyle`
@@ -44,6 +45,12 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const App: React.FC = () => {
+  useEffect(() => {
+    // 着地時に URL の utm_* を sessionStorage に保存し、
+    // 以降の outbound_click イベントに参照元として同梱する
+    captureUtmFromLocation();
+  }, []);
+
   return (
   <LocaleProvider>
     <SmoothScrollProvider>

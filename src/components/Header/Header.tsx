@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { FaGithub } from "react-icons/fa";
 import BubbleMenu, { type BubbleMenuItem } from "../BubbleMenu";
 import { useLocale, type Locale } from "../../contexts/LocaleContext";
+import { trackOutboundClick } from "../../lib/analytics";
 import "./Header.css";
 
 const REPO_URL = "https://github.com/N-i-ke/self-introduction";
@@ -317,6 +318,9 @@ const Header: React.FC = () => {
             rel="noopener noreferrer"
             className="cursor-target"
             aria-label="View source on GitHub"
+            onClick={() =>
+              trackOutboundClick({ service: "github", location: "header", url: REPO_URL })
+            }
           >
             <FaGithub size={18} aria-hidden="true" />
           </GitHubIconLink>

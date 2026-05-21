@@ -3,6 +3,7 @@ import { SiQiita, SiZenn } from "react-icons/si";
 import { useParallax } from "../../hooks/useParallax";
 import EarthBackground from "../EarthBackground";
 import { useLocale, type Locale } from "../../contexts/LocaleContext";
+import { trackOutboundClick } from "../../lib/analytics";
 import "./Profile.css";
 
 type ProfileContent = {
@@ -110,6 +111,13 @@ const Profile: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={current.qiitaLabel}
+              onClick={() =>
+                trackOutboundClick({
+                  service: "qiita",
+                  location: "articles",
+                  url: QIITA_URL,
+                })
+              }
             >
               <SiQiita className="articles-link__icon" aria-hidden="true" />
               <span className="articles-link__label">Qiita</span>
@@ -122,6 +130,13 @@ const Profile: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={current.zennLabel}
+              onClick={() =>
+                trackOutboundClick({
+                  service: "zenn",
+                  location: "articles",
+                  url: ZENN_URL,
+                })
+              }
             >
               <SiZenn className="articles-link__icon" aria-hidden="true" />
               <span className="articles-link__label">Zenn</span>

@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { FaGithub } from "react-icons/fa";
+import { trackOutboundClick } from "../../lib/analytics";
 
 const REPO_URL = "https://github.com/N-i-ke/self-introduction";
 
@@ -66,6 +67,9 @@ const Footer: React.FC = () => {
         rel="noopener noreferrer"
         className="github-link cursor-target"
         aria-label="View source on GitHub"
+        onClick={() =>
+          trackOutboundClick({ service: "github", location: "footer", url: REPO_URL })
+        }
       >
         <FaGithub size={18} aria-hidden="true" />
         <span>View on GitHub</span>

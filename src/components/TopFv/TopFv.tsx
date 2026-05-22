@@ -5,38 +5,22 @@ import DecryptedLoader from '../DecryptedLoader';
 import ViewportHandler from '../ViewportHandler';
 import LiquidChrome from '../LiquidChrome';
 import { useViewport } from '../../hooks/useViewport';
-import { useLocale, type Locale } from '../../contexts/LocaleContext';
 
 import './Aurora.css';
 
-type CtaContent = {
-  newLabel: string;
-  badgeText: string;
-  primary: string;
-  secondary: string;
-};
-
-const ctaContent: Record<Locale, CtaContent> = {
-  ja: {
-    newLabel: 'NEW',
-    badgeText: 'Articles 公開中',
-    primary: '実績を見る',
-    secondary: '自己紹介を読む',
-  },
-  en: {
-    newLabel: 'NEW',
-    badgeText: 'Articles Available',
-    primary: 'View Works',
-    secondary: 'Learn more',
-  },
-};
+// CTA はサイト全体の JA/EN とは独立に英語固定。
+// (タイトル "N-i-ke's Portfolio" と揃えてヒーロー部分を英語で統一)
+const CTA = {
+  newLabel: 'NEW',
+  badgeText: 'Articles Available',
+  primary: 'View Works',
+  secondary: 'Learn more',
+} as const;
 
 const TopFv: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [contentVisible, setContentVisible] = useState(false);
   const { width: viewportWidth, isMobile } = useViewport();
-  const { locale } = useLocale();
-  const cta = ctaContent[locale];
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -89,10 +73,10 @@ const TopFv: React.FC = () => {
           <a
             href="#articles"
             className="topfv-cta-badge cursor-target"
-            aria-label={`${cta.newLabel} ${cta.badgeText}`}
+            aria-label={`${CTA.newLabel} ${CTA.badgeText}`}
           >
-            <span className="topfv-cta-badge__new">{cta.newLabel}</span>
-            <span className="topfv-cta-badge__text">{cta.badgeText}</span>
+            <span className="topfv-cta-badge__new">{CTA.newLabel}</span>
+            <span className="topfv-cta-badge__text">{CTA.badgeText}</span>
             <FaArrowRight className="topfv-cta-badge__arrow" aria-hidden="true" />
           </a>
 
@@ -110,14 +94,14 @@ const TopFv: React.FC = () => {
               href="#work"
               className="topfv-cta-btn topfv-cta-btn--primary cursor-target"
             >
-              <span>{cta.primary}</span>
+              <span>{CTA.primary}</span>
               <FaArrowRight aria-hidden="true" />
             </a>
             <a
               href="#about"
               className="topfv-cta-btn topfv-cta-btn--secondary cursor-target"
             >
-              {cta.secondary}
+              {CTA.secondary}
             </a>
           </div>
         </div>

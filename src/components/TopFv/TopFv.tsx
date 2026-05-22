@@ -1,16 +1,42 @@
 import React, { useEffect, useState } from 'react';
+import { FaArrowRight } from 'react-icons/fa6';
 import GlitchText from '../GlitchText';
 import DecryptedLoader from '../DecryptedLoader';
 import ViewportHandler from '../ViewportHandler';
 import LiquidChrome from '../LiquidChrome';
 import { useViewport } from '../../hooks/useViewport';
+import { useLocale, type Locale } from '../../contexts/LocaleContext';
 
 import './Aurora.css';
+
+type CtaContent = {
+  newLabel: string;
+  badgeText: string;
+  primary: string;
+  secondary: string;
+};
+
+const ctaContent: Record<Locale, CtaContent> = {
+  ja: {
+    newLabel: 'NEW',
+    badgeText: 'Articles 公開中',
+    primary: '実績を見る',
+    secondary: '自己紹介を読む',
+  },
+  en: {
+    newLabel: 'NEW',
+    badgeText: 'Articles Available',
+    primary: 'View Works',
+    secondary: 'Learn more',
+  },
+};
 
 const TopFv: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [contentVisible, setContentVisible] = useState(false);
   const { width: viewportWidth, isMobile } = useViewport();
+  const { locale } = useLocale();
+  const cta = ctaContent[locale];
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -60,6 +86,16 @@ const TopFv: React.FC = () => {
       </div>
       <div className={`topfv-container ${contentVisible ? 'fade-in' : 'hidden'}`}>
         <div className="portfolio-title">
+          <a
+            href="#articles"
+            className="topfv-cta-badge cursor-target"
+            aria-label={`${cta.newLabel} ${cta.badgeText}`}
+          >
+            <span className="topfv-cta-badge__new">{cta.newLabel}</span>
+            <span className="topfv-cta-badge__text">{cta.badgeText}</span>
+            <FaArrowRight className="topfv-cta-badge__arrow" aria-hidden="true" />
+          </a>
+
           <GlitchText
             speed={getGlitchSpeed()}
             enableShadows={true}
@@ -68,6 +104,22 @@ const TopFv: React.FC = () => {
           >
             N-i-ke's Portfolio
           </GlitchText>
+
+          <div className="topfv-cta-buttons">
+            <a
+              href="#work"
+              className="topfv-cta-btn topfv-cta-btn--primary cursor-target"
+            >
+              <span>{cta.primary}</span>
+              <FaArrowRight aria-hidden="true" />
+            </a>
+            <a
+              href="#about"
+              className="topfv-cta-btn topfv-cta-btn--secondary cursor-target"
+            >
+              {cta.secondary}
+            </a>
+          </div>
         </div>
       </div>
     </>

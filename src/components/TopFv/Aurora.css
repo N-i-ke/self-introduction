@@ -172,4 +172,174 @@ html, body {
   transform: translate(-50%, -50%);
   z-index: 2;
   text-align: center;
-} 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(16px, 2.5vw, 28px);
+  width: max-content;
+  max-width: 92vw;
+}
+
+/* NEW バッジ (reactbits 風 glassmorphism) */
+.topfv-cta-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 16px 5px 5px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 216, 255, 0.28);
+  background: rgba(18, 15, 23, 0.45);
+  backdrop-filter: blur(20px) saturate(1.3);
+  -webkit-backdrop-filter: blur(20px) saturate(1.3);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25),
+    inset 0 0.5px 0 rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.85) !important;
+  font-family: "Courier New", "Menlo", monospace;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease,
+    transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.topfv-cta-badge:hover {
+  border-color: rgba(0, 216, 255, 0.6);
+  background: rgba(18, 15, 23, 0.6);
+  color: #ffffff !important;
+  box-shadow: 0 4px 18px rgba(0, 216, 255, 0.18),
+    inset 0 0.5px 0 rgba(255, 255, 255, 0.08);
+  transform: translateY(-1px);
+}
+
+.topfv-cta-badge:focus-visible {
+  outline: 2px solid #00d8ff;
+  outline-offset: 3px;
+}
+
+.topfv-cta-badge__new {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #0b0b0b;
+  background: #00d8ff;
+  padding: 4px 10px;
+  border-radius: 999px;
+  letter-spacing: 0.12em;
+  box-shadow: 0 0 8px rgba(0, 216, 255, 0.55);
+}
+
+.topfv-cta-badge__text {
+  display: inline-block;
+}
+
+.topfv-cta-badge__arrow {
+  width: 12px;
+  height: 12px;
+  transition: transform 0.2s ease;
+}
+
+.topfv-cta-badge:hover .topfv-cta-badge__arrow {
+  transform: translateX(2px);
+}
+
+/* Primary / Secondary ボタン */
+.topfv-cta-buttons {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.topfv-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Courier New", "Menlo", monospace;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 12px 22px;
+  min-height: 44px;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease,
+    box-shadow 0.2s ease, transform 0.2s ease;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.topfv-cta-btn:focus-visible {
+  outline: 2px solid #00d8ff;
+  outline-offset: 3px;
+}
+
+.topfv-cta-btn--primary {
+  background: #00d8ff;
+  color: #0b0b0b !important;
+  border: 1px solid #00d8ff;
+  box-shadow: 0 6px 18px rgba(0, 216, 255, 0.32),
+    0 0 18px rgba(0, 216, 255, 0.45);
+}
+
+.topfv-cta-btn--primary:hover {
+  background: #4be2ff;
+  border-color: #4be2ff;
+  color: #0b0b0b !important;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(0, 216, 255, 0.4),
+    0 0 22px rgba(0, 216, 255, 0.6);
+}
+
+.topfv-cta-btn--primary svg {
+  transition: transform 0.2s ease;
+}
+
+.topfv-cta-btn--primary:hover svg {
+  transform: translateX(2px);
+}
+
+.topfv-cta-btn--secondary {
+  background: rgba(18, 15, 23, 0.4);
+  color: #cfeaff !important;
+  border: 1px solid rgba(0, 216, 255, 0.45);
+  backdrop-filter: blur(20px) saturate(1.2);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+}
+
+.topfv-cta-btn--secondary:hover {
+  border-color: rgba(0, 216, 255, 0.85);
+  background: rgba(0, 216, 255, 0.12);
+  color: #ffffff !important;
+  box-shadow: 0 0 14px rgba(0, 216, 255, 0.35);
+  transform: translateY(-1px);
+}
+
+/* SP では CTA ボタンを縦並びに */
+@media screen and (max-width: 480px) {
+  .portfolio-title {
+    gap: 14px;
+  }
+  .topfv-cta-badge {
+    font-size: 0.7rem;
+    padding: 4px 12px 4px 4px;
+  }
+  .topfv-cta-badge__new {
+    font-size: 0.65rem;
+    padding: 3px 8px;
+  }
+  .topfv-cta-buttons {
+    flex-direction: column;
+    width: min(280px, 80vw);
+    gap: 10px;
+  }
+  .topfv-cta-btn {
+    width: 100%;
+    justify-content: center;
+    font-size: 0.82rem;
+    padding: 11px 18px;
+  }
+}

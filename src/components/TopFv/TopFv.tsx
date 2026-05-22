@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { FaArrowRight } from 'react-icons/fa6';
 import GlitchText from '../GlitchText';
 import DecryptedLoader from '../DecryptedLoader';
 import ViewportHandler from '../ViewportHandler';
@@ -6,6 +7,15 @@ import LiquidChrome from '../LiquidChrome';
 import { useViewport } from '../../hooks/useViewport';
 
 import './Aurora.css';
+
+// CTA はサイト全体の JA/EN とは独立に英語固定。
+// (タイトル "N-i-ke's Portfolio" と揃えてヒーロー部分を英語で統一)
+const CTA = {
+  newLabel: 'NEW',
+  badgeText: 'Articles Available',
+  primary: 'View Works',
+  secondary: 'Learn more',
+} as const;
 
 const TopFv: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -60,6 +70,16 @@ const TopFv: React.FC = () => {
       </div>
       <div className={`topfv-container ${contentVisible ? 'fade-in' : 'hidden'}`}>
         <div className="portfolio-title">
+          <a
+            href="#articles"
+            className="topfv-cta-badge cursor-target"
+            aria-label={`${CTA.newLabel} ${CTA.badgeText}`}
+          >
+            <span className="topfv-cta-badge__new">{CTA.newLabel}</span>
+            <span className="topfv-cta-badge__text">{CTA.badgeText}</span>
+            <FaArrowRight className="topfv-cta-badge__arrow" aria-hidden="true" />
+          </a>
+
           <GlitchText
             speed={getGlitchSpeed()}
             enableShadows={true}
@@ -68,6 +88,22 @@ const TopFv: React.FC = () => {
           >
             N-i-ke's Portfolio
           </GlitchText>
+
+          <div className="topfv-cta-buttons">
+            <a
+              href="#work"
+              className="topfv-cta-btn topfv-cta-btn--primary cursor-target"
+            >
+              <span>{CTA.primary}</span>
+              <FaArrowRight aria-hidden="true" />
+            </a>
+            <a
+              href="#about"
+              className="topfv-cta-btn topfv-cta-btn--secondary cursor-target"
+            >
+              {CTA.secondary}
+            </a>
+          </div>
         </div>
       </div>
     </>

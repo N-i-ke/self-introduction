@@ -26,8 +26,12 @@ const EarthBackground: React.FC<EarthBackgroundProps> = ({
 
     const scene = new THREE.Scene();
 
+    // camera.position.z = 3.2 + fov = 35° だと球の見え角 (arcsin(1/3.2) ≈ 18.21°)
+    // が垂直 fov 半角 (17.5°) を超え、上下が画角の外にはみ出てクリップされる。
+    // 結果として極が「潰れた」見た目になっていた。
+    // 4.0 まで離すと見え角は arcsin(1/4) ≈ 14.48° となり余裕を持って収まる。
     const camera = new THREE.PerspectiveCamera(35, width / Math.max(height, 1), 0.1, 100);
-    camera.position.set(0, 0, 3.2);
+    camera.position.set(0, 0, 4.0);
 
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -62,9 +66,17 @@ const EarthBackground: React.FC<EarthBackgroundProps> = ({
         `
       );
     };
+    // 親 Group で 23.5° の地軸傾斜を表現し、メッシュ自身は局所 Y まわりに
+    // 自転させる。Euler XYZ 既定順序で mesh に rotation.z と rotation.y を
+    // 直接設定すると「先に傾けて、ワールド Y まわりに回す」となり、傾いた
+    // 極がワールド Y まわりを振り回されてしまう。親 Group 経由なら傾斜は
+    // 静的、局所 Y (= 傾いた軸) まわりの自転になり本物の地球と同じ挙動。
+    const earthGroup = new THREE.Group();
+    earthGroup.rotation.z = EARTH_AXIAL_TILT_RAD;
+    scene.add(earthGroup);
+
     const earth = new THREE.Mesh(geometry, material);
-    earth.rotation.z = EARTH_AXIAL_TILT_RAD;
-    scene.add(earth);
+    earthGroup.add(earth);
 
     const ambient = new THREE.AmbientLight(0xffffff, 0.8);
     scene.add(ambient);

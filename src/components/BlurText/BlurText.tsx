@@ -58,12 +58,14 @@ const BlurText: React.FC<BlurTextProps> = ({
 
   useEffect(() => {
     if (!ref.current) return;
+    // 一度表示されたら再アニメーションしない。
+    // 画面外で false に戻すと、スクロールで再進入するたびに
+    // 全単語の blur アニメーションが再発火しカクつきの原因になる
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setInView(true);
-        } else {
-          setInView(false);
+          observer.disconnect();
         }
       },
       { threshold, rootMargin }

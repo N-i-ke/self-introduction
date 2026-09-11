@@ -137,21 +137,36 @@ export const LiquidChrome: React.FC<LiquidChromeProps> = ({
 
     if (interactive) {
       container.addEventListener('mousemove', handleMouseMove);
-      container.addEventListener('touchmove', handleTouchMove);
+      // passive 指定がないとタッチスクロールがこのハンドラの完了を待たされる
+      container.addEventListener('touchmove', handleTouchMove, { passive: true });
     }
 
-    let animationId: number;
+    let animationId: number | null = null;
     function update(t: number) {
       animationId = requestAnimationFrame(update);
       program.uniforms.uTime.value = t * 0.001 * speed;
       renderer.render({ scene: mesh });
     }
-    animationId = requestAnimationFrame(update);
+
+    // 画面外では描画を停止する。全画面シェーダーのため、
+    // TopFv を離れても回し続けるとページ全体のスクロール負荷になる
+    const visibilityObserver = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        if (animationId === null) {
+          animationId = requestAnimationFrame(update);
+        }
+      } else if (animationId !== null) {
+        cancelAnimationFrame(animationId);
+        animationId = null;
+      }
+    });
+    visibilityObserver.observe(container);
 
     container.appendChild(gl.canvas);
 
     return () => {
-      cancelAnimationFrame(animationId);
+      if (animationId !== null) cancelAnimationFrame(animationId);
+      visibilityObserver.disconnect();
       window.removeEventListener('resize', resize);
       if (interactive) {
         container.removeEventListener('mousemove', handleMouseMove);

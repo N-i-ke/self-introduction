@@ -179,6 +179,11 @@ const SiteBackground: React.FC<SiteBackgroundProps> = ({
     const mesh = new Mesh(gl, { geometry, program });
     ctn.appendChild(gl.canvas as HTMLCanvasElement);
 
+    // Color 変換は毎フレーム行うと GC 停止の原因になるため、
+    // colorStops が変わったときだけ再計算する
+    let lastStops = propsRef.current.colorStops;
+    let stopsCache = colorStopsArray;
+
     let animateId = 0;
     const update = (t: number) => {
       animateId = requestAnimationFrame(update);
@@ -188,10 +193,14 @@ const SiteBackground: React.FC<SiteBackgroundProps> = ({
       program.uniforms.uAmplitude.value = propsRef.current.amplitude;
       program.uniforms.uBlend.value = propsRef.current.blend;
       const stops = propsRef.current.colorStops;
-      program.uniforms.uColorStops.value = stops.map((hex: string) => {
-        const c = new Color(hex);
-        return [c.r, c.g, c.b];
-      });
+      if (stops !== lastStops) {
+        lastStops = stops;
+        stopsCache = stops.map((hex: string) => {
+          const c = new Color(hex);
+          return [c.r, c.g, c.b];
+        });
+      }
+      program.uniforms.uColorStops.value = stopsCache;
       renderer.render({ scene: mesh });
     };
     animateId = requestAnimationFrame(update);

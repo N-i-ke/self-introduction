@@ -171,13 +171,32 @@ const useAnimationLoop = (
       rafRef.current = requestAnimationFrame(animate);
     };
 
-    rafRef.current = requestAnimationFrame(animate);
-
-    return () => {
+    // 画面外ではループを止める (lastTimestamp をリセットしないと
+    // 再開時に停止していた時間ぶんオフセットが一気に飛ぶ)
+    const startLoop = () => {
+      if (rafRef.current === null) {
+        lastTimestampRef.current = null;
+        rafRef.current = requestAnimationFrame(animate);
+      }
+    };
+    const stopLoop = () => {
       if (rafRef.current !== null) {
         cancelAnimationFrame(rafRef.current);
         rafRef.current = null;
       }
+    };
+    const visibilityObserver = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        startLoop();
+      } else {
+        stopLoop();
+      }
+    });
+    visibilityObserver.observe(track);
+
+    return () => {
+      visibilityObserver.disconnect();
+      stopLoop();
       lastTimestampRef.current = null;
     };
   }, [trackRef, targetVelocity, seqWidth, seqHeight, isHovered, hoverSpeed, isVertical]);

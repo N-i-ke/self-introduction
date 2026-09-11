@@ -25,7 +25,7 @@ const WorkItem: React.FC<WorkItemProps> = ({
       <figure>
         {disabled ? (
           <div className="disabled-link-container">
-            <img src={imgSrc} alt={imgAlt} />
+            <img src={imgSrc} alt={imgAlt} loading="lazy" decoding="async" />
             <div className="disabled-overlay">
               <span>Coming Soon</span>
             </div>
@@ -39,7 +39,7 @@ const WorkItem: React.FC<WorkItemProps> = ({
           </div>
         ) : (
           <a href={link} target="_blank" rel="noopener noreferrer">
-            <img src={imgSrc} alt={imgAlt} />
+            <img src={imgSrc} alt={imgAlt} loading="lazy" decoding="async" />
             <figcaption>
               <div className="fig-inner">
                 <h3>{title}</h3>

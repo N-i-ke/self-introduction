@@ -1,12 +1,12 @@
-import Sneaker from "../Image/sneaker.png";
-import Flower from "../Image/ohana.png";
-import WorksImg from "../Image/works.png";
-import Building from "../Image/kensetu.png";
-import BathSalt from "../Image/kunaipu.png";
-import Engress from "../Image/Engress.png";
-import Kadan from "../Image/kadan.png";
-import Sousaku from "../Image/sousaku.png";
-import Your from "../Image/your.png";
+import Sneaker from "../Image/sneaker.webp";
+import Flower from "../Image/ohana.webp";
+import WorksImg from "../Image/works.webp";
+import Building from "../Image/kensetu.webp";
+import BathSalt from "../Image/kunaipu.webp";
+import Engress from "../Image/Engress.webp";
+import Kadan from "../Image/kadan.webp";
+import Sousaku from "../Image/sousaku.webp";
+import Your from "../Image/your.webp";
 
 export type Work = {
   imgSrc: string;

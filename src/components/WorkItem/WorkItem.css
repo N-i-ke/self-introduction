@@ -28,11 +28,6 @@
   text-align: center;
 }
 
-#work .work-item__border {
-  display: block;
-  border-radius: 10px;
-}
-
 #work figure {
   margin: 0;
   position: relative;
